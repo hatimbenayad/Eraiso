@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ISO2 Team A.05 · Project Roadmap & Status Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Sticky Top Navigation Bar -->
+  <nav class="sticky-navbar">
+    <div class="navbar-container">
+      <a href="#" class="nav-brand">
+        <span>🏥 SESCAM A.05</span>
+        <span class="nav-brand-badge">ISO2</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#must-fix-section" class="nav-link highlight">⚡ Must Fix</a></li>
+        <li><a href="#todo-by-section" class="nav-link" style="color: #6ee7b7; font-weight: 700;">📌 To-Do By</a></li>
+        <li><a href="#meetings-section" class="nav-link">📅 Meetings 1–8</a></li>
+        <li><a href="#possible-issues-section" class="nav-link">🚀 Milestones & Issues</a></li>
+        <li><a href="#checklist-section" class="nav-link">📋 Checklist</a></li>
+        <li><a href="#components-section" class="nav-link">🧩 Components</a></li>
+        <li><a href="#roadmap-section" class="nav-link">🏷️ Roadmap</a></li>
+        <li><a href="#team-section" class="nav-link">👥 Team</a></li>
+      </ul>
+      <div class="nav-right-controls">
+        <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle dark/light mode">🌙 Dark</button>
+        <button id="print-btn" class="print-btn" title="Print or save as PDF">🖨️ Print</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Top Header Banner -->
+  <header class="top-header">
+    <div class="header-container">
+      <div class="title-area">
+        <div class="project-badge">
+          <span>🏥 SESCAM Radiodiagnostics</span> · <span>ISO2 2026/27</span> · <span>Team A.05</span>
+        </div>
+        <h1>Comprehensive Radiodiagnostics Management System</h1>
+        <p>Software Engineering II (UCLM ESI) · Unified Process (UP) Lifecycle & AI-Augmented (AI4SE) Progress Tracker</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-container">
+
+    <!-- KPI Summary Grid -->
+    <div class="kpi-grid">
+      <!-- Overall Progress -->
+      <div class="kpi-card">
+        <div class="kpi-title">
+          <span>Overall Project</span>
+          <span>🎯</span>
+        </div>
+        <div class="kpi-value" id="overall-progress-val">--%</div>
+        <div class="progress-track">
+          <div class="progress-fill" id="overall-progress-fill" style="width: 0%"></div>
+        </div>
+        <div class="kpi-sub" id="overall-progress-sub">Calculating...</div>
+      </div>
+
+      <!-- Iteration 0 (Inception) -->
+      <div class="kpi-card">
+        <div class="kpi-title">
+          <span>Iteration 0 (Inception)</span>
+          <span>🏁</span>
+        </div>
+        <div class="kpi-value" id="it0-progress-val">--%</div>
+        <div class="progress-track">
+          <div class="progress-fill success" id="it0-progress-fill" style="width: 0%"></div>
+        </div>
+        <div class="kpi-sub" id="it0-progress-sub">Kickoff baseline</div>
+      </div>
+
+      <!-- Constraints KPI -->
+      <div class="kpi-card">
+        <div class="kpi-title">
+          <span>Constraints Status</span>
+          <span>⚠️</span>
+        </div>
+        <div class="kpi-value" id="constraints-kpi-val">[0/9]</div>
+        <div class="progress-track">
+          <div class="progress-fill" style="width: 25%; background: var(--warning);"></div>
+        </div>
+        <div class="kpi-sub" id="constraints-kpi-sub">Pending formalization in wiki</div>
+      </div>
+
+      <!-- Assumptions KPI -->
+      <div class="kpi-card">
+        <div class="kpi-title">
+          <span>Assumptions Status</span>
+          <span>✅</span>
+        </div>
+        <div class="kpi-value" id="assumptions-kpi-val">[7/7]</div>
+        <div class="progress-track">
+          <div class="progress-fill success" style="width: 100%;"></div>
+        </div>
+        <div class="kpi-sub" id="assumptions-kpi-sub">7 baseline assumptions logged</div>
+      </div>
+    </div>
+
+    <!-- Quick Status Callout Banner -->
+    <div class="quick-summary-banner">
+      <div class="banner-left">
+        <span style="font-size: 1.5rem;">📍</span>
+        <div>
+          <strong style="font-size: 1rem;">Current Phase: Iteration 0 (Inception)</strong>
+          <p style="font-size: 0.85rem; opacity: 0.95;">Repository, Git Flow, 32 Requirements, and Use Case Diagrams established. Next: complete Planification.md and Theory Deliverable 1.</p>
+        </div>
+      </div>
+      <div class="banner-pill-list">
+        <span class="banner-pill">📅 Theory 1: Nov 13</span>
+        <span class="banner-pill">📅 Final Lab: Dec 15</span>
+        <span class="banner-pill">🌿 develop branch</span>
+        <span class="banner-pill">📦 SemVer 2.0.0</span>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- MUST FIX SECTION (Clickable Step-by-Step Instructions)   -->
+    <!-- ======================================================== -->
+    <section class="dashboard-section" id="must-fix-section" style="border-left: 6px solid #ef4444;">
+      <div class="section-header">
+        <div>
+          <h2><span>🚨</span> Must Fix: Critical Immediate Gaps & Missing Artifacts</h2>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">
+            Essential items from the course specification that are currently missing in the repository, build system, or wiki. <strong>Click any card to expand its complete, step-by-step instructions.</strong>
+          </p>
+        </div>
+        <span class="badge-tag deliverables" style="font-size: 0.85rem; padding: 4px 12px;">Immediate Action Required</span>
+      </div>
+
+      <div class="must-fix-container" id="must-fix-container">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- MEETINGS SECTION (Meetings 1 to 8 + Copy as Markdown)   -->
+    <!-- ======================================================== -->
+    <section class="dashboard-section" id="meetings-section">
+      <div class="section-header">
+        <div>
+          <h2><span>📅</span> Team Meetings & Minutes (Meetings 1 to 8)</h2>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">
+            Official meeting minutes archive. Switch between meetings, edit live notes, and click <strong>Copy as Markdown</strong> to copy ready-to-paste markdown directly into the GitHub Wiki.
+          </p>
+        </div>
+        <span class="section-tag">Governance & Minutes</span>
+      </div>
+
+      <!-- Meetings Tab Bar (Meeting 1 to 8) -->
+      <div class="meetings-tabs-bar" id="meetings-tabs-bar">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+
+      <!-- Meeting Viewer Card -->
+      <div class="meeting-viewer-card">
+        <div class="meeting-card-header">
+          <div>
+            <div class="meeting-card-title">
+              <h3 id="meeting-display-title">Loading Meeting...</h3>
+            </div>
+            <div class="meeting-card-meta">
+              <span><strong>Date:</strong> <span id="meeting-display-date">--</span></span>
+              <span><strong>Attendees:</strong> <span id="meeting-display-attendees">--</span></span>
+              <span><strong>Minutes by:</strong> <span id="meeting-display-by">--</span></span>
+            </div>
+          </div>
+          <div class="meeting-actions-bar">
+            <span class="badge-tag usecases" id="meeting-status-badge-display">Recorded</span>
+            <div class="meeting-view-mode-toggle">
+              <button class="view-mode-btn active" id="btn-view-rendered" onclick="toggleMeetingView('rendered')">👁️ Rendered</button>
+              <button class="view-mode-btn" id="btn-view-raw" onclick="toggleMeetingView('raw')">📄 Raw Markdown</button>
+            </div>
+            <button class="meeting-copy-btn" onclick="copyCurrentMeetingMarkdown()" title="Copy Markdown to Clipboard for GitHub Wiki">
+              <span>📋</span> Copy as Markdown for GitHub Wiki
+            </button>
+          </div>
+        </div>
+
+        <div class="meeting-content-area">
+          <div id="meeting-rendered-content" class="meeting-rendered-view">
+            <!-- Rendered HTML injected by app.js -->
+          </div>
+          <textarea id="meeting-raw-content" class="meeting-raw-view" spellcheck="false" placeholder="Meeting markdown content..."></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- TO-DO BY MEMBER & COLLABORATION BOARD (Requested Feature)-->
+    <!-- ======================================================== -->
+    <section class="dashboard-section" id="todo-by-section">
+      <div class="section-header">
+        <div>
+          <h2><span>📌</span> To-Do By Member: Roadmap Task Assignment &amp; Pairing Board</h2>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">
+            Personalized assignment board for the 6 collaborators. Select tasks directly from the Roadmap, pair collaborators together, add custom directives, and clarify what must be changed in GitHub vs. the Wiki.
+          </p>
+        </div>
+        <span class="section-tag">Team Assignments</span>
+      </div>
+
+      <!-- Meeting Plan Evaluation & GitHub Permission Guide Banner -->
+      <div class="todo-plan-banner">
+        <div class="todo-plan-banner-icon">🎯</div>
+        <div class="todo-plan-banner-content">
+          <h4>Coordinator's Meeting Plan: Validated &amp; Applied</h4>
+          <p>
+            <strong>Your meeting plan is strategically sound!</strong> Mina &amp; Ayça pair up on Inception Diagrams (resolving Issue #28 inheritance), Balota &amp; Berke complete Planification tables, Hatim scaffolds the multi-module Maven build, and Felipe leads the architectural baseline entities while synchronizing meeting minutes.
+          </p>
+          <div class="github-rules-pills">
+            <span class="rule-pill wiki">
+              <span>📘</span> GitHub Wiki: Direct Edit (Self-Service) — Balota, Berke &amp; Felipe can edit &amp; publish immediately without waiting for Hatim or opening PRs.
+            </span>
+            <span class="rule-pill repo">
+              <span>🌿</span> GitHub Repo: Git Flow Required — Branch feature/... -&gt; Open PR against develop -&gt; Review &amp; Merge by Coordinator.
+            </span>
+            <span class="rule-pill secretary">
+              <span>✍️</span> Secretary Role: Felipe documents meeting minutes and syncs official markdown directly to the Wiki.
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Toolbar -->
+      <div class="todo-action-bar">
+        <div class="todo-filters" id="todo-member-filters">
+          <button class="todo-filter-btn active" onclick="filterTodoMember('all')">All Members (6)</button>
+          <button class="todo-filter-btn" onclick="filterTodoMember('hatim')">Hatim</button>
+          <button class="todo-filter-btn" onclick="filterTodoMember('felipe')">Felipe</button>
+          <button class="todo-filter-btn" onclick="filterTodoMember('berke')">Berke</button>
+          <button class="todo-filter-btn" onclick="filterTodoMember('balota')">Balota</button>
+          <button class="todo-filter-btn" onclick="filterTodoMember('mina')">Mina</button>
+          <button class="todo-filter-btn" onclick="filterTodoMember('ayca')">Ayça</button>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <a href="Planification.md" download="Planification.md" class="todo-btn-secondary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;" title="Download completed Planification.md for GitHub Wiki">
+            <span>📥</span> Planification.md
+          </a>
+          <button class="todo-btn-primary" onclick="toggleAssignDrawer()">
+            <span>➕</span> Assign Task from Roadmap
+          </button>
+          <button class="todo-btn-secondary" onclick="resetTodoToDefault()" title="Reset assignments to today's meeting plan baseline">
+            <span>🔄</span> Reset to Meeting Plan
+          </button>
+        </div>
+      </div>
+
+      <!-- Interactive Assignment Form Drawer -->
+      <div class="todo-assign-drawer" id="todo-assign-drawer">
+        <div class="todo-assign-drawer-header">
+          <h3><span>📝</span> Assign Task / Pair Collaborators</h3>
+          <button class="todo-btn-secondary" onclick="toggleAssignDrawer()" style="padding: 4px 10px; font-size: 0.75rem;">✕ Close</button>
+        </div>
+
+        <form id="todo-assignment-form" onsubmit="handleAssignTaskSubmit(event)">
+          <div class="form-grid-2">
+            <div class="form-field">
+              <label for="assignee-select">Assign To (Primary Collaborator):</label>
+              <select id="assignee-select" required>
+                <option value="hatim">Hatim Ben Ayad (Coordinator)</option>
+                <option value="felipe">Felipe Dionisio Becerra Sangeorzan (Secretary)</option>
+                <option value="berke">Berke Taha Özdemir (Git Expert)</option>
+                <option value="balota">Beyzanur Balota (Git Expert)</option>
+                <option value="mina">Mina Özdoğan (Maven Expert)</option>
+                <option value="ayca">Ayça Görgülü (Maven Expert)</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="collaborate-select">🤝 Collaborate With (Pair / Co-Worker):</label>
+              <select id="collaborate-select">
+                <option value="">-- None (Solo Task) --</option>
+                <option value="hatim">Hatim Ben Ayad</option>
+                <option value="felipe">Felipe Dionisio</option>
+                <option value="berke">Berke Taha Özdemir</option>
+                <option value="balota">Beyzanur Balota</option>
+                <option value="mina">Mina Özdoğan</option>
+                <option value="ayca">Ayça Görgülü</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="roadmap-task-select">Select Task from Roadmap:</label>
+              <select id="roadmap-task-select" onchange="handleRoadmapTaskSelection(this.value)">
+                <optgroup label="── Inception Phase (v0.0.1) ──">
+                  <option value="diagrams-assembly">Diagrams Assembly (Client &amp; Server Models)</option>
+                  <option value="planification-page">Planification Page (Constraints, Availability, Effort)</option>
+                  <option value="issue-28-inheritance">Issue #28: Physician-Patient Inheritance Generalization</option>
+                  <option value="issue-30-sysadmin">Issue #30: SysAdmin Diagram Review &amp; Decisions</option>
+                </optgroup>
+                <optgroup label="── Elaboration Phase (v0.1.0) ──">
+                  <option value="maven-multimodule">Maven Multi-Module Root &amp; Submodule Skeletons</option>
+                  <option value="architectural-baseline">Architectural Baseline (Entities: User, Role, Patient)</option>
+                  <option value="external-adapters">External System Adapters (SSO, EHR, Admissions, PACS)</option>
+                  <option value="theory-1-documentation">Theory Deliverable 1 Documentation (SCM, SQA Plan)</option>
+                </optgroup>
+                <optgroup label="── Construction Phase (v0.2.0–v0.8.0) ──">
+                  <option value="clinical-orders">Clinical Orders &amp; Scheduling (CU10, CU20)</option>
+                  <option value="diagnostic-reports">Diagnostic Reports &amp; PACS Image Viewer (CU14, CU15)</option>
+                  <option value="notifications-timer">Automated Notifications &amp; Reminders (CU05, CU11)</option>
+                  <option value="unit-tests-jacoco">Unit Tests &amp; JaCoCo &gt;80% Coverage Enforcement</option>
+                </optgroup>
+                <optgroup label="── Governance &amp; Wiki ──">
+                  <option value="meeting-minutes">Meeting Minutes &amp; GitHub Wiki Synchronization</option>
+                  <option value="custom">✏️ Other / Custom Task...</option>
+                </optgroup>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="platform-rule-select">Platform / Where to Change in GitHub:</label>
+              <select id="platform-rule-select">
+                <option value="wiki">📘 GitHub Wiki: Direct Edit (No PR needed, self-service)</option>
+                <option value="repo">🌿 GitHub Repo: Git Flow (Branch feature/... -&gt; PR -&gt; Review)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-field" id="custom-task-field" style="display: none; margin-bottom: 16px;">
+            <label for="custom-task-title">Custom Task Title:</label>
+            <input type="text" id="custom-task-title" placeholder="e.g. Write integration test suite for Patient admission">
+          </div>
+
+          <div class="form-field" style="margin-bottom: 16px;">
+            <label for="coordinator-comment-input">💬 Coordinator's Comment / Directive (Instructions for this task):</label>
+            <textarea id="coordinator-comment-input" placeholder="e.g. Focus on CU01-CU09 Patient + CU10-CU18 Physician merging, and ensure Issue #28 is closed."></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="todo-btn-secondary" onclick="toggleAssignDrawer()">Cancel</button>
+            <button type="submit" class="todo-btn-primary"><span>💾</span> Confirm &amp; Assign Task</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- 6 Collaborators Boxes Grid -->
+      <div class="todo-members-grid" id="todo-members-grid">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- POSSIBLE ISSUES & MILESTONES ROADMAP (Milestones M0–M5)  -->
+    <!-- ======================================================== -->
+    <section class="dashboard-section" id="possible-issues-section">
+      <div class="section-header">
+        <div>
+          <h2><span>🚀</span> Possible Issues: Iteration 1 Backlog & Lifecycle Milestones</h2>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">
+            Comprehensive GitHub Issues backlog broken down by Milestones (M0–M5) to finish Iteration 1 and complete the full project lifecycle. Includes one-click <strong>Copy for GitHub</strong> formatted with RADIT disciplines.
+          </p>
+        </div>
+        <span class="section-tag">GitHub Issues Backlog</span>
+      </div>
+
+      <!-- Milestones Tab Navigation -->
+      <div class="milestones-tabs" id="milestones-tabs-container">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+
+      <!-- Milestone Target Banner -->
+      <div class="milestone-banner">
+        <div class="milestone-banner-info">
+          <h3 id="milestone-banner-title">Loading Milestone...</h3>
+          <p id="milestone-banner-desc">Loading objective...</p>
+        </div>
+        <div>
+          <span class="badge-tag usecases" id="milestone-banner-target">Target: Loading...</span>
+        </div>
+      </div>
+
+      <!-- Issues List Container -->
+      <div class="issues-grid" id="issues-list-container">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+    <!-- Interactive Progress Checklist (Requested Format) -->
+    <section class="dashboard-section" id="checklist-section">
+      <div class="section-header">
+        <div>
+          <h2><span>📋</span> Project Verification Checklist (Constraints, Assumptions & Specs)</h2>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">
+            Explicit progress tracking across all categories. Click any card to toggle between <code>[x] Done</code> and <code>[ ] Pending</code>.
+          </p>
+        </div>
+        <div class="section-tag">Interactive Checklist</div>
+      </div>
+
+      <!-- Filters & Search Toolbar -->
+      <div class="filter-toolbar">
+        <div class="filter-group">
+          <button class="filter-btn active" data-status="all">All Items</button>
+          <button class="filter-btn" data-status="pending">Remaining [ ]</button>
+          <button class="filter-btn" data-status="done">Completed [x]</button>
+        </div>
+
+        <div class="filter-group">
+          <button class="filter-btn active" data-category="all">All Categories</button>
+          <button class="filter-btn" data-category="constraints">[] Constraints</button>
+          <button class="filter-btn" data-category="assumptions">[x] Assumptions</button>
+          <button class="filter-btn" data-category="components">Components</button>
+          <button class="filter-btn" data-category="versions">Versions</button>
+          <button class="filter-btn" data-category="usecases">Use Cases</button>
+          <button class="filter-btn" data-category="scm">Git & Wiki</button>
+          <button class="filter-btn" data-category="deliverables">Deliverables</button>
+        </div>
+
+        <div class="search-box">
+          <span>🔍</span>
+          <input type="text" id="search-input" placeholder="Search tasks, RFs, rules...">
+        </div>
+      </div>
+
+      <!-- Dynamic Checklist Container -->
+      <div class="checklist-container" id="checklist-container">
+        <!-- Injected dynamically by app.js -->
+      </div>
+    </section>
+
+    <!-- Components Architecture Breakdown -->
+    <section class="dashboard-section" id="components-section">
+      <div class="section-header">
+        <div>
+          <h2><span>🧩</span> Multi-Module Maven Component Architecture</h2>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">
+            Structural breakdown into decoupled Maven submodules obeying SOLID and interface-oriented design.
+          </p>
+        </div>
+        <span class="section-tag">Component Model</span>
+      </div>
+
+      <div class="arch-diagram">
+ISO26-ISO2-A.05/
+├── pom.xml                                  &lt;-- [ ] Root Aggregator POM (Surefire, JaCoCo, Compiler plugins)
+├── common-contracts/                        &lt;-- [ ] Shared API interfaces & Domain Data Transfer Objects
+│   ├── src/main/java/es/uclm/sescam/contracts/
+│   │   ├── api/                             &lt;-- Client-Server REST / Service Interfaces
+│   │   └── adapters/                        &lt;-- External Healthcare Interfaces (SSO, EHR, Admissions, RIS/PACS)
+│   └── pom.xml
+├── servidor/                                &lt;-- [ ] Backend Server Submodule (Spring Boot / Java SE)
+│   ├── src/main/java/es/uclm/sescam/server/
+│   │   ├── controllers/                     &lt;-- API Controllers (SCU01–SCU13)
+│   │   ├── services/                        &lt;-- Medical examination business logic
+│   │   ├── persistence/                     &lt;-- Database repository & clinical entities
+│   │   └── external/                        &lt;-- Mock adapters for E01 (SSO), E02 (EHR), E03 (Adm), E04 (PACS)
+│   └── pom.xml
+├── cliente-web/                             &lt;-- [ ] Web Client Submodule (MVC pattern)
+│   ├── src/main/java/es/uclm/sescam/client/web/
+│   │   ├── controllers/                     &lt;-- Patient / Admin web controllers
+│   │   └── views/                           &lt;-- DICOM-enabled medical viewing & appointment UI
+│   └── pom.xml
+└── cliente-movil/                           &lt;-- [ ] Mobile Client Submodule / Client interface
+    └── pom.xml
+      </div>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Submodule / Component</th>
+            <th>Layer</th>
+            <th>Associated Requirements</th>
+            <th>Current Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>ISO26-ISO2-A.05 (Root)</code></td>
+            <td>Build Aggregator</td>
+            <td>Build lifecycle, JaCoCo &gt;80%, Surefire</td>
+            <td><span class="badge-tag deliverables">[ ] Pending Iteration 1</span></td>
+          </tr>
+          <tr>
+            <td><code>common-contracts</code></td>
+            <td>Interfaces & Models</td>
+            <td>RF01–RF32 contract interfaces</td>
+            <td><span class="badge-tag deliverables">[ ] Pending Iteration 1</span></td>
+          </tr>
+          <tr>
+            <td><code>servidor</code> (Backend)</td>
+            <td>Service / Persistence</td>
+            <td>SCU01–SCU13, E01–E04 integrations</td>
+            <td><span class="badge-tag deliverables">[ ] Pending Iteration 1</span></td>
+          </tr>
+          <tr>
+            <td><code>cliente-web</code> (Frontend)</td>
+            <td>MVC Web View / Controller</td>
+            <td>Patient, Admin, Physician portals</td>
+            <td><span class="badge-tag deliverables">[ ] Pending Iteration 2</span></td>
+          </tr>
+          <tr>
+            <td><code>cliente-movil</code></td>
+            <td>Mobile Interface</td>
+            <td>Mobile appointment notifications & history</td>
+            <td><span class="badge-tag deliverables">[ ] Pending Iteration 3</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Versions & Release Roadmap -->
+    <section class="dashboard-section" id="roadmap-section">
+      <div class="section-header">
+        <div>
+          <h2><span>🏷️</span> Semantic Versioning (SemVer 2.0.0) Release Roadmap</h2>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">
+            Target release schedule mapping iterations to formal component deliveries.
+          </p>
+        </div>
+        <span class="section-tag">Release Calendar</span>
+      </div>
+
+      <div class="roadmap-grid">
+        <!-- Milestone 1: It0 -->
+        <div class="roadmap-col">
+          <div class="roadmap-header">
+            <span>v0.0.1 · Inception</span>
+            <span class="badge-tag usecases">Current</span>
+          </div>
+          <div class="roadmap-card">
+            <h4>Repository & SCM <span style="color: var(--success);">[x]</span></h4>
+            <p>Git Flow, branch protection, DECISIONS.md, issue templates.</p>
+          </div>
+          <div class="roadmap-card">
+            <h4>Requirements & Actors <span style="color: var(--success);">[x]</span></h4>
+            <p>RF01–RF32 elicited, 4 human actors, 4 external systems.</p>
+          </div>
+          <div class="roadmap-card">
+            <h4>Diagrams Assembly <span style="color: var(--warning);">[ ]</span></h4>
+            <p>Patient, Admin, Physician, Server merged; SysAdmin & Combined pending.</p>
+          </div>
+          <div class="roadmap-card">
+            <h4>Planification Page <span style="color: var(--warning);">[ ]</span></h4>
+            <p>Constraints, availability, and RADIT effort tables to fill.</p>
+          </div>
+        </div>
+
+        <!-- Milestone 2: Elaboration -->
+        <div class="roadmap-col">
+          <div class="roadmap-header">
+            <span>v0.1.0 · Elaboration</span>
+            <span class="badge-tag components">Next</span>
+          </div>
+          <div class="roadmap-card">
+            <h4>Maven Multi-Module <span style="color: var(--text-muted);">[ ]</span></h4>
+            <p>Root POM, servidor, and client submodules initialized.</p>
+          </div>
+          <div class="roadmap-card">
+            <h4>Architectural Baseline <span style="color: var(--text-muted);">[ ]</span></h4>
+            <p>Core entity models, patient demographic registration (CU19).</p>
+          </div>
+          <div class="roadmap-card">
+            <h4>External System Adapters <span style="color: var(--text-muted);">[ ]</span></h4>
+            <p>Mock implementations for SSO, EHR, Admissions, RIS/PACS.</p>
+          </div>
+          <div class="roadmap-card">
+            <h4>Theory Deliverable 1 <span style="color: var(--danger);">[ ] Due Nov 13</span></h4>
+            <p>UP Plan, SCM Plan, and ISO 25010 SQA Plan submission.</p>
+          </div>
+        </div>
+
+        <!-- Milestone 3: Construction -->
+        <div class="roadmap-col">
+          <div class="roadmap-header">
+            <span>v0.2.0..v0.8.0 · Construction</span>
+            <span class="badge-tag deliverables">Planned</span>
+          </div>
+          <div class="roadmap-card">
+            <h4>Clinical Orders & Scheduling <span style="color: var(--text-muted);">[ ]</span></h4>
+            <p>Diagnostic ordering (CU10), appointment slots allocation (CU20).</p>
+          </div>
+          <div class="roadmap-card">
+            <h4>Diagnostic Reports & PACS <span style="color: var(--text-muted);">[ ]</span></h4>
+            <p>Reporting workflow (CU14) and medical image retrieval (CU15).</p>
+          </div>
+          <div class="roadmap-card">
+            <h4>Automated Notifications <span style="color: var(--text-muted);">[ ]</span></h4>
+            <p>Timer-based notifications & periodic follow-up surveillance (CU05, CU11).</p>
+          </div>
+          <div class="roadmap-card">
+            <h4>Unit Tests & JaCoCo &gt;80% <span style="color: var(--text-muted);">[ ]</span></h4>
+            <p>JUnit 5 test suites verifying business logic contracts.</p>
+          </div>
+        </div>
+
+        <!-- Milestone 4: Transition -->
+        <div class="roadmap-col">
+          <div class="roadmap-header">
+            <span>v1.0.0 · Final Production</span>
+            <span class="badge-tag usecases">Dec 15</span>
+          </div>
+          <div class="roadmap-card">
+            <h4>Final Integration <span style="color: var(--text-muted);">[ ]</span></h4>
+            <p>Consolidated multi-module build packaging and deployment scripts.</p>
+          </div>
+          <div class="roadmap-card">
+            <h4>Documentation & Javadoc <span style="color: var(--text-muted);">[ ]</span></h4>
+            <p>Generated Javadoc (mvn javadoc:javadoc) and user manuals.</p>
+          </div>
+          <div class="roadmap-card">
+            <h4>Individual Self-Assessments <span style="color: var(--text-muted);">[ ]</span></h4>
+            <p>Critical personal appraisals on wiki for all 6 members.</p>
+          </div>
+          <div class="roadmap-card">
+            <h4>Final Evaluation Submission <span style="color: var(--danger);">[ ] Due Dec 15</span></h4>
+            <p>Repository freeze and final academic evaluation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team & Traceability Matrix -->
+    <section class="dashboard-section" id="team-section">
+      <div class="section-header">
+        <div>
+          <h2><span>👥</span> Team Member Responsibilities & Elicitation Coverage</h2>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">
+            Explicit allocation of requirements, diagrams, and project disciplines across the 6 team members.
+          </p>
+        </div>
+        <span class="section-tag">RACI / Team Matrix</span>
+      </div>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Member</th>
+            <th>Primary Role</th>
+            <th>Assigned Functional Scope</th>
+            <th>Diagrams & Deliverables</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Hatim Ben Ayad</strong></td>
+            <td>Coordinator</td>
+            <td>Administrative / Admissions (RF19–RF26 / CU19–CU26)</td>
+            <td>Admin Client Diagram (.vpp/.png merged PR #19); General Client Diagram assembly</td>
+            <td><span class="badge-tag assumptions">[x] Active</span></td>
+          </tr>
+          <tr>
+            <td><strong>Felipe Dionisio</strong></td>
+            <td>Secretary</td>
+            <td>System Administrator (RF27–RF32 / CU27–CU32)</td>
+            <td>SysAdmin Diagram (.vpp drafted; pending review #30); Decision logging</td>
+            <td><span class="badge-tag constraints">[ ] Review Pending</span></td>
+          </tr>
+          <tr>
+            <td><strong>Berke Taha Özdemir</strong></td>
+            <td>Git Expert</td>
+            <td>Server Architecture (SCU01–SCU13)</td>
+            <td>Server Use Case Diagram (.vpp/.jpg merged PR #32); External actors (E01–E04) verified</td>
+            <td><span class="badge-tag assumptions">[x] Completed</span></td>
+          </tr>
+          <tr>
+            <td><strong>Beyzanur Balota</strong></td>
+            <td>Git Expert</td>
+            <td>Planning & Constraints Governance</td>
+            <td>Constraints & Assumptions drafting (Issue #18, #31); Team availability table</td>
+            <td><span class="badge-tag constraints">[ ] In Progress</span></td>
+          </tr>
+          <tr>
+            <td><strong>Mina Özdoğan</strong></td>
+            <td>Maven Expert</td>
+            <td>Patient Users (RF01–RF09 / CU01–CU09)</td>
+            <td>Patient Client Diagram (.vpp/.png merged PR #20); Maven architecture setup</td>
+            <td><span class="badge-tag assumptions">[x] Completed</span></td>
+          </tr>
+          <tr>
+            <td><strong>Ayça Görgülü</strong></td>
+            <td>Maven Expert</td>
+            <td>Physician Users (RF10–RF18 / CU10–CU18)</td>
+            <td>Physician Client Diagram (.vpp/.jpg merged PR #21); Patient inheritance resolution (#28)</td>
+            <td><span class="badge-tag constraints">[ ] In Progress</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <!-- Toast Notification element -->
+  <div id="toast-notification" class="toast-notification"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

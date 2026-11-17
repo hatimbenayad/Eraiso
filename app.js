@@ -11,8 +11,8 @@
     { id: "must-fix", href: "must-fix.html", label: "Must Fix" },
     { id: "blunders", href: "blunders.html", label: "Blunders" },
     { id: "todo-by", href: "todo-by.html", label: "To-Do By" },
-    { id: "milestones", href: "milestones.html", label: "Milestones & Issues" },
-    { id: "meetings", href: "meetings.html", label: "Meetings & Decisions" },
+    { id: "milestones", href: "milestones.html", label: "Milestones" },
+    { id: "meetings", href: "meetings.html", label: "Meetings" },
     { id: "roadmap", href: "roadmap.html", label: "Roadmap" },
     { id: "team", href: "team.html", label: "Team" }
   ];

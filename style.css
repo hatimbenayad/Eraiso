@@ -174,17 +174,17 @@ code {
   list-style: none;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   flex-wrap: wrap;
 }
 
 .nav-links a {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 7px 13px;
+  gap: 5px;
+  padding: 6px 10px;
   border-radius: 8px;
-  font-size: 0.87rem;
+  font-size: 0.83rem;
   font-weight: 600;
   color: #cbd5e1;
   transition: background 0.15s ease, color 0.15s ease;

@@ -9,6 +9,7 @@
   const NAV_ITEMS = [
     { id: "progress", href: "index.html", label: "Progress" },
     { id: "must-fix", href: "must-fix.html", label: "Must Fix" },
+    { id: "blunders", href: "blunders.html", label: "Blunders" },
     { id: "todo-by", href: "todo-by.html", label: "To-Do By" },
     { id: "milestones", href: "milestones.html", label: "Milestones & Issues" },
     { id: "meetings", href: "meetings.html", label: "Meetings & Decisions" },
@@ -603,12 +604,72 @@
     }
   }
 
+  // 7. BLUNDERS (??) & RECOVERY PLAYBOOK (!!) PAGE
+  function renderBlunders() {
+    const mount = document.getElementById("blunders-list");
+    const filterMount = document.getElementById("blunder-filters");
+    if (!mount) return;
+
+    let activeSeverity = "ALL";
+    const SEVS = ["ALL", "CRITICAL", "HIGH", "MEDIUM"];
+
+    function draw() {
+      if (filterMount) {
+        filterMount.innerHTML = SEVS.map(s => `
+          <button class="filter-btn ${activeSeverity === s ? "active" : ""}" data-sev="${s}">
+            ${s === "ALL" ? `All Blunders (${DATA.blunders.length})` : s}
+          </button>
+        `).join("");
+        filterMount.querySelectorAll(".filter-btn").forEach(btn => {
+          btn.addEventListener("click", () => {
+            activeSeverity = btn.dataset.sev;
+            draw();
+          });
+        });
+      }
+
+      const items = activeSeverity === "ALL"
+        ? DATA.blunders
+        : DATA.blunders.filter(b => b.severity === activeSeverity);
+
+      mount.innerHTML = items.map(b => `
+        <article class="issue-card ${b.severity === "CRITICAL" ? "status-critical" : b.severity === "HIGH" ? "status-open" : "status-progress"}">
+          <div class="issue-top">
+            <div class="issue-badges">
+              <span class="badge ${b.severity === "CRITICAL" ? "badge-critical" : b.severity === "HIGH" ? "badge-open" : "badge-progress"}">${esc(b.notation)}</span>
+              <span class="badge badge-neutral">${esc(b.id)}</span>
+              <span class="badge badge-done">Recovery Gain: ${esc(b.scoreGain)}</span>
+            </div>
+            <span style="font-size:0.81rem;color:var(--text-muted);"><strong>Owner:</strong> ${esc(b.owner)}</span>
+          </div>
+
+          <div class="issue-title">${esc(b.title)}</div>
+
+          <div class="two-col" style="margin-top:12px;">
+            <div class="panel danger-accent" style="padding:14px 16px;">
+              <h3 style="font-size:0.92rem;color:var(--danger);margin-bottom:8px;">?? What We Might Be Doing Wrong</h3>
+              <p style="font-size:0.87rem;color:var(--text-secondary);margin-bottom:8px;">${esc(b.whatWrong)}</p>
+              <p style="font-size:0.83rem;color:var(--text-muted);"><strong>Risk / Impact:</strong> ${esc(b.impact)}</p>
+            </div>
+            <div class="panel success-accent" style="padding:14px 16px;">
+              <h3 style="font-size:0.92rem;color:var(--success);margin-bottom:8px;">!! Best Move — How to Recover</h3>
+              <p style="font-size:0.87rem;color:var(--text-secondary);margin-bottom:0;">${esc(b.recovery)}</p>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    draw();
+  }
+
   /* ------------------------------------------------------------------------
      BOOT
      ------------------------------------------------------------------------ */
   document.addEventListener("DOMContentLoaded", () => {
     initChrome();
     if (PAGE === "must-fix") renderMustFix();
+    if (PAGE === "blunders") renderBlunders();
     if (PAGE === "todo-by") renderTodoBy();
     if (PAGE === "milestones") renderMilestones();
     if (PAGE === "meetings") renderMeetings();

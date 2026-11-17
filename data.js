@@ -824,6 +824,78 @@ window.PORTAL_DATA = {
   ],
 
   /* ------------------------------------------------------------------------
+     BLUNDERS (??) & RECOVERY PLAYBOOK (!!) — HONEST SELF-AUDIT
+     ------------------------------------------------------------------------ */
+  blunders: [
+    {
+      id: "BL-01",
+      severity: "CRITICAL",
+      notation: "?? Critical Blunder",
+      title: "Over-Modeling While Construction Code Lags Behind (1/32 RFs Coded, 0% Swing UI)",
+      whatWrong: "We spent the start of Iteration 2 heavily focused on UML diagrams and documentation while only 1 of 32 use cases (CU19) is implemented end-to-end on the server and 0% of the client Swing UI exists (only SmokeTest.java). Only 5 days remain before the Santa Tecla break (Nov 23–27).",
+      impact: "If coding does not begin immediately, the team risks an unmanageable December crunch trying to implement 31 use cases in two weeks.",
+      recovery: "Freeze Iteration 2 diagrams by Thursday 19/11. Immediately implement lean vertical slices on 20–22 Nov (ExaminationOrderService, DiagnosticReportService, MockPacsAdapter, and minimal MainWindowFrame Swing UI) using our Copy Context (.md) packs under D-014.",
+      owner: "All Team · Coordinated by Hatim & Felipe",
+      scoreGain: "+1.2 pts on Implementation Velocity"
+    },
+    {
+      id: "BL-02",
+      severity: "HIGH",
+      notation: "?? Major Blunder",
+      title: "Leaving Completed Work Unmerged or Local ('Invisible Progress')",
+      whatWrong: "Finished work—Hatim's pushed Order test expansion (commit 0c91eeb), Mina's completed CU10–CU12 diagrams, the finalized Planification.md, and SELF_ASSESSMENT_DRAFT.md—is sitting on unmerged branches or local folders instead of develop and the live GitHub Wiki.",
+      impact: "Course evaluation grades merged repository evidence and live Wiki pages (C12, C16). Unmerged local work appears as 0% progress to instructors.",
+      recovery: "Open and merge the PR for test/CU10-CU11-CU16-orders-test-suite today, merge Mina's CU10–CU12 diagram PR, and publish Planification & Self-Assessment directly onto the live GitHub Wiki before Thursday 5:00 PM.",
+      owner: "Hatim (@hatimbenayad) & Mina (@minaOZ)",
+      scoreGain: "+0.4 pts on Traceability & Wiki"
+    },
+    {
+      id: "BL-03",
+      severity: "HIGH",
+      notation: "?? Major Blunder",
+      title: "GitHub Issue Titles Drifting From the Official Wiki (#64–#67)",
+      whatWrong: "Initial Iteration 2 issue titles inverted CU14 (Manage diagnostic report) and CU15 (View medical images) and mislabeled CU11/CU12 compared to the official Wiki Requirements-and-use-cases.md.",
+      impact: "Causes teammates and AI assistants to model or code the wrong functionality under the wrong CU ID, breaking 1:1 RF-to-CU traceability.",
+      recovery: "Rename GitHub Issues #64–#67 today to match the Wiki 1:1, create sub-issues for CU13 & CU18, and treat Wiki Requirements-and-use-cases.md as the immutable source of truth.",
+      owner: "Hatim (@hatimbenayad)",
+      scoreGain: "+0.2 pts on Requirements Alignment"
+    },
+    {
+      id: "BL-04",
+      severity: "HIGH",
+      notation: "?? Major Blunder",
+      title: "Uneven Contributor Activity in GitHub Insights",
+      whatWrong: "Most merged code and Maven build commits so far come from 2 team members (Hatim and Felipe), while other teammates' contributions are either pending PR or unassigned in code.",
+      impact: "Individual lab grades explicitly audit GitHub Insights commit, PR, and review balance across all 6 members (Constraint C18).",
+      recovery: "Execute the balanced 3–3–3 diagram PR split (Mina CU10–12, Beyza CU13–15, Ayca CU16–18) and assign dedicated Java service + JUnit 6 test branches to Berke, Beyza, Mina, and Ayca in It2/It3.",
+      owner: "Coordinator & All 6 Members",
+      scoreGain: "+0.4 pts on Team Governance"
+    },
+    {
+      id: "BL-05",
+      severity: "MEDIUM",
+      notation: "? Inaccuracy",
+      title: "GitHub Projects Kanban Board Out of Sync (Constraint C11)",
+      whatWrong: "New Iteration 2 issues (#59–#75) were opened without linking all of them to the GitHub Projects Kanban board or enabling automatic status workflows.",
+      impact: "Leaves a visible compliance gap against Constraint C11 during professor supervision.",
+      recovery: "Bulk-select all open and closed Iteration 2 issues in the Issues tab, add them to the Project board, and enable built-in Workflows ('Auto-add to project' and 'Item closed -> Done') in 2 minutes.",
+      owner: "Hatim (@hatimbenayad)",
+      scoreGain: "+0.2 pts on SCM & Project Tracking"
+    },
+    {
+      id: "BL-06",
+      severity: "MEDIUM",
+      notation: "? Inaccuracy",
+      title: "Ignoring Midterms & Travel Blackouts in This Week's Sprint Scope",
+      whatWrong: "Treating Nov 18–22 as a normal 66-hour week despite real academic blackouts: Berke (midterm Nov 18), Beyza (midterm Nov 19), Felipe (travel Nov 20–22), and Mina (assignment Nov 21).",
+      impact: "Unrealistic expectations create missed handoffs right before the Santa Tecla holiday freeze (Nov 23–27, 0 h).",
+      recovery: "Front-load Felipe's Server Design (#72) before Nov 20; have Hatim & Ayca lead initial It2 service/UI scaffolding on Nov 20–22; bring Berke & Beyza in for service implementation & Issue #75 JUnit tests right after their exams.",
+      owner: "All Team · Tracked via To-Do By",
+      scoreGain: "+0.2 pts on Planning Realism"
+    }
+  ],
+
+  /* ------------------------------------------------------------------------
      MEETING SESSIONS LOG (SUPPORTS WIKI MINUTES & DECISIONS ACCURACY)
      ------------------------------------------------------------------------ */
   meetings: [

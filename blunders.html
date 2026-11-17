@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blunders &amp; Recovery · SESCAM Radiodiagnostics (ISO2 Team A.05)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="blunders">
+  <div id="site-navbar"></div>
+
+  <main class="container">
+    <header class="page-hero">
+      <div class="hero-eyebrow">Honest Self-Audit · Deviations &amp; Corrective Actions · 17/11/2026</div>
+      <h1>Blunders (??) &amp; Recovery Playbook (!!)</h1>
+      <p>
+        Inspired by chess annotation—where a <strong>Blunder (<code>??</code>)</strong> flags a serious mistake and a <strong>Best Move (<code>!!</code>)</strong> shows the exact corrective response—this page tracks what Team A.05 might be doing wrong right now and our concrete plan to recover before the December 15 delivery.
+      </p>
+      <div class="hero-meta">
+        <span class="meta-pill">Current Self-Audit: 7.95 / 10</span>
+        <span class="meta-pill green">Recovery Target (15/12): 9.3 &ndash; 9.6 / 10</span>
+        <span class="meta-pill">6 Identified Blunders / Inaccuracies</span>
+      </div>
+    </header>
+
+    <!-- Honest Grade Breakdown KPIs -->
+    <section class="kpi-grid" aria-label="Self-audit grade summary">
+      <div class="kpi-card">
+        <div class="kpi-label"><span>Current Realistic Grade</span><span>17/11</span></div>
+        <div class="kpi-value">7.95 / 10</div>
+        <div class="progress-bar"><div class="progress-fill" style="width: 79.5%"></div></div>
+        <div class="kpi-sub">Honest audit against RF01–RF32 &amp; C01–C18</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label"><span>Process, Architecture &amp; SQA</span><span>Strong</span></div>
+        <div class="kpi-value">9.1 / 10</div>
+        <div class="progress-bar"><div class="progress-fill green" style="width: 91%"></div></div>
+        <div class="kpi-sub">Maven, Git Flow, JUnit 6, JaCoCo &ge;75%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label"><span>Construction Code Velocity</span><span>?? Gap</span></div>
+        <div class="kpi-value">5.8 / 10</div>
+        <div class="progress-bar"><div class="progress-fill" style="width: 58%; background: var(--danger);"></div></div>
+        <div class="kpi-sub">1/32 RFs on server · 0% Swing UI coded</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label"><span>Projected Final Grade</span><span>!! Goal</span></div>
+        <div class="kpi-value">9.5 / 10</div>
+        <div class="progress-bar"><div class="progress-fill green" style="width: 95%"></div></div>
+        <div class="kpi-sub">If recovery milestones hold through 15/12</div>
+      </div>
+    </section>
+
+    <!-- Blunders & Recovery Cards -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <h2>Identified Blunders &amp; Concrete Recovery Actions</h2>
+          <p>Each blunder pairs an honest diagnosis of what we are getting wrong with the exact corrective action to fix it.</p>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <div id="blunder-filters" class="filter-group"></div>
+      </div>
+
+      <div id="blunders-list" class="issue-list"></div>
+    </section>
+
+    <!-- 48-Hour Quick-Win Recovery Plan -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <h2>!! 48-Hour Recovery Sprint (Before Thursday 19/11 at 17:00)</h2>
+          <p>Immediate high-leverage moves that resolve visibility, governance, and alignment blunders in ~2 hours of focused effort.</p>
+        </div>
+        <span class="badge badge-done">+0.6 pts Immediate Gain</span>
+      </div>
+      <div class="panel success-accent">
+        <ul class="clean-list">
+          <li><strong>Move 1 — Merge Already-Pushed Tests:</strong> Open and merge Hatim's PR for <code>test/CU10-CU11-CU16-orders-test-suite</code> (<code>0c91eeb</code>) into <code>develop</code>.</li>
+          <li><strong>Move 2 — Merge Mina's Completed Analysis:</strong> Push and merge Mina's <code>CU10–CU12</code> BCE Communication Diagrams PR so analysis progress is visible on <code>develop</code>.</li>
+          <li><strong>Move 3 — Fix Issue Title Drift:</strong> Rename GitHub Issues <code>#64–#67</code> to match official Wiki names (<code>CU11</code>, <code>CU12</code>, <code>CU14</code>, <code>CU15</code>) and add <code>CU13</code> &amp; <code>CU18</code>.</li>
+          <li><strong>Move 4 — Sync Kanban Board (C11):</strong> Bulk-add all Iteration 2 issues to GitHub Projects and enable <em>Auto-add</em> &amp; <em>Item closed &rarr; Done</em> workflows.</li>
+          <li><strong>Move 5 — Lock Server &amp; Client Design (<code>#71</code>, <code>#72</code>):</strong> Merge Felipe's Server Design before his Nov 20 travel so backend &amp; Swing UI coding starts immediately on Nov 20–22.</li>
+          <li><strong>Move 6 — Publish Live Wiki Pages (C12 &amp; C16):</strong> Publish the finalized <code>Planification</code> and <code>Self-assessment-and-experience</code> drafts onto the GitHub Wiki.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

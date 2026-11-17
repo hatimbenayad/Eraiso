@@ -11,6 +11,7 @@
     { id: "must-fix", href: "must-fix.html", label: "Must Fix" },
     { id: "todo-by", href: "todo-by.html", label: "To-Do By" },
     { id: "milestones", href: "milestones.html", label: "Milestones & Issues" },
+    { id: "meetings", href: "meetings.html", label: "Meetings & Decisions" },
     { id: "roadmap", href: "roadmap.html", label: "Roadmap" },
     { id: "team", href: "team.html", label: "Team" }
   ];
@@ -566,6 +567,42 @@
     });
   }
 
+  // 6. MEETINGS & DECISIONS PAGE
+  function renderMeetings() {
+    const meetingsMount = document.getElementById("meetings-log");
+    const decisionsMount = document.getElementById("meetings-decisions-table");
+    if (!meetingsMount) return;
+
+    meetingsMount.innerHTML = DATA.meetings.map(m => `
+      <article class="issue-card ${m.status === "in-progress" ? "status-progress" : "status-done"}">
+        <div class="issue-top">
+          <div class="issue-badges">
+            ${m.status === "in-progress" ? '<span class="badge badge-progress">Upcoming Session</span>' : '<span class="badge badge-done">Logged</span>'}
+            <span class="badge badge-neutral">${esc(m.id)}</span>
+            <span class="badge badge-neutral">${esc(m.date)}</span>
+          </div>
+          <div class="issue-badges">
+            ${(m.decisionsLinked || []).map(d => `<span class="badge badge-neutral"><code>${esc(d)}</code></span>`).join("")}
+          </div>
+        </div>
+        <div class="issue-title">${esc(m.type)}</div>
+        <ul class="clean-list" style="margin-top:8px;">
+          ${(m.agenda || []).map(point => `<li>${esc(point)}</li>`).join("")}
+        </ul>
+      </article>
+    `).join("");
+
+    if (decisionsMount) {
+      decisionsMount.innerHTML = DATA.decisions.map(d => `
+        <tr>
+          <td><strong><code>${esc(d.id)}</code></strong></td>
+          <td><strong>${esc(d.title)}</strong></td>
+          <td>${esc(d.summary)}</td>
+        </tr>
+      `).join("");
+    }
+  }
+
   /* ------------------------------------------------------------------------
      BOOT
      ------------------------------------------------------------------------ */
@@ -574,6 +611,7 @@
     if (PAGE === "must-fix") renderMustFix();
     if (PAGE === "todo-by") renderTodoBy();
     if (PAGE === "milestones") renderMilestones();
+    if (PAGE === "meetings") renderMeetings();
     if (PAGE === "roadmap") renderRoadmap();
     if (PAGE === "team") renderTeam();
   });

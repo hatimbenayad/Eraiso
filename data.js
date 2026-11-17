@@ -824,15 +824,87 @@ window.PORTAL_DATA = {
   ],
 
   /* ------------------------------------------------------------------------
+     MEETING SESSIONS LOG (SUPPORTS WIKI MINUTES & DECISIONS ACCURACY)
+     ------------------------------------------------------------------------ */
+  meetings: [
+    {
+      id: "Meeting 05 (Upcoming)",
+      date: "Thursday, 19/11/2026 · 17:00 (5:00 PM)",
+      type: "Supervision Session with Prof. Ismael Caballero",
+      status: "in-progress",
+      decisionsLinked: ["D-014", "D-015", "D-016", "D-017"],
+      agenda: [
+        "Present Iteration 2 quality infrastructure: JUnit 6.1.3 + JaCoCo >=75% line / >=70% branch coverage gate (PR #76) and 85+ passing unit tests.",
+        "Walk through Lab S.04.01 Black-Box Test Design Matrices (Equivalence Partitions & Boundary Values on Issues #74 and #75).",
+        "Review Iteration 2 Physician BCE Communication Diagrams (CU10–CU12 completed by Mina; CU13–CU18 split across Beyza & Ayca) and Client/Server Design Class Diagrams (#71, #72).",
+        "Confirm readiness prior to Santa Tecla academic break (23–27 Nov, D-016) and Iteration 3 scheduling kickoff (CU20–CU25)."
+      ]
+    },
+    {
+      id: "It2 Coordination Sync",
+      date: "15/11 – 17/11/2026",
+      type: "Team Iteration 2 Kickoff & Work Distribution",
+      status: "done",
+      decisionsLinked: ["D-009", "D-014", "D-015", "D-017"],
+      agenda: [
+        "Closed Step 1 Quality Infrastructure: merged PR #52 (architectural baseline), PR #58 (0.2.0-SNAPSHOT), and PR #76 (JaCoCo coverage enforcement); closed Issues #59, #60, #61.",
+        "Resolved use-case title alignment against official Wiki Requirements-and-use-cases.md (CU11 Periodic follow-up via Timer, CU12 Manage/cancel orders, CU14 Manage diagnostic report, CU15 View medical images).",
+        "Agreed balanced 3–3–3 Physician analysis split: Mina (CU10–CU12), Beyza (CU13–CU15), Ayca (CU16–CU18), while Hatim (#71) & Felipe (#72) work in parallel on Client/Server Design Class Diagrams and Berke prepares #75 JUnit tests."
+      ]
+    },
+    {
+      id: "Meeting 04",
+      date: "09/11/2026",
+      type: "Elaboration Architecture Baseline Review",
+      status: "done",
+      decisionsLinked: ["D-017", "D-018"],
+      agenda: [
+        "Consolidated Maven multi-module structure into 3 decoupled modules: common-contracts, server, and client (D-017).",
+        "Agreed in-memory repository persistence behind interfaces until DB selection, and implemented CU19 (Manage Patient Demographics) as the executable vertical slice.",
+        "Clarified Physician -> Patient role inheritance boundary (D-018: applies strictly to own-care functionality via Role.includes())."
+      ]
+    },
+    {
+      id: "Meeting 02",
+      date: "23/10/2026 · 21:00 – 21:40",
+      type: "Use-Case Modeling, Planning & Governance Alignment",
+      status: "done",
+      decisionsLinked: ["D-005", "D-006", "D-007", "D-008", "D-009", "D-010", "D-012", "D-015", "D-016"],
+      agenda: [
+        "Standardized on Visual Paradigm (D-005) and separated Client vs. Server use-case diagrams (D-006) with external hospital actors E01–E04 + Timer (D-008).",
+        "Established Peer-Review Matrix (D-009), Simulated External Adapters (D-012), Non-Destructive Clinical Records (D-015), and Release Calendar respecting Santa Tecla break (D-016).",
+        "Assigned planning leadership: Beyza (availability, constraints, risks) and Berke (SCM, calendar, RADIT effort estimates) per D-010."
+      ]
+    },
+    {
+      id: "Meeting 01",
+      date: "19/10/2026 · 21:00 – 21:30",
+      type: "Initial Project Kickoff & Role Assignment",
+      status: "done",
+      decisionsLinked: ["D-001", "D-002", "D-003", "D-004"],
+      agenda: [
+        "Divided all 32 functional requirements and client use-case diagrams by actor (D-001): Mina (Patient), Ayca (Physician), Hatim (Admin), Felipe (SysAdmin).",
+        "Agreed parallel diagram authoring with Coordinator assembly into the master client diagram (D-002).",
+        "Standardized IDE on Visual Studio Code (D-003) and GitHub Copilot as AI assistant under human oversight (D-004)."
+      ]
+    }
+  ],
+
+  /* ------------------------------------------------------------------------
      KEY ARCHITECTURAL DECISIONS QUICK REFERENCE
      ------------------------------------------------------------------------ */
   decisions: [
+    { id: "D-001", title: "Division of RFs & Diagrams by Actor", summary: "Parallel domain ownership: Mina (Patient RF01–09), Ayca (Physician RF10–18), Hatim (Admin RF19–26), Felipe (SysAdmin RF27–32)." },
     { id: "D-005", title: "Visual Paradigm Official UML Tool", summary: "All UML models must include both editable .vpp and high-resolution .png exports under docs/diagrams/." },
+    { id: "D-006", title: "Separate Client & Server Use-Case Diagrams", summary: "Separates human actor workflows (CU01–CU32) from server orchestrations & external systems E01–E04 + Timer (SCU01–SCU13)." },
     { id: "D-009", title: "Git Flow & Peer-Review Matrix", summary: "Direct pushes to develop/main are blocked. Every PR requires green CI and cross-review approval (Mina<->Felipe, Hatim<->Ayca, Berke<->Beyza)." },
     { id: "D-012", title: "Simulated External Hospital Adapters", summary: "External platforms E01–E04 (SSO, EHR, Admissions, RIS/PACS) sit behind interfaces in common-contracts with Mock Adapters in server for offline testing." },
+    { id: "D-013", title: "Wiki Self-Service vs. Strict Code Git Flow", summary: "Team members publish Wiki documentation directly while all code, POMs, and UML diagrams go through reviewed feature branches and PRs." },
     { id: "D-014", title: "Human-in-the-Loop AI4SE Governance", summary: "'The Engineer designs the Interfaces; the AI implements the Contracts.' Humans own design, test specs, code review, and Git commits." },
     { id: "D-015", title: "Non-Destructive Clinical Records", summary: "Zero hard deletes: orders transition to CANCELLED with cancelledAt timestamp, patients become INACTIVE, preserving full GDPR/SESCAM audit history." },
-    { id: "D-017", title: "3-Module Maven Architecture & In-Memory Persistence", summary: "Root aggregator builds common-contracts first, then server and client. Persistence sits behind repository interfaces with In-Memory implementations." }
+    { id: "D-016", title: "Academic Release Calendar & Santa Tecla Break", summary: "Milestones aligned to Moodle & lab deadlines with 0 billable hours scheduled during Santa Tecla week (23–27 Nov)." },
+    { id: "D-017", title: "3-Module Maven Architecture & In-Memory Persistence", summary: "Root aggregator builds common-contracts first, then server and client. Persistence sits behind repository interfaces with In-Memory implementations." },
+    { id: "D-018", title: "Physician -> Patient Role Scope Clarification", summary: "Physician inclusion of Patient capabilities (Role.includes) applies strictly to own-care access, never bypassing clinical authorization." }
   ]
 };
 

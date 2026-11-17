@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meetings &amp; Decisions · SESCAM Radiodiagnostics (ISO2 Team A.05)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="meetings">
+  <div id="site-navbar"></div>
+
+  <main class="container">
+    <header class="page-hero">
+      <div class="hero-eyebrow">Meeting Coordination &amp; Traceability · Constraint C11 &amp; C13</div>
+      <h1>Meetings &amp; Decisions Tracker</h1>
+      <p>
+        Central coordination log used to prepare meeting agendas, capture session outcomes, and preserve binding decisions so our official GitHub Wiki pages (<code>Minutes-of-meetings</code> and <code>Decisions</code>) and <code>DECISIONS.md</code> stay accurate and synchronized.
+      </p>
+      <div class="hero-meta">
+        <span class="meta-pill">Next Meeting: Thursday 19/11 at 17:00 (Prof. Ismael Caballero)</span>
+        <span class="meta-pill green">Decisions D-001 &ndash; D-018 Tracked</span>
+      </div>
+    </header>
+
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <h2>Meeting Sessions &amp; Agendas</h2>
+          <p>Upcoming supervision agenda and historical team meeting summaries mirrored to the GitHub Wiki.</p>
+        </div>
+        <a class="btn" href="https://github.com/hatimbenayad/2026-ISO2-A.05/wiki/Minutes-of-meetings" target="_blank" rel="noopener">Open Wiki Minutes ↗</a>
+      </div>
+      <div id="meetings-log" class="issue-list"></div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <h2>Binding Decisions Log (D-001 &ndash; D-018)</h2>
+          <p>Quick reference of agreed project decisions mirrored in <code>DECISIONS.md</code> and the GitHub Wiki.</p>
+        </div>
+        <a class="btn" href="https://github.com/hatimbenayad/2026-ISO2-A.05/blob/develop/DECISIONS.md" target="_blank" rel="noopener">Open DECISIONS.md ↗</a>
+      </div>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width:90px;">ID</th>
+              <th style="width:260px;">Decision</th>
+              <th>Summary &amp; Impact</th>
+            </tr>
+          </thead>
+          <tbody id="meetings-decisions-table"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

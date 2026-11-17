@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team &amp; Governance · SESCAM Radiodiagnostics (ISO2 Team A.05)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="team">
+  <div id="site-navbar"></div>
+
+  <main class="container">
+    <header class="page-hero">
+      <div class="hero-eyebrow">Organization &amp; Governance · 66 Person-Hours / Week</div>
+      <h1>Team A.05 — Roles, Ownership &amp; Peer-Review Matrix</h1>
+      <p>
+        Clear division of functional actor ownership (<code>D-001</code>), technical specializations, availability constraints, and mandatory peer-review pairings (<code>D-009</code>) ensuring balanced contributions and academic accountability.
+      </p>
+    </header>
+
+    <!-- Roster Grid -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <h2>Team Roster &amp; Active Focus</h2>
+          <p>Click <strong>Copy Personal AI Context</strong> on any card to copy a ready-to-use Markdown briefing tailored to that teammate.</p>
+        </div>
+        <span class="badge badge-neutral">6 Members · UCLM ESI</span>
+      </div>
+      <div id="team-roster-grid" class="team-grid"></div>
+    </section>
+
+    <!-- Governance & Review Matrix -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <h2>Peer-Review Matrix (D-009) &amp; AI Governance (D-014)</h2>
+          <p>Quality assurance rules enforced on every Pull Request targeting <code>develop</code> or <code>main</code>.</p>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="panel primary-accent">
+          <h3>Cross-Review Pairings (Decision D-009)</h3>
+          <ul class="clean-list">
+            <li><strong>Mina &Ouml;zdo&#287;an &harr; Felipe Dionisio:</strong> Patient (<code>CU01–CU09</code>) and System Admin / Core Server deliverables.</li>
+            <li><strong>Hatim Ben Ayad &harr; Ay&ccedil;a G&ouml;rg&uuml;l&uuml;:</strong> Administrative/Admissions (<code>CU19–CU26</code>) and Physician (<code>CU10–CU18</code>) deliverables.</li>
+            <li><strong>Berke Taha &Ouml;zdemir &harr; Beyzanur Balota:</strong> Server orchestration, SCM, Planning, and Analysis deliverables.</li>
+            <li><strong>Merge Policy:</strong> Direct pushes to <code>develop</code> and <code>main</code> are blocked; every PR requires green GitHub Actions CI + peer approval before Coordinator merge.</li>
+          </ul>
+        </div>
+
+        <div class="panel success-accent">
+          <h3>Human-in-the-Loop AI Governance (Decision D-014)</h3>
+          <ul class="clean-list">
+            <li><strong>Core Principle:</strong> <em>"The Engineer designs the Interfaces; the AI implements the Contracts."</em></li>
+            <li><strong>Human Ownership:</strong> Architecture, UML modeling, Black-Box test matrices (EP/BVA), PR verification, and Git commits belong exclusively to team members.</li>
+            <li><strong>AI Acceleration:</strong> GitHub Copilot / LLM assistants help generate boilerplate Java code, DTOs, and JUnit 6 scaffolding from our structured Markdown Context Packs.</li>
+            <li><strong>Academic Evidence:</strong> All individual contributions are traceable via GitHub Commits, PRs, Issues, and the Wiki <code>Self-assessment-and-experience</code> page (C16).</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Useful Links -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <h2>Official Project Links</h2>
+          <p>Direct references to the main engineering repository, wiki documentation, and Kanban board.</p>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;">
+        <a class="btn btn-primary" href="https://github.com/hatimbenayad/2026-ISO2-A.05" target="_blank" rel="noopener">Main Repository ↗</a>
+        <a class="btn" href="https://github.com/hatimbenayad/2026-ISO2-A.05/issues" target="_blank" rel="noopener">GitHub Issues ↗</a>
+        <a class="btn" href="https://github.com/hatimbenayad/2026-ISO2-A.05/pulls" target="_blank" rel="noopener">Pull Requests ↗</a>
+        <a class="btn" href="https://github.com/hatimbenayad/2026-ISO2-A.05/wiki" target="_blank" rel="noopener">Project Wiki ↗</a>
+        <a class="btn" href="https://github.com/hatimbenayad/2026-ISO2-A.05/wiki/Requirements-and-use-cases" target="_blank" rel="noopener">Official Requirements &amp; Use Cases ↗</a>
+        <a class="btn" href="https://github.com/hatimbenayad/2026-ISO2-A.05/blob/develop/DECISIONS.md" target="_blank" rel="noopener">DECISIONS.md ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roadmap &amp; Architecture · SESCAM Radiodiagnostics (ISO2 Team A.05)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="roadmap">
+  <div id="site-navbar"></div>
+
+  <main class="container">
+    <header class="page-hero">
+      <div class="hero-eyebrow">Unified Process Lifecycle · Theory Deliverable 1 Aligned</div>
+      <h1>Project Roadmap &amp; System Architecture</h1>
+      <p>
+        Complete release sequence from Inception (<code>v0.0.1</code>) through final Transition delivery (<code>v1.0.0</code> on 15/12/2026), ordered strictly by risk elimination and functional data dependencies.
+      </p>
+      <div class="hero-meta">
+        <span class="meta-pill green">It0 &amp; It1 Completed</span>
+        <span class="meta-pill">Current: It2 (14/11 – 22/11 · 60 h)</span>
+        <span class="meta-pill">Santa Tecla Break: 23/11 – 27/11 (0 h)</span>
+        <span class="meta-pill">Final Delivery: 15/12/2026</span>
+      </div>
+    </header>
+
+    <!-- Iteration Timeline -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <h2>Iteration Sequence &amp; Dependency Rationale (It0 &ndash; ItN)</h2>
+          <p>Each use case (<code>CU01–CU32</code>) is realized in one cohesive iteration across all five RADIT disciplines.</p>
+        </div>
+        <span class="badge badge-progress">We Are in It2</span>
+      </div>
+      <div id="roadmap-timeline" class="timeline"></div>
+    </section>
+
+    <!-- RADIT & 3-Module Architecture -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <h2>RADIT Execution Workflow &amp; 3-Module Maven Architecture (D-017)</h2>
+          <p>How every iteration moves from requirements to tested code across decoupled Maven submodules.</p>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="panel primary-accent">
+          <h3>RADIT Pipeline Inside Each Iteration</h3>
+          <ul class="clean-list">
+            <li><strong>R — Requirements:</strong> Lock exact Functional Requirements (<code>RF</code>) &amp; Use Cases (<code>CU</code>) from the official Wiki baseline.</li>
+            <li><strong>A — Analysis:</strong> Create BCE Communication Diagrams (<code>&lt;&lt;boundary&gt;&gt;</code>, <code>&lt;&lt;control&gt;&gt;</code>, <code>&lt;&lt;entity&gt;&gt;</code>) in Visual Paradigm (<code>docs/diagrams/analysis/</code>).</li>
+            <li><strong>D — Design:</strong> Translate BCE models into Client &amp; Server UML Design Class Diagrams (<code>docs/diagrams/design/</code>) and shared interfaces in <code>common-contracts</code>.</li>
+            <li><strong>I — Implementation:</strong> Code services, in-memory repositories, mock adapters, and Swing UI on Git Flow feature branches (AI-assisted under D-014).</li>
+            <li><strong>T — Testing:</strong> Document Black-Box Test Matrices (EP, BVA, Error Guessing) in GitHub Issues, implement JUnit 6 tests, and pass <code>mvn clean verify</code> + JaCoCo (&ge;75% / &ge;70%).</li>
+          </ul>
+        </div>
+
+        <div class="panel purple-accent">
+          <h3>Maven Multi-Module Architecture (D-017)</h3>
+          <ul class="clean-list">
+            <li><strong>Root Aggregator (<code>radiodiagnostics · 0.2.0-SNAPSHOT</code>):</strong> Centralizes Java 21, JUnit <code>6.1.3</code>, and JaCoCo <code>0.8.14</code> quality gates.</li>
+            <li><strong><code>common-contracts</code> (Built 1st):</strong> Pure Java domain entities (<code>User</code>, <code>Role</code>, <code>Patient</code>, <code>ExaminationOrder</code>), DTOs, and service contracts. Zero framework dependencies.</li>
+            <li><strong><code>server</code> (Depends on <code>common-contracts</code>):</strong> Business services (<code>PatientRegistryService</code>, upcoming Orders/Reports/PACS services), in-memory repositories, and Mock External Adapters (D-012).</li>
+            <li><strong><code>client</code> (Depends ONLY on <code>common-contracts</code>):</strong> Desktop Swing Views, Client Controllers, and <code>ClientSessionContext</code> — fully decoupled from backend internals.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Decisions Reference -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <h2>Key Architectural &amp; Governance Decisions</h2>
+          <p>Binding team decisions maintained in <code>DECISIONS.md</code> and enforced across all Pull Requests.</p>
+        </div>
+        <a class="btn" href="https://github.com/hatimbenayad/2026-ISO2-A.05/blob/develop/DECISIONS.md" target="_blank" rel="noopener">Open DECISIONS.md ↗</a>
+      </div>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width:90px;">ID</th>
+              <th style="width:260px;">Decision</th>
+              <th>Binding Rule &amp; Engineering Impact</th>
+            </tr>
+          </thead>
+          <tbody id="roadmap-decisions"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

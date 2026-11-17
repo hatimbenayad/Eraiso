@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Must Fix · SESCAM Radiodiagnostics (ISO2 Team A.05)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="must-fix">
+  <div id="site-navbar"></div>
+
+  <main class="container">
+    <header class="page-hero">
+      <div class="hero-eyebrow">Priority Action Queue · Updated 17/11/2026</div>
+      <h1>Must Fix — Active Blockers &amp; Quality Gates</h1>
+      <p>
+        Immediate items that require resolution to keep Iteration 2 (Construction I) clean, synchronized with the official Wiki, and ready for academic review before the Santa Tecla break (23–27 Nov).
+      </p>
+    </header>
+
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <h2>Active Priority Items</h2>
+          <p>Actionable items ordered by urgency. Resolve critical and high items before opening new feature branches.</p>
+        </div>
+        <span class="badge badge-critical">6 Active Items</span>
+      </div>
+      <div id="must-fix-active" class="issue-list"></div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <h2>Recently Resolved Quality Gates</h2>
+          <p>Verified fixes merged into <code>develop</code> and tracked on GitHub.</p>
+        </div>
+        <span class="badge badge-done">Verified</span>
+      </div>
+      <div id="must-fix-resolved" class="issue-list"></div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

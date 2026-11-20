@@ -611,7 +611,7 @@
     if (!mount) return;
 
     let activeSeverity = "ALL";
-    const SEVS = ["ALL", "CRITICAL", "HIGH", "MEDIUM"];
+    const SEVS = ["ALL", "CRITICAL", "HIGH", "MEDIUM", "RESOLVED"];
 
     function draw() {
       if (filterMount) {
@@ -633,10 +633,10 @@
         : DATA.blunders.filter(b => b.severity === activeSeverity);
 
       mount.innerHTML = items.map(b => `
-        <article class="issue-card ${b.severity === "CRITICAL" ? "status-critical" : b.severity === "HIGH" ? "status-open" : "status-progress"}">
+        <article class="issue-card ${b.severity === "CRITICAL" ? "status-critical" : b.severity === "HIGH" ? "status-open" : b.severity === "RESOLVED" ? "status-done" : "status-progress"}">
           <div class="issue-top">
             <div class="issue-badges">
-              <span class="badge ${b.severity === "CRITICAL" ? "badge-critical" : b.severity === "HIGH" ? "badge-open" : "badge-progress"}">${esc(b.notation)}</span>
+              <span class="badge ${b.severity === "CRITICAL" ? "badge-critical" : b.severity === "HIGH" ? "badge-open" : b.severity === "RESOLVED" ? "badge-done" : "badge-progress"}">${esc(b.notation)}</span>
               <span class="badge badge-neutral">${esc(b.id)}</span>
               <span class="badge badge-done">Recovery Gain: ${esc(b.scoreGain)}</span>
             </div>
@@ -656,8 +656,45 @@
               <p style="font-size:0.87rem;color:var(--text-secondary);margin-bottom:0;">${esc(b.recovery)}</p>
             </div>
           </div>
+
+          ${b.stepByStep && b.stepByStep.length ? `
+            <div class="panel" style="margin-top:12px;padding:14px 16px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-sm);">
+              <h3 style="font-size:0.92rem;color:var(--text-primary);margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+                <span>📋</span> Step-by-Step Solution
+              </h3>
+              <ol class="clean-list" style="padding-left:18px;margin:0;font-size:0.87rem;color:var(--text-secondary);display:flex;flex-direction:column;gap:6px;">
+                ${b.stepByStep.map(s => `<li>${esc(s)}</li>`).join("")}
+              </ol>
+            </div>
+          ` : ""}
+
+          ${b.aiPrompt ? `
+            <div class="panel" style="margin-top:12px;padding:14px 16px;background:var(--bg-primary);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:var(--radius-sm);">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
+                <h3 style="font-size:0.92rem;color:var(--accent);margin:0;display:flex;align-items:center;gap:6px;">
+                  <span>🤖</span> Full AI Agent Prompt (Copy &amp; Run)
+                </h3>
+                <button class="nav-btn" data-copy-prompt="${b.id}" style="padding:6px 12px;font-size:0.8rem;background:var(--accent);color:#fff;border:none;border-radius:var(--radius-sm);cursor:pointer;font-weight:600;">
+                  📋 Copy AI Prompt
+                </button>
+              </div>
+              <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:8px;">
+                <strong>Target Branch:</strong> <code>feature/CU10-CU11-CU16-orders-backend-service</code> &middot; Ready to paste directly into Cursor, Claude Code, or ChatGPT to generate and test the complete service layer.
+              </p>
+              <pre style="max-height:240px;overflow-y:auto;background:var(--bg-card);padding:10px 12px;border-radius:var(--radius-sm);border:1px solid var(--border);font-family:var(--font-mono, monospace);font-size:0.8rem;white-space:pre-wrap;color:var(--text-secondary);line-height:1.45;">${esc(b.aiPrompt)}</pre>
+            </div>
+          ` : ""}
         </article>
       `).join("");
+
+      mount.querySelectorAll("[data-copy-prompt]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const blunder = DATA.blunders.find(b => b.id === btn.dataset.copyPrompt);
+          if (blunder && blunder.aiPrompt) {
+            copyToClipboard(blunder.aiPrompt, "AI Agent prompt copied to clipboard!");
+          }
+        });
+      });
     }
 
     draw();

@@ -832,66 +832,168 @@ window.PORTAL_DATA = {
       severity: "CRITICAL",
       notation: "?? Critical Blunder",
       title: "Over-Modeling While Construction Code Lags Behind (1/32 RFs Coded, 0% Swing UI)",
-      whatWrong: "We spent the start of Iteration 2 heavily focused on UML diagrams and documentation while only 1 of 32 use cases (CU19) is implemented end-to-end on the server and 0% of the client Swing UI exists (only SmokeTest.java). Only 5 days remain before the Santa Tecla break (Nov 23–27).",
-      impact: "If coding does not begin immediately, the team risks an unmanageable December crunch trying to implement 31 use cases in two weeks.",
-      recovery: "Freeze Iteration 2 diagrams by Thursday 19/11. Immediately implement lean vertical slices on 20–22 Nov (ExaminationOrderService, DiagnosticReportService, MockPacsAdapter, and minimal MainWindowFrame Swing UI) using our Copy Context (.md) packs under D-014.",
-      owner: "All Team · Coordinated by Hatim & Felipe",
-      scoreGain: "+1.2 pts on Implementation Velocity"
+      whatWrong: "We spent the start of Iteration 2 heavily focused on UML diagrams and documentation while only 1 of 32 use cases (CU19 Patient Registry) is implemented on the server, and 0% of the client Swing UI exists (only SmokeTest.java). The backend service for Examination Orders (CU10, CU11, CU16) has not been implemented in the server module.",
+      impact: "Violates Unified Process iteration goals (Construction phase demands executable code). Risk of an unmanageable December crunch trying to implement all clinical use cases at once.",
+      recovery: "Assign the backend ExaminationOrderService and repository implementation to a teammate (Beyza / Berke) to implement on a dedicated branch with tests meeting JaCoCo >=75% line / >=70% branch coverage.",
+      owner: "Assigned to: Beyza Nur Topuz (@beyzabalota1) & Berke Taha Özdemir (@berquepica)",
+      scoreGain: "+1.5 pts on Construction Velocity",
+      stepByStep: [
+        "Step 1: Clone repo and checkout dedicated feature branch: git checkout -b feature/CU10-CU11-CU16-orders-backend-service origin/develop",
+        "Step 2: Under server/src/main/java/es/uclm/esi/iso2/server/orders/, create persistence and service subpackages.",
+        "Step 3: In persistence, define IOrderRepository and implement InMemoryOrderRepository (thread-safe ConcurrentHashMap<String, ExaminationOrder>).",
+        "Step 4: In service, implement IExaminationOrderService and ExaminationOrderService supporting: (a) createOrder (CU10 / RF10), (b) schedulePeriodicFollowUp (CU11 / RF11), (c) markPerformed (CU16 / RF16), and (d) cancelOrder (CU12 / RF12 with D-015 soft-cancellation).",
+        "Step 5: In server/src/test/java/, implement InMemoryOrderRepositoryTest and ExaminationOrderServiceTest covering all happy paths, boundary validations, and illegal state transitions.",
+        "Step 6: Run 'mvn clean verify' and verify JaCoCo coverage (>= 75% line, >= 70% branch).",
+        "Step 7: Commit, push to origin, and open Pull Request to develop requesting review from @hatimbenayad."
+      ],
+      aiPrompt: `You are an expert Java Software Engineer working on the SESCAM Radiodiagnostics project for UCLM Software Engineering II.
+Repository: https://github.com/hatimbenayad/2026-ISO2-A.05.git
+Target Branch to create: feature/CU10-CU11-CU16-orders-backend-service (branch off origin/develop)
+
+OBJECTIVE:
+Implement the complete backend service and in-memory persistence layer for Diagnostic Examination Orders (CU10, CU11, CU12, CU16) in the 'server' module, adhering to Decision D-015 (non-destructive soft cancellation), D-017 (Maven 3-module architecture), and meeting the JaCoCo quality gate (>= 75% line, >= 70% branch coverage).
+
+CONTEXT & EXISTING CODE:
+- Domain contracts and DTOs already exist in 'common-contracts':
+  - es.uclm.esi.iso2.common.orders.domain.ExaminationOrder
+  - es.uclm.esi.iso2.common.orders.domain.OrderStatus (PENDING, SCHEDULED, PERFORMED, REPORTED, COMPLETED, CANCELLED)
+  - es.uclm.esi.iso2.common.orders.domain.Priority (NORMAL, URGENT, EMERGENCY)
+  - es.uclm.esi.iso2.common.orders.dto.ExaminationOrderDto
+- Server Component Design diagram exists in docs/diagrams/design/It2-server-design.svg (merged in PR #80). Follow the IOrderRepository and IExaminationOrderService design.
+- Reference existing architecture in server: server/src/main/java/es/uclm/esi/iso2/server/patients/ (IPatientRepository, InMemoryPatientRepository, PatientRegistryService).
+
+STEP-BY-STEP INSTRUCTIONS:
+1. Clone & Branch:
+   git clone https://github.com/hatimbenayad/2026-ISO2-A.05.git
+   cd 2026-ISO2-A.05
+   git checkout develop
+   git pull origin develop
+   git checkout -b feature/CU10-CU11-CU16-orders-backend-service
+
+2. Implement in server/src/main/java/es/uclm/esi/iso2/server/orders/:
+   - persistence/IOrderRepository.java:
+     Methods: Optional<ExaminationOrder> findById(String orderId), List<ExaminationOrder> findByPatientId(String patientId), List<ExaminationOrder> findByStatus(OrderStatus status), ExaminationOrder save(ExaminationOrder order), ExaminationOrder update(ExaminationOrder order), boolean existsById(String orderId).
+   - persistence/InMemoryOrderRepository.java:
+     Thread-safe in-memory store backed by ConcurrentHashMap<String, ExaminationOrder>.
+   - service/IExaminationOrderService.java:
+     Methods:
+     - ExaminationOrder createOrder(ExaminationOrderDto dto) [CU10 - RF10]
+     - ExaminationOrder schedulePeriodicFollowUp(ExaminationOrderDto dto, int intervalDays, int occurrences) [CU11 - RF11]
+     - ExaminationOrder markPerformed(String orderId, String technicianId, java.time.LocalDateTime executionTime) [CU16 - RF16]
+     - ExaminationOrder cancelOrder(String orderId, String reason, String operatorId) [CU12 - RF12 & D-015 soft-cancellation]
+     - Optional<ExaminationOrder> getOrder(String orderId)
+     - List<ExaminationOrder> getOrdersByPatient(String patientId)
+   - service/ExaminationOrderService.java:
+     Full business logic with strict validations: check non-null DTO, non-empty IDs, valid state transitions (e.g. cannot mark performed an order that is CANCELLED). For cancelOrder, set status to CANCELLED and preserve audit fields per Decision D-015 without removing from repository.
+
+3. Implement Unit Tests in server/src/test/java/es/uclm/esi/iso2/server/orders/:
+   - InMemoryOrderRepositoryTest.java: test save, update, findById, findByPatientId, findByStatus, not-found behavior.
+   - ExaminationOrderServiceTest.java: test order creation, periodic follow-up recurrence calculation, status transitions to PERFORMED, soft-cancellation with reason, and invalid input/state transition exceptions.
+   - Ensure JaCoCo coverage in server module meets >= 75% line and >= 70% branch coverage.
+
+4. Build & Verify:
+   mvn clean verify
+   Ensure all tests in common-contracts and server pass with 0 errors.
+
+5. Commit & Push:
+   git add server/src/
+   git commit -m "feat(server): implement examination order service and in-memory repository (closes #63, #64, #65, #68)"
+   git push -u origin feature/CU10-CU11-CU16-orders-backend-service
+   Open a Pull Request targeting develop on GitHub and tag @hatimbenayad for review.`
     },
     {
       id: "BL-02",
       severity: "HIGH",
       notation: "?? Major Blunder",
       title: "Leaving Completed Work Unmerged or Local ('Invisible Progress')",
-      whatWrong: "Finished work—Hatim's pushed Order test expansion (commit 0c91eeb), Mina's completed CU10–CU12 diagrams, the finalized Planification.md, and SELF_ASSESSMENT_DRAFT.md—is sitting on unmerged branches or local folders instead of develop and the live GitHub Wiki.",
-      impact: "Course evaluation grades merged repository evidence and live Wiki pages (C12, C16). Unmerged local work appears as 0% progress to instructors.",
-      recovery: "Open and merge the PR for test/CU10-CU11-CU16-orders-test-suite today, merge Mina's CU10–CU12 diagram PR, and publish Planification & Self-Assessment directly onto the live GitHub Wiki before Thursday 5:00 PM.",
-      owner: "Hatim (@hatimbenayad) & Mina (@minaOZ)",
-      scoreGain: "+0.4 pts on Traceability & Wiki"
+      whatWrong: "Verified Status: PR #79 (Order Black-Box tests, commit 0c91eeb) and PR #80 (Server Design Class Diagram, commit 645aec3) ARE merged into develop! However, Mina's branch 'feature/CU10-CU18-analysis-communication' (5 commits for CU10-CU13, CU18) has NO open PR, and teammates' local diagrams (Ayça CU16/CU17, Beyza CU14/CU15, Hatim Client Design #71) remain unpushed on local machines.",
+      impact: "Unmerged branches and unpushed local files do not reflect in GitHub develop commit history, leaving external inspectors and graders with an impression of stalled progress.",
+      recovery: "In today's meeting: review the completed diagrams, have Ayça and Beyza push their finished diagrams to their feature branches, open Pull Requests against develop, and merge them so that all analysis diagrams are visible on develop before Friday night.",
+      owner: "Hatim (@hatimbenayad) & All Teammates",
+      scoreGain: "+0.6 pts on Evidence & Traceability",
+      stepByStep: [
+        "Step 1: Verified on GitHub: PR #79 (Orders Black-Box tests) and PR #80 (Server Design) are already merged into develop.",
+        "Step 2: In the team meeting, conduct the planned peer review of Mina's branch (feature/CU10-CU18-analysis-communication) and Ayça's / Beyza's local diagrams.",
+        "Step 3: Have Mina open a Pull Request from feature/CU10-CU18-analysis-communication into develop with title 'analysis(physician): BCE communication diagrams for CU10-CU13, CU18 (#62)'.",
+        "Step 4: Have Ayça (CU16, CU17) and Beyza (CU14, CU15) push their completed .vpp and .png files to docs/diagrams/analysis/ on their feature branches and open PRs.",
+        "Step 5: Have Hatim push the completed Client Component Design diagram (docs/diagrams/design/It2-client-design.svg & .vpp) on branch feature/It2-client-design and open PR for Issue #71.",
+        "Step 6: Review and merge all PRs into develop via Git Flow."
+      ]
     },
     {
       id: "BL-03",
       severity: "HIGH",
       notation: "?? Major Blunder",
       title: "GitHub Issue Titles Drifting From the Official Wiki (#64–#67)",
-      whatWrong: "Initial Iteration 2 issue titles inverted CU14 (Manage diagnostic report) and CU15 (View medical images) and mislabeled CU11/CU12 compared to the official Wiki Requirements-and-use-cases.md.",
-      impact: "Causes teammates and AI assistants to model or code the wrong functionality under the wrong CU ID, breaking 1:1 RF-to-CU traceability.",
-      recovery: "Rename GitHub Issues #64–#67 today to match the Wiki 1:1, create sub-issues for CU13 & CU18, and treat Wiki Requirements-and-use-cases.md as the immutable source of truth.",
+      whatWrong: "Several GitHub issue titles and descriptions drift from the official Wiki Requirements-and-use-cases.md: Issue #65 is mislabeled with analysis(patients) (actor is Physician), Issue #66 uses prefix pacs for reports, Issue #67 uses prefix reports for PACS imaging, and the checklist in parent Issue #62 lists outdated CU descriptions.",
+      impact: "Causes confusion among teammates and AI prompts regarding which CU corresponds to which functionality, breaking clean 1:1 RF-to-CU traceability required by C02.",
+      recovery: "Rename issues #65, #66, #67, #68, #69 to match the exact Wiki naming convention and subsystem prefixes, and update Issue #62 checklist.",
       owner: "Hatim (@hatimbenayad)",
-      scoreGain: "+0.2 pts on Requirements Alignment"
+      scoreGain: "+0.3 pts on Requirements Traceability",
+      stepByStep: [
+        "Step 1: Open GitHub Issues on repository hatimbenayad/2026-ISO2-A.05.",
+        "Step 2: Rename Issue #65 from 'analysis(patients): Communication Diagram for CU12 — Manage procedure orders' to: 'analysis(orders): Communication Diagram for CU12 — Manage procedure orders' (subsystem is orders, actor is Physician).",
+        "Step 3: Rename Issue #66 from 'analysis(pacs): Communication Diagram for CU14 — Manage diagnostic report' to: 'analysis(reports): Communication Diagram for CU14 — Manage diagnostic report' (subsystem is diagnostic reports).",
+        "Step 4: Rename Issue #67 from 'analysis(reports): Communication Diagram for CU15 — View medical images' to: 'analysis(pacs): Communication Diagram for CU15 — View medical images' (subsystem is RIS/PACS imaging).",
+        "Step 5: Rename Issue #68 from 'analysis(orders): Communication Diagram for CU16 — Register Diagnostic Procedure Execution' to: 'analysis(orders): Communication Diagram for CU16 — Record procedure execution' (matches Wiki title exactly).",
+        "Step 6: Rename Issue #69 from 'analysis(orders): Communication Diagram for CU17 — Record Clinical Incidents & Adverse Events' to: 'analysis(orders): Communication Diagram for CU17 — Document incident' (matches Wiki title exactly).",
+        "Step 7: Edit Issue #62 description checklist to update the sub-issue titles and add links to #77 (CU13) and #78 (CU18)."
+      ]
     },
     {
       id: "BL-04",
       severity: "HIGH",
       notation: "?? Major Blunder",
       title: "Uneven Contributor Activity in GitHub Insights",
-      whatWrong: "Most merged code and Maven build commits so far come from 2 team members (Hatim and Felipe), while other teammates' contributions are either pending PR or unassigned in code.",
-      impact: "Individual lab grades explicitly audit GitHub Insights commit, PR, and review balance across all 6 members (Constraint C18).",
-      recovery: "Execute the balanced 3–3–3 diagram PR split (Mina CU10–12, Beyza CU13–15, Ayca CU16–18) and assign dedicated Java service + JUnit 6 test branches to Berke, Beyza, Mina, and Ayca in It2/It3.",
+      whatWrong: "Live GitHub API audit reveals a severe contribution imbalance on develop: Felipe (36 contributions) and Hatim (26 contributions) account for the vast majority of activity, while Mina has 4 merged, Berke has 3, Ayça has 3, and Beyza currently has 0 recorded commits/PRs.",
+      impact: "Lab evaluations grade individual SCM engagement (Constraint C18). Teammates with 0 or 3 commits risk an individual grade penalty if work is not actively committed under their GitHub accounts.",
+      recovery: "Rebalance sprint workload immediately: assign construction code and testing tickets to teammates with the lowest activity ranking (Beyza #1, Berke #2, Ayça #3). Stop assigning implementation tasks to Hatim and Felipe.",
       owner: "Coordinator & All 6 Members",
-      scoreGain: "+0.4 pts on Team Governance"
+      scoreGain: "+0.8 pts on Team Balance & Governance",
+      stepByStep: [
+        "Live Activity Ranking (Lowest to Highest):",
+        "1. Beyza Nur Topuz (@beyzabalota1): 0 commits / 0 PRs -> Priority 1: Assign backend ExaminationOrderService & repository (BL-01) or PACS/Reports black-box tests (Issue #75).",
+        "2. Berke Taha Özdemir (@berquepica): 3 commits -> Priority 2: Assign Client Swing UI Order Entry Frame & Controller in client/ module.",
+        "3. Ayça Beril Gümüş (@aycagorgulu0): 3 commits -> Priority 3: Push completed CU16/CU17 diagrams and assist in backend unit test coverage.",
+        "4. Mina Alimohammadi (@minaOZ): 4 merged commits (+5 on feature branch) -> Priority 4: Open and merge PR for feature/CU10-CU18-analysis-communication.",
+        "5. Hatim Ben Ayad (@hatimbenayad): 26 commits -> Maintain coordination, PR reviews, and Wiki maintenance.",
+        "6. Felipe Dionisio (@Felipe-Dionisio): 36 commits -> Shift focus to PR peer reviews during travel."
+      ]
     },
     {
       id: "BL-05",
       severity: "MEDIUM",
       notation: "? Inaccuracy",
       title: "GitHub Projects Kanban Board Out of Sync (Constraint C11)",
-      whatWrong: "New Iteration 2 issues (#59–#75) were opened without linking all of them to the GitHub Projects Kanban board or enabling automatic status workflows.",
-      impact: "Leaves a visible compliance gap against Constraint C11 during professor supervision.",
-      recovery: "Bulk-select all open and closed Iteration 2 issues in the Issues tab, add them to the Project board, and enable built-in Workflows ('Auto-add to project' and 'Item closed -> Done') in 2 minutes.",
+      whatWrong: "Several recently merged PRs and closed issues (#59, #60, #61, #72, #74, #76, #79, #80) and newly opened analysis issues (#77, #78) are either missing from the GitHub Project Kanban board or not updated to their real status.",
+      impact: "Violates Constraint C11 (Agile tracking via GitHub Projects) during teacher supervision audits.",
+      recovery: "Bulk-link all repository issues to the project board, move completed items to 'Done', and enable GitHub automated status workflows.",
       owner: "Hatim (@hatimbenayad)",
-      scoreGain: "+0.2 pts on SCM & Project Tracking"
+      scoreGain: "+0.3 pts on SCM & Project Tracking",
+      stepByStep: [
+        "Step 1: Go to repository hatimbenayad/2026-ISO2-A.05 -> Projects tab -> Open the team Kanban board.",
+        "Step 2: Click '+ Add item' -> Select 'Add item from repository' -> Select all issues and PRs from #50 to #80.",
+        "Step 3: Move closed issues (#59, #60, #61, #72, #74, #76, #79, #80) into the 'Done' column.",
+        "Step 4: Move active in-progress issues (#62, #63, #64, #65, #71, #77, #78) into 'In Progress'.",
+        "Step 5: Move pending test issue (#75) and implementation tasks into 'Todo'.",
+        "Step 6: Click Board settings (three dots) -> 'Workflows' -> Enable: (a) 'Auto-add items to project' when created in hatimbenayad/2026-ISO2-A.05, and (b) 'Item closed -> Set status to Done'."
+      ]
     },
     {
       id: "BL-06",
-      severity: "MEDIUM",
-      notation: "? Inaccuracy",
-      title: "Ignoring Midterms & Travel Blackouts in This Week's Sprint Scope",
-      whatWrong: "Treating Nov 18–22 as a normal 66-hour week despite real academic blackouts: Berke (midterm Nov 18), Beyza (midterm Nov 19), Felipe (travel Nov 20–22), and Mina (assignment Nov 21).",
-      impact: "Unrealistic expectations create missed handoffs right before the Santa Tecla holiday freeze (Nov 23–27, 0 h).",
-      recovery: "Front-load Felipe's Server Design (#72) before Nov 20; have Hatim & Ayca lead initial It2 service/UI scaffolding on Nov 20–22; bring Berke & Beyza in for service implementation & Issue #75 JUnit tests right after their exams.",
-      owner: "All Team · Tracked via To-Do By",
-      scoreGain: "+0.2 pts on Planning Realism"
+      severity: "RESOLVED",
+      notation: "✓ Resolved / Non-Issue",
+      title: "Academic Calendar & Holiday Clarification (Santa Tecla in October)",
+      whatWrong: "Initial planning draft flagged a potential schedule conflict assuming Santa Tecla occurred in late November (23–27 Nov).",
+      impact: "None. Santa Tecla occurred in October, so there is no academic freeze in November. The team has full availability leading up to the December milestones.",
+      recovery: "Blunder marked as resolved and closed. Sprint pacing continues normally without holiday interruption.",
+      owner: "Resolved",
+      scoreGain: "N/A (Corrected)",
+      stepByStep: [
+        "Fact-checked: Santa Tecla was celebrated in October, not November.",
+        "No academic break week exists between Nov 23–27.",
+        "Sprint pacing for Iteration 2 and Iteration 3 proceeds on full schedule."
+      ]
     }
   ],
 

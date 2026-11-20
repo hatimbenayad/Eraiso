@@ -9,6 +9,7 @@
   const NAV_ITEMS = [
     { id: "progress", href: "index.html", label: "Progress" },
     { id: "iterations", href: "iterations.html", label: "Iterations" },
+    { id: "delivery2", href: "second-delivery-kickoff.html", label: "2nd Delivery" },
     { id: "must-fix", href: "must-fix.html", label: "Must Fix" },
     { id: "blunders", href: "blunders.html", label: "Blunders" },
     { id: "todo-by", href: "todo-by.html", label: "To-Do By" },

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2nd Delivery Kickoff · Theoretical Exercise 2 &amp; Lab Testing (ISO2 Team A.05)</title>
+  <link rel="stylesheet" href="style.css?v=4">
+</head>
+<body data-page="delivery2">
+  <div id="site-navbar"></div>
+
+  <main class="container">
+    <header class="page-hero">
+      <div class="hero-eyebrow">Academic Year 2026/2027 · UCLM Software Engineering II · Delivery 2</div>
+      <h1>2nd Delivery Kickoff — Theoretical Exercise 2 &amp; Testing Practicum</h1>
+      <p>
+        Official guide for the <strong>Tuesday 15/12/2026</strong> submission: 3 cross-testing pairs, 3 dedicated GitHub repositories, 10-step combinatorial/decision test case design, and automated JUnit 6 + JaCoCo (&ge;80%) execution.
+      </p>
+      <div class="hero-meta">
+        <span class="meta-pill green">Submission Deadline: Tuesday 15/12/2026</span>
+        <span class="meta-pill">Score: Up to 10.0 Points (3.33 pts / problem)</span>
+        <span class="meta-pill">3 Standalone Repos: ISO2-2025-GrupoA05-Testing-P1 / P2 / P3</span>
+        <span class="meta-pill green">Quality Gate: &ge;80% Statement Coverage (JaCoCo)</span>
+      </div>
+    </header>
+
+    <!-- EXECUTIVE PRINCIPLE: DEVELOPERS DO NOT TEST THEIR OWN CODE -->
+    <section class="purpose-banner" aria-label="Core delivery philosophy">
+      <div class="purpose-icon">!</div>
+      <div>
+        <h2>The Core Engineering Principle (Developers Do Not Test Their Own Code)</h2>
+        <p>
+          In professional software engineering, independent verification is paramount: <strong>developers who implement code must never design or execute their own tests</strong>. To simulate this, our 6-member team splits into <strong>3 pairs</strong> across <strong>3 distinct problems</strong> in a rotational pipeline: Pair 1 implements, Pair 2 designs the formal test cases (Theory), and Pair 3 implements the JUnit 6 tests on a dedicated <code>hotfix</code> branch (Lab).
+        </p>
+      </div>
+    </section>
+
+    <!-- ROTATIONAL WORKFLOW MATRIX (TABLE 1) -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <h2>Work Allocation &amp; Cross-Pair Rotational Matrix (Group A.05)</h2>
+          <p>Strict division of labor where every pair experiences all three development stages across the three problems.</p>
+        </div>
+        <span class="badge badge-done">3 Pairs Defined</span>
+      </div>
+
+      <!-- Pair Definitions -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:12px;margin-bottom:18px;">
+        <div class="panel primary-accent" style="padding:12px 16px;">
+          <h3 style="color:var(--accent);font-size:0.95rem;margin-bottom:4px;">Pair 1 (P1)</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);margin:0;"><strong>Hatim Ben Ayad</strong> (Coordinator) &amp; <strong>Ayça Beril Gümüş</strong></p>
+        </div>
+        <div class="panel purple-accent" style="padding:12px 16px;">
+          <h3 style="color:#a855f7;font-size:0.95rem;margin-bottom:4px;">Pair 2 (P2)</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);margin:0;"><strong>Mina Alimohammadi</strong> &amp; <strong>Felipe Dionisio</strong></p>
+        </div>
+        <div class="panel success-accent" style="padding:12px 16px;">
+          <h3 style="color:var(--success);font-size:0.95rem;margin-bottom:4px;">Pair 3 (P3)</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);margin:0;"><strong>Berke Taha Özdemir</strong> &amp; <strong>Beyza Nur Topuz</strong></p>
+        </div>
+      </div>
+
+      <!-- Rotational Table -->
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width:240px;">Problem &amp; Dedicated Repo</th>
+              <th>Step 1: Program Implementation (Maven)</th>
+              <th>Step 2: Test Case Design (Theory PDF)</th>
+              <th>Step 3: JUnit 6 &amp; JaCoCo &ge;80% (Lab)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>Problem 1: Parking Fee Calculator</strong><br>
+                <code>ISO2-2025-GrupoA05-Testing-P1</code>
+              </td>
+              <td><span class="badge badge-done">Pair 1 (Hatim &amp; Ayça)</span><br><small style="color:var(--text-muted);">Implement on <code>develop</code></small></td>
+              <td><span class="badge badge-open">Pair 2 (Mina &amp; Felipe)</span><br><small style="color:var(--text-muted);">10-Question Theory PDF</small></td>
+              <td><span class="badge badge-progress">Pair 3 (Berke &amp; Beyza)</span><br><small style="color:var(--text-muted);">JUnit on <code>hotfix</code> branch</small></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Problem 2: University Scholarships</strong><br>
+                <code>ISO2-2025-GrupoA05-Testing-P2</code>
+              </td>
+              <td><span class="badge badge-done">Pair 2 (Mina &amp; Felipe)</span><br><small style="color:var(--text-muted);">Implement on <code>develop</code></small></td>
+              <td><span class="badge badge-open">Pair 3 (Berke &amp; Beyza)</span><br><small style="color:var(--text-muted);">10-Question Theory PDF</small></td>
+              <td><span class="badge badge-progress">Pair 1 (Hatim &amp; Ayça)</span><br><small style="color:var(--text-muted);">JUnit on <code>hotfix</code> branch</small></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Problem 3: Smart Greenhouse Irrigation</strong><br>
+                <code>ISO2-2025-GrupoA05-Testing-P3</code>
+              </td>
+              <td><span class="badge badge-done">Pair 3 (Berke &amp; Beyza)</span><br><small style="color:var(--text-muted);">Implement on <code>develop</code></small></td>
+              <td><span class="badge badge-open">Pair 1 (Hatim &amp; Ayça)</span><br><small style="color:var(--text-muted);">10-Question Theory PDF</small></td>
+              <td><span class="badge badge-progress">Pair 2 (Mina &amp; Felipe)</span><br><small style="color:var(--text-muted);">JUnit on <code>hotfix</code> branch</small></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- DETAILED PROBLEM SPECIFICATIONS -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <h2>The 3 Problem Specifications (ET.02.02, ET.02.03, ET.02.04)</h2>
+          <p>Exact domain logic, inputs, business rules, exceptions, and encapsulation constraints.</p>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <!-- Problem 1 -->
+        <div class="panel primary-accent" style="padding:16px 18px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <h3 style="color:var(--accent);margin:0;">Problem 1: Parking Fee Calculator (ET.02.02)</h3>
+            <span class="badge badge-neutral">Repo: ISO2-2025-GrupoA05-Testing-P1</span>
+          </div>
+          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:10px;">
+            Calculate total parking stay cost based on entry and exit Date/Time ticket objects.
+          </p>
+          <ul class="clean-list" style="font-size:0.85rem;color:var(--text-secondary);display:flex;flex-direction:column;gap:6px;">
+            <li><strong>Encapsulation &amp; Validation:</strong> If <code>exitTime &lt; entryTime</code> or if null objects are passed, throw an appropriate exception. Implement validations at constructor level with full encapsulation.</li>
+            <li><strong>Pricing Rules:</strong>
+              <div style="padding-left:14px;color:var(--text-muted);margin-top:2px;">
+                &bull; First <strong>30 minutes</strong>: completely free (€0.00).<br>
+                &bull; Minute 31 onward: charged at <strong>€0.05 per minute</strong>.<br>
+                &bull; Daily ceiling: capped at a strict maximum limit of <strong>€20.00 per day</strong>.
+              </div>
+            </li>
+            <li><strong>Architecture:</strong> CLI-based presentation component decoupled from domain calculation classes.</li>
+          </ul>
+        </div>
+
+        <!-- Problem 2 -->
+        <div class="panel purple-accent" style="padding:16px 18px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <h3 style="color:#a855f7;margin:0;">Problem 2: University Scholarship Eligibility (ET.02.03)</h3>
+            <span class="badge badge-neutral">Repo: ISO2-2025-GrupoA05-Testing-P2</span>
+          </div>
+          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:10px;">
+            Determine the single matching scholarship category for a student based on: GPA (0–10), Family Income (€), Distance (km), Disability (%), and Siblings.
+          </p>
+          <ul class="clean-list" style="font-size:0.85rem;color:var(--text-secondary);display:flex;flex-direction:column;gap:6px;">
+            <li><strong>1. Excellence Scholarship:</strong> GPA &ge; 8.5 AND Family Income &lt; €30,000 &rarr; <em>Full tuition waiver + €1,000 stipend</em>.</li>
+            <li><strong>2. Residence Scholarship:</strong> GPA between 6.5 and 8.4 AND Family Income &lt; €20,000 AND Distance &gt; 50 km &rarr; <em>Full tuition waiver + housing allowance</em>.</li>
+            <li><strong>3. Large Family Scholarship:</strong> GPA &ge; 5.0 AND Family Income strictly &lt; €15,000 AND Siblings &ge; 3 &rarr; <em>Full tuition waiver</em>.</li>
+            <li><strong>4. Inclusion Scholarship:</strong> Disability &ge; 33% AND GPA &ge; 5.0 &rarr; <em>Full tuition waiver + assistive technology funding</em>.</li>
+            <li><strong>Zero-Ambiguity Rule:</strong> No student may receive conflicting awards; explicit boundary conditions and exceptions must be documented.</li>
+          </ul>
+        </div>
+
+        <!-- Problem 3 -->
+        <div class="panel success-accent" style="padding:16px 18px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <h3 style="color:var(--success);margin:0;">Problem 3: Agricultural Smart Greenhouse Irrigation (ET.02.04)</h3>
+            <span class="badge badge-neutral">Repo: ISO2-2025-GrupoA05-Testing-P3</span>
+          </div>
+          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:10px;">
+            Automated irrigation decision engine based on: Soil Moisture (%), Ambient Temperature (°C), Rain Forecast (boolean/imminent), and Time of Day (HH:mm).
+          </p>
+          <ul class="clean-list" style="font-size:0.85rem;color:var(--text-secondary);display:flex;flex-direction:column;gap:6px;">
+            <li><strong>Heavy Watering:</strong> Moisture &lt; 20% AND Temp &gt; 25°C AND No rain forecasted within next 24 hours.</li>
+            <li><strong>Light Watering:</strong> Moisture between 20% and 40% AND Temp &gt; 25°C AND No rain forecasted.</li>
+            <li><strong>Do Not Water:</strong> Moisture &lt; 40% AND imminent rain is forecasted.</li>
+            <li><strong>Emergency Drainage:</strong> Moisture &gt; 60% AND Temp &lt; 5°C (prevents root freeze damage).</li>
+            <li><strong>Peak Solar Radiation Rule (12:00 PM – 4:00 PM):</strong> All standard watering postponed, UNLESS Moisture drops below 10%, in which case <strong>Critical Watering</strong> must execute.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE 10 THEORETICAL QUESTIONS (TW.02.01) -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <h2>The 10 Required Theoretical Deliverables (TW.02.01)</h2>
+          <p>Every pair must produce a formal PDF report (<code>ISO2-2025-GrupoA05-Testing-PM.pdf</code>) answering all 10 questions for their assigned problem.</p>
+        </div>
+        <span class="badge badge-progress">Theory Submission</span>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:12px;">
+        <div style="background:var(--bg-secondary);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+          <strong>1. Pseudocode:</strong> Write the clean algorithmic pseudocode for the identified method(s).
+        </div>
+        <div style="background:var(--bg-secondary);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+          <strong>2. Test Units:</strong> Formally identify all test units (classes and methods under test).
+        </div>
+        <div style="background:var(--bg-secondary);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+          <strong>3. Test Variables:</strong> Identify and categorize all input parameters, states, and return variables.
+        </div>
+        <div style="background:var(--bg-secondary);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+          <strong>4. Test Value Partitions:</strong> Tabulate test values using Equivalence Partitioning (EP), Boundary Value Analysis (BVA), and Error Guessing.
+        </div>
+        <div style="background:var(--bg-secondary);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+          <strong>5. Combinatorial Maximum:</strong> Calculate theoretical cartesian product of all identified test values.
+        </div>
+        <div style="background:var(--bg-secondary);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+          <strong>6. Each-Choice Criteria:</strong> Define the minimal test suite where every valid and invalid value is executed at least once.
+        </div>
+        <div style="background:var(--bg-secondary);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+          <strong>7. Pairwise Testing (PICT):</strong> Generate pairwise 2-way combinatorial test sets (verified using Microsoft PICT tool).
+        </div>
+        <div style="background:var(--bg-secondary);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+          <strong>8. Decision Coverage:</strong> Propose test suites guaranteeing 100% decision/branch coverage on all conditional branches.
+        </div>
+        <div style="background:var(--bg-secondary);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+          <strong>9. MC/DC Coverage:</strong> Propose Modified Condition/Decision Coverage test vectors proving independence of each atomic predicate.
+        </div>
+        <div style="background:var(--bg-secondary);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+          <strong>10. Comparative Evaluation:</strong> Analytical commentary comparing suite sizes, test effectiveness, and code design influence on testability.
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP-BY-STEP GETTING STARTED CHECKLIST -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <h2>Step-by-Step Action Plan: How Team A.05 Gets Started</h2>
+          <p>Follow this exact sequence to avoid blocking teammates across the rotational pipeline.</p>
+        </div>
+      </div>
+
+      <div class="panel success-accent" style="padding:16px 18px;">
+        <ol class="clean-list" style="display:flex;flex-direction:column;gap:12px;font-size:0.88rem;color:var(--text-secondary);padding-left:18px;">
+          <li>
+            <strong>Step 1 — Create the 3 GitHub Repositories (Coordinator):</strong>
+            Create <code>ISO2-2025-GrupoA05-Testing-P1</code>, <code>...-P2</code>, and <code>...-P3</code> on GitHub under <code>hatimbenayad</code>. Grant write access to all 6 teammates and practical professors.
+          </li>
+          <li>
+            <strong>Step 2 — Implement Java Programs on <code>develop</code> (Deadline: Nov 28):</strong>
+            Each pair initializes their Maven project on <code>develop</code> with clean SOLID architecture (P1 does Parking, P2 does Scholarships, P3 does Irrigation).
+          </li>
+          <li>
+            <strong>Step 3 — Link Repos in Main Project Wiki (Mandatory Constraint):</strong>
+            In our main repository (<code>2026-ISO2-A.05</code>), create a Wiki section titled <strong>"Testing Part"</strong> containing direct links to all three testing repositories.
+          </li>
+          <li>
+            <strong>Step 4 — Theory Test Case Design (Deadline: Dec 05):</strong>
+            The second pair analyzes the code, answers questions 1–10, and compiles the final <code>ISO2-2025-GrupoA05-Testing-PM.pdf</code> report.
+          </li>
+          <li>
+            <strong>Step 5 — Laboratory JUnit 6 Implementation on <code>hotfix</code> (Deadline: Dec 12):</strong>
+            The third pair checks out a dedicated <strong><code>hotfix</code></strong> branch from <code>develop</code>, implements tests in <code>src/test/java</code>, and runs <code>mvn verify</code> ensuring <strong>&ge;80% statement coverage</strong> via JaCoCo.
+          </li>
+          <li>
+            <strong>Step 6 — Final Submission (Tuesday 15/12/2026):</strong>
+            Coordinator packages the 3 PDF reports into a single ZIP file and uploads it to Moodle/Virtual Campus.
+          </li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="data.js?v=4"></script>
+  <script src="app.js?v=4"></script>
+</body>
+</html>

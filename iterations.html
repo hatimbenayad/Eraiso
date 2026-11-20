@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iterations Focus · SESCAM Radiodiagnostics (ISO2 Team A.05)</title>
+  <link rel="stylesheet" href="style.css?v=4">
+</head>
+<body data-page="iterations">
+  <div id="site-navbar"></div>
+
+  <main class="container">
+    <header class="page-hero">
+      <div class="hero-eyebrow">Unified Process Phasing · Iteration Scope &amp; Next Sprint Preview</div>
+      <h1>Active Iteration Scope &amp; Next Sprint Roadmap</h1>
+      <p>
+        Detailed breakdown of <strong>This Iteration (Iteration 2 — Construction I)</strong>: completed evidence, the exact remaining implementation tasks before release <code>v0.2.0</code>, and the immediate preview of <strong>The Next Iteration (Iteration 3 — Construction II)</strong>.
+      </p>
+      <div class="hero-meta">
+        <span class="meta-pill green">Active: Iteration 2 (v0.2.0-SNAPSHOT)</span>
+        <span class="meta-pill">Next: Iteration 3 (v0.3.0-SNAPSHOT)</span>
+        <span class="meta-pill">Milestone #3: 10 Open · 5 Closed</span>
+        <span class="meta-pill green">85+ Unit Tests Passing</span>
+      </div>
+    </header>
+
+    <!-- SECTION 1: THIS ITERATION (IT2) -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span class="badge badge-progress" style="font-size:0.85rem;">Active Sprint</span>
+            <h2>Iteration 2: Construction I — Diagnostic &amp; Clinical Core</h2>
+          </div>
+          <p>Target Release: <code>v0.2.0</code> · Focus: Physician Examination Orders (<code>CU10–CU18</code>), In-Memory Repositories, Mock Adapters, and Quality Gates.</p>
+        </div>
+        <span class="meta-pill green">60% Mapped · Coding In Progress</span>
+      </div>
+
+      <!-- Completed in It2 vs Left to do in It2 -->
+      <div class="two-col" style="margin-top:16px;">
+        <!-- Left: Completed Work -->
+        <div class="panel success-accent" style="padding:16px 18px;">
+          <h3 style="color:var(--success);margin-bottom:12px;display:flex;align-items:center;gap:6px;">
+            <span>✓</span> What We Have Done So Far in It2
+          </h3>
+          <ul class="clean-list" style="display:flex;flex-direction:column;gap:10px;font-size:0.88rem;color:var(--text-secondary);">
+            <li>
+              <strong>SQA Quality Infrastructure Gate (PR #76):</strong> Root POM configured with JUnit <code>6.1.3</code> and JaCoCo <code>0.8.14</code> enforcing &ge;75% line and &ge;70% branch coverage on every build. <em>Closed #60.</em>
+            </li>
+            <li>
+              <strong>Core Domain Baseline (PR #52):</strong> 20 Java classes in <code>common-contracts</code>: <code>ExaminationOrder</code>, <code>OrderStatus</code>, <code>Priority</code>, <code>Patient</code>, <code>AuthSession</code>, and DTOs.
+            </li>
+            <li>
+              <strong>Server Component Design (PR #80):</strong> UML Design Class Diagram for domain services, repositories, and mock adapters merged (<code>It2-server-design.svg</code> &amp; <code>.vpp</code>). <em>Closed #72.</em>
+            </li>
+            <li>
+              <strong>Black-Box Test Matrices (PR #79):</strong> Documented Equivalence Partitions (EP) and Boundary Value Analysis (BVA) for orders on Issue #74; expanded <code>ExaminationOrderTest</code>. <em>Closed #74.</em>
+            </li>
+            <li>
+              <strong>Physician Communication Models:</strong> Completed BCE diagrams for <code>CU10</code>, <code>CU11</code>, <code>CU12</code>, <code>CU13</code>, and <code>CU18</code> committed on branch <code>feature/CU10-CU18-analysis-communication</code>.
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right: What is Left to do in It2 -->
+        <div class="panel danger-accent" style="padding:16px 18px;">
+          <h3 style="color:var(--danger);margin-bottom:12px;display:flex;align-items:center;gap:6px;">
+            <span>⚡</span> What Is Left For Us To Do to Finish It2
+          </h3>
+          <ul class="clean-list" style="display:flex;flex-direction:column;gap:10px;font-size:0.88rem;color:var(--text-secondary);">
+            <li>
+              <strong>1. Backend Order Service (#82):</strong> Implement <code>IOrderRepository</code>, <code>InMemoryOrderRepository</code>, and <code>ExaminationOrderService</code> (CU10, CU11, CU12, CU16 &amp; D-015 soft-cancel). <br><span class="badge badge-open" style="font-size:0.75rem;">Assigned to @beyzabalota1</span>
+            </li>
+            <li>
+              <strong>2. Desktop Swing UI Scaffold (#83):</strong> Build <code>MainWindowFrame</code>, <code>PhysicianWorkspacePanel</code>, <code>OrderPrescriptionView</code>, and <code>ClientOrderController</code>. <br><span class="badge badge-open" style="font-size:0.75rem;">Assigned to @berquepica</span>
+            </li>
+            <li>
+              <strong>3. Diagnostic Report Service (#84):</strong> Implement <code>InMemoryReportRepository</code> &amp; <code>DiagnosticReportService</code> for report drafting and signature (CU14). <br><span class="badge badge-open" style="font-size:0.75rem;">Assigned to @aycagorgulu0</span>
+            </li>
+            <li>
+              <strong>4. Mock External Adapters (#85):</strong> Simulated RIS/PACS (E04) and EHR (E02) synthetic adapters adhering to Decision D-012. <br><span class="badge badge-open" style="font-size:0.75rem;">Assigned to @minaOZ</span>
+            </li>
+            <li>
+              <strong>5. PACS &amp; Reports Black-Box Tests (#75):</strong> Implement test suite for image viewing and diagnostic report validation.
+            </li>
+            <li>
+              <strong>6. Client Component Design (#71):</strong> Commit <code>It2-client-design.svg</code> and source <code>.vpp</code> project file.
+            </li>
+            <li>
+              <strong>7. Verification &amp; Tagging:</strong> Run <code>mvn clean verify</code> ensuring all 3 modules pass &ge;75% JaCoCo gate, merge into <code>develop</code>, and tag release <code>v0.2.0</code>.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: THE NEXT ITERATION (IT3) -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span class="badge badge-planned" style="font-size:0.85rem;">Upcoming Sprint</span>
+            <h2>The Next Iteration: Iteration 3 (Construction II)</h2>
+          </div>
+          <p>Target Release: <code>v0.3.0-SNAPSHOT</code> · Focus: Patient Portal (<code>CU01–CU09</code>), Admissions &amp; Modality Room Scheduling (<code>CU20–CU26</code>), and Notifications.</p>
+        </div>
+        <span class="meta-pill">Starts Immediately After It2 Delivery</span>
+      </div>
+
+      <div class="two-col" style="margin-top:16px;">
+        <!-- Functional Modules in It3 -->
+        <div class="panel primary-accent" style="padding:16px 18px;">
+          <h3 style="color:var(--accent);margin-bottom:12px;">Planned Functional Work Breakdown (CU01–CU09 &amp; CU20–CU26)</h3>
+          <ul class="clean-list" style="display:flex;flex-direction:column;gap:10px;font-size:0.88rem;color:var(--text-secondary);">
+            <li>
+              <strong>Patient Portal Workflows (RF01–RF09):</strong>
+              <div style="font-size:0.83rem;color:var(--text-muted);margin-top:3px;">
+                Patient requests radiological appointment (CU01), consults scheduled appointments (CU02), requests soft cancellation (CU03), consults published diagnostic reports (CU04), and views DICOM images (CU05).
+              </div>
+            </li>
+            <li>
+              <strong>Admissions &amp; Reception Personnel (RF20–RF23):</strong>
+              <div style="font-size:0.83rem;color:var(--text-muted);margin-top:3px;">
+                Inpatient/outpatient clinical admission check-in (CU20), calendar schedule allocation for radiodiagnostic rooms (CU21), and schedule modification/reassignment (CU22).
+              </div>
+            </li>
+            <li>
+              <strong>Billing, Invoicing &amp; Incident Auditing (RF24–RF26):</strong>
+              <div style="font-size:0.83rem;color:var(--text-muted);margin-top:3px;">
+                Calculate procedure fees and generate invoices (CU24), record insurance payment coverage (CU25), and admissions incident registration (CU26).
+              </div>
+            </li>
+            <li>
+              <strong>Notification Dispatcher Engine (CU07, CU26):</strong>
+              <div style="font-size:0.83rem;color:var(--text-muted);margin-top:3px;">
+                Automated notification service alerting patients of confirmed appointment dates and notifying physicians of emergency findings.
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Dependency Rationale -->
+        <div class="panel purple-accent" style="padding:16px 18px;">
+          <h3 style="color:#a855f7;margin-bottom:12px;">Architectural Dependency Rationale (Why It3 Follows It2)</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.5;margin-bottom:12px;">
+            In the Unified Process, construction order is strictly governed by <strong>entity and operational dependencies</strong>:
+          </p>
+          <ul class="clean-list" style="display:flex;flex-direction:column;gap:8px;font-size:0.85rem;color:var(--text-secondary);">
+            <li>
+              <strong>Orders Precede Appointments:</strong> A Patient or Admissions clerk cannot schedule an appointment (CU01 / CU21) unless a validated <code>ExaminationOrder</code> with procedure modality and priority exists (built in It2).
+            </li>
+            <li>
+              <strong>Reports Precede Patient Access:</strong> A Patient cannot view clinical findings or images (CU04 / CU05) until the Physician diagnostic report service and PACS adapter (built in It2) are active.
+            </li>
+            <li>
+              <strong>Shared Contracts:</strong> Iteration 3 directly reuses the <code>AuthSession</code> RBAC tokens, in-memory repository architecture (D-030), and Mock Adapters (D-012) proven in Iteration 2.
+            </li>
+          </ul>
+          <div style="margin-top:14px;padding:10px 12px;background:var(--bg-primary);border-radius:var(--radius-sm);border:1px solid var(--border);">
+            <strong style="color:var(--text-primary);font-size:0.82rem;">Transition Gate:</strong>
+            <span style="font-size:0.82rem;color:var(--text-muted);">Completing It3 unlocks the final Transition Phase (It4 / ItN), where all 32 use cases undergo end-to-end acceptance testing for the Dec 15 delivery.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="data.js?v=4"></script>
+  <script src="app.js?v=4"></script>
+</body>
+</html>

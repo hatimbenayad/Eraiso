@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Progress &amp; Hub · SESCAM Radiodiagnostics (ISO2 Team A.05)</title>
-  <link rel="stylesheet" href="style.css?v=3">
+  <title>Progress &amp; Engineering Hub · SESCAM Radiodiagnostics (ISO2 Team A.05)</title>
+  <link rel="stylesheet" href="style.css?v=4">
 </head>
 <body data-page="progress">
   <div id="site-navbar"></div>
@@ -18,10 +18,10 @@
         Unified Process (UP) &amp; RADIT engineering tracker for the Comprehensive Radiodiagnostics and Medical Imaging Management System (<code>hatimbenayad/2026-ISO2-A.05</code>).
       </p>
       <div class="hero-meta">
-        <span class="meta-pill green">It0 &amp; It1 Completed (v0.1.0)</span>
-        <span class="meta-pill">Active: It2 — Construction I (0.2.0-SNAPSHOT)</span>
-        <span class="meta-pill">85+ JUnit 6 Tests · JaCoCo &ge;75% Line / &ge;70% Branch</span>
-        <span class="meta-pill">It2 Target: 22/11/2026 (Before Santa Tecla)</span>
+        <span class="meta-pill green">Overall Project: ~55% Complete</span>
+        <span class="meta-pill">Active: It2 — Construction I (v0.2.0-SNAPSHOT)</span>
+        <span class="meta-pill green">85+ Unit Tests · JaCoCo &ge;75% Line / &ge;70% Branch</span>
+        <span class="meta-pill">Next Delivery: v0.2.0 (Diagnostic Orders Engine)</span>
       </div>
     </header>
 
@@ -36,31 +36,169 @@
       </div>
     </section>
 
-    <!-- KPI Summary -->
+    <!-- Executive KPI Summary -->
     <section class="kpi-grid" aria-label="Key project metrics">
       <div class="kpi-card">
-        <div class="kpi-label"><span>Current Lifecycle Phase</span><span>UP</span></div>
-        <div class="kpi-value">It2 · 45%</div>
-        <div class="progress-bar"><div class="progress-fill" style="width: 45%"></div></div>
-        <div class="kpi-sub">Construction I (Core Physician Flow)</div>
+        <div class="kpi-label"><span>Overall Project Progress</span><span>Macro</span></div>
+        <div class="kpi-value">55% / 100%</div>
+        <div class="progress-bar"><div class="progress-fill green" style="width: 55%"></div></div>
+        <div class="kpi-sub">Inception (100%) · Elaboration (100%) · Construction I (65%)</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label"><span>Active Milestone (It2)</span><span>Sprint</span></div>
+        <div class="kpi-value">10 Open · 5 Done</div>
+        <div class="progress-bar"><div class="progress-fill" style="width: 60%"></div></div>
+        <div class="kpi-sub">Quality Gate &amp; Server Design Done · Code In-Flight</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-label"><span>Automated Quality Gate</span><span>SQA</span></div>
-        <div class="kpi-value">85+ Tests</div>
+        <div class="kpi-value">85+ Tests (0 Fail)</div>
         <div class="progress-bar"><div class="progress-fill green" style="width: 100%"></div></div>
-        <div class="kpi-sub">JUnit 6.1.3 + JaCoCo 0.8.14 (&ge;75% / &ge;70%)</div>
+        <div class="kpi-sub">JUnit 6.1.3 + JaCoCo 0.8.14 (&ge;75% Line / &ge;70% Branch)</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label"><span>Iteration 2 Deliverables</span><span>It2</span></div>
-        <div class="kpi-value">Step 1 Done</div>
-        <div class="progress-bar"><div class="progress-fill" style="width: 55%"></div></div>
-        <div class="kpi-sub">Step 1 Closed · Steps 2, 3 &amp; 4 Active</div>
+        <div class="kpi-label"><span>Final Release Delivery</span><span>Target</span></div>
+        <div class="kpi-value">15 Dec 2026</div>
+        <div class="progress-bar"><div class="progress-fill" style="width: 70%; background: var(--accent);"></div></div>
+        <div class="kpi-sub">Continuous delivery without holiday blackout</div>
       </div>
-      <div class="kpi-card">
-        <div class="kpi-label"><span>Upcoming Freeze</span><span>D-016</span></div>
-        <div class="kpi-value">23–27 Nov</div>
-        <div class="progress-bar"><div class="progress-fill" style="width: 100%; background: var(--warning);"></div></div>
-        <div class="kpi-sub">Santa Tecla Break (0 h) · Final Delivery 15/12</div>
+    </section>
+
+    <!-- MACRO SCOPE & PROGRESS GAUGE: HOW FAR WE'VE COME & WHAT'S LEFT -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <h2>Macro Engineering Progress — Scope Completed vs. Scope Remaining</h2>
+          <p>Global view of the 32 Functional Requirements, RADIT disciplines, and lifecycle phases across our 6-member team.</p>
+        </div>
+        <span class="badge badge-progress">Live Status 20/11/2026</span>
+      </div>
+
+      <!-- Discipline Progress Meters -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:12px;margin-bottom:20px;">
+        <div style="background:var(--bg-secondary);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+          <div style="display:flex;justify-content:space-between;font-size:0.82rem;font-weight:600;margin-bottom:6px;">
+            <span>Requirements (R)</span>
+            <span style="color:var(--success);">32 / 32 (100%)</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill green" style="width: 100%"></div></div>
+          <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">All 32 RFs elicited &amp; mapped to 4 human + 4 external actors</div>
+        </div>
+
+        <div style="background:var(--bg-secondary);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+          <div style="display:flex;justify-content:space-between;font-size:0.82rem;font-weight:600;margin-bottom:6px;">
+            <span>Analysis (A)</span>
+            <span style="color:var(--accent);">78% Mapped</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width: 78%"></div></div>
+          <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">CU10–CU13, CU18 committed; CU14–CU17 local in review</div>
+        </div>
+
+        <div style="background:var(--bg-secondary);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+          <div style="display:flex;justify-content:space-between;font-size:0.82rem;font-weight:600;margin-bottom:6px;">
+            <span>Design (D)</span>
+            <span style="color:var(--success);">95% (It2 Base)</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill green" style="width: 95%"></div></div>
+          <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">Server Design merged (PR #80); Client Design in final polish (#71)</div>
+        </div>
+
+        <div style="background:var(--bg-secondary);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+          <div style="display:flex;justify-content:space-between;font-size:0.82rem;font-weight:600;margin-bottom:6px;">
+            <span>Implementation (I)</span>
+            <span style="color:var(--warning);">In-Flight (~40%)</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width: 40%; background: var(--warning);"></div></div>
+          <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">CU19 server done; Orders &amp; UI services actively assigned (#81–#85)</div>
+        </div>
+
+        <div style="background:var(--bg-secondary);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+          <div style="display:flex;justify-content:space-between;font-size:0.82rem;font-weight:600;margin-bottom:6px;">
+            <span>Testing (T)</span>
+            <span style="color:var(--success);">85+ Unit Tests</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill green" style="width: 85%"></div></div>
+          <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">PR #79 merged; PACS/Reports black-box tests pending (#75)</div>
+        </div>
+      </div>
+
+      <!-- Two-Column Forensic Audit: What We've Done vs What We Have Left -->
+      <div class="two-col">
+        <!-- Left: Completed Work -->
+        <div class="panel success-accent" style="padding:16px 18px;">
+          <h3 style="color:var(--success);margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;">
+            <span>✓ How Far We Have Done (Completed)</span>
+            <span class="badge badge-done">Verified Evidence</span>
+          </h3>
+          <ul class="clean-list" style="display:flex;flex-direction:column;gap:10px;font-size:0.88rem;color:var(--text-secondary);">
+            <li>
+              <strong>It0 — Inception Phase (100% Closed · 27 Issues):</strong>
+              Elicited all 32 functional requirements, separated Client vs Server use cases (D-006), identified external systems (SSO, EHR, Admissions, RIS/PACS) and Server Timer, established Visual Paradigm UML standard (D-005) and Git Flow branching.
+            </li>
+            <li>
+              <strong>It1 — Elaboration Phase (100% Closed · 6 Issues · v0.1.0):</strong>
+              Delivered Theoretical Exercise 1; built 3-module Maven architecture (<code>common-contracts</code>, <code>server</code>, <code>client</code> — D-017); created Maven Wrapper; implemented <code>CU19</code> (Patient Registry) with <strong>85 passing unit tests</strong>.
+            </li>
+            <li>
+              <strong>SQA Quality Gate Infrastructure (PR #76):</strong>
+              Configured root POM with JUnit <code>6.1.3</code> and JaCoCo <code>0.8.14</code> enforcing strict <strong>&ge;75% line / &ge;70% branch coverage</strong> on every CI build. <em>Closed #59, #60, #61.</em>
+            </li>
+            <li>
+              <strong>Server Component Design (PR #80):</strong>
+              Felipe's Server Design Class Diagram (<code>It2-server-design.svg</code> &amp; <code>.vpp</code>) merged into <code>develop</code>. Defines <code>IOrderRepository</code>, <code>IExaminationOrderService</code>, and mock adapters. <em>Closed #72.</em>
+            </li>
+            <li>
+              <strong>Black-Box Test Suite for Orders (PR #79):</strong>
+              Documented EP/BVA matrices for Lab S.04.01 on Issue #74; committed edge-case tests in <code>ExaminationOrderTest</code>. <em>Closed #74.</em>
+            </li>
+            <li>
+              <strong>Physician Communication Models (BCE):</strong>
+              Mina completed and committed diagrams for <code>CU10</code> (Order procedure), <code>CU11</code> (Periodic follow-up), <code>CU12</code> (Soft-cancel orders), <code>CU13</code> (Schedules), and <code>CU18</code> (Metrics) on <code>feature/CU10-CU18-analysis-communication</code>.
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right: What is Left to Do -->
+        <div class="panel danger-accent" style="padding:16px 18px;">
+          <h3 style="color:var(--danger);margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;">
+            <span>⚡ What We Have Left (Remaining Backlog)</span>
+            <span class="badge badge-open">Roadmap</span>
+          </h3>
+          <ul class="clean-list" style="display:flex;flex-direction:column;gap:10px;font-size:0.88rem;color:var(--text-secondary);">
+            <li>
+              <strong>1. Finish It2 Construction Code (#81):</strong>
+              <div style="font-size:0.82rem;color:var(--text-muted);margin-top:2px;">
+                &bull; <code>#82</code>: Backend Order Service &amp; In-Memory Repo &rarr; <em>Assigned to Beyza (@beyzabalota1)</em><br>
+                &bull; <code>#83</code>: Desktop Swing UI Order Entry Workspace &rarr; <em>Assigned to Berke (@berquepica)</em><br>
+                &bull; <code>#84</code>: Diagnostic Report Service &rarr; <em>Assigned to Ay&ccedil;a (@aycagorgulu0)</em><br>
+                &bull; <code>#85</code>: Mock RIS/PACS &amp; EHR Adapters (D-012) &rarr; <em>Assigned to Mina (@minaOZ)</em>
+              </div>
+            </li>
+            <li>
+              <strong>2. Complete It2 Design &amp; Testing:</strong>
+              <div style="font-size:0.82rem;color:var(--text-muted);margin-top:2px;">
+                &bull; <code>#71</code>: Client Component Design (Hatim/Berke) &middot; add JFrame/JPanel inheritance.<br>
+                &bull; <code>#75</code>: Black-Box Test Suite for PACS Viewing &amp; Reports (CU14, CU15, CU17).
+              </div>
+            </li>
+            <li>
+              <strong>3. Quality Gate &amp; Release v0.2.0:</strong>
+              Execute <code>mvn clean verify</code> across all 3 modules, merge <code>develop</code> into <code>main</code>, tag <code>v0.2.0</code>, and close Milestone <code>it2-Construction</code>.
+            </li>
+            <li>
+              <strong>4. Iteration 3 — Construction II (Upcoming v0.3.0):</strong>
+              <div style="font-size:0.82rem;color:var(--text-muted);margin-top:2px;">
+                &bull; <em>Patient Portal (CU01–CU09):</em> Appointment booking, consultation, cancellation, image viewing.<br>
+                &bull; <em>Admissions &amp; Scheduling (CU20–CU26):</em> Room allocation, check-in, billing/invoicing.<br>
+                &bull; <em>Notification Dispatcher (CU07, CU26):</em> Automated appointment &amp; emergency alerts.
+              </div>
+            </li>
+            <li>
+              <strong>5. Iteration 4 — Transition Phase (Final v1.0.0 Delivery):</strong>
+              System-wide regression testing, simulated external hospital adapter integration, user documentation, and final defense preparation for <strong>December 15, 2026</strong>.
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -68,18 +206,29 @@
     <section class="section-card">
       <div class="section-header">
         <div>
-          <h2>Portal Directory — Dedicated Section Pages</h2>
-          <p>Each operational area has its own focused page to keep navigation clean and fast.</p>
+          <h2>Portal Directory — Dedicated Operational Views</h2>
+          <p>Each domain area has its own focused page to keep navigation clean, deep, and fast.</p>
         </div>
       </div>
       <div class="hub-grid" style="margin-bottom:0;">
+        <a class="hub-card" href="iterations.html">
+          <div>
+            <div class="hub-card-top">
+              <h3>Iterations Focus</h3>
+              <span class="badge badge-progress">It2 &rarr; It3</span>
+            </div>
+            <p>Active sprint breakdown (Construction I), remaining completion checklist, and the immediate preview of Iteration 3.</p>
+          </div>
+          <span class="hub-card-link">Open Iterations &rarr;</span>
+        </a>
+
         <a class="hub-card" href="must-fix.html">
           <div>
             <div class="hub-card-top">
               <h3>Must Fix</h3>
-              <span class="badge badge-critical">6 Active</span>
+              <span class="badge badge-critical">Active Gates</span>
             </div>
-            <p>Immediate blockers, open PR actions, GitHub issue title alignments, and recently resolved SQA gates.</p>
+            <p>Immediate blockers, open PR actions, GitHub issue alignments, and recently resolved SQA quality gates.</p>
           </div>
           <span class="hub-card-link">Open Must Fix &rarr;</span>
         </a>
@@ -88,9 +237,9 @@
           <div>
             <div class="hub-card-top">
               <h3>Blunders (??) &amp; Recovery</h3>
-              <span class="badge badge-open">7.95 &rarr; 9.5</span>
+              <span class="badge badge-open">8.2 &rarr; 9.5</span>
             </div>
-            <p>Honest chess-style self-audit of what we might be doing wrong (<code>??</code>) and the exact recovery moves (<code>!!</code>) to hit 9.5/10.</p>
+            <p>Honest chess-style self-audit of deviations (<code>??</code>), step-by-step solutions, and copyable AI prompts to recover.</p>
           </div>
           <span class="hub-card-link">Open Blunders &rarr;</span>
         </a>
@@ -121,9 +270,9 @@
           <div>
             <div class="hub-card-top">
               <h3>Meetings &amp; Decisions</h3>
-              <span class="badge badge-progress">Thu 17:00</span>
+              <span class="badge badge-progress">Minutes &amp; D-018</span>
             </div>
-            <p>Meeting agendas, session summaries, and decisions log (<code>D-001</code>&ndash;<code>D-018</code>) supporting accurate Wiki minutes and decisions pages.</p>
+            <p>Meeting agendas, session summaries, and decisions log (<code>D-001</code>&ndash;<code>D-018</code>) supporting accurate Wiki pages.</p>
           </div>
           <span class="hub-card-link">Open Meetings &amp; Decisions &rarr;</span>
         </a>
@@ -145,46 +294,10 @@
               <h3>Team &amp; Governance</h3>
               <span class="badge badge-neutral">D-009 · D-014</span>
             </div>
-            <p>Team roles, actor ownership, availability constraints, cross-review matrix, and Human-in-the-Loop AI rules.</p>
+            <p>Team roles, actor ownership, availability constraints, cross-review matrix, and Human-in-the-Loop AI governance.</p>
           </div>
           <span class="hub-card-link">Open Team &rarr;</span>
         </a>
-      </div>
-    </section>
-
-    <!-- Progress Audit: Completed vs Active -->
-    <section class="section-card">
-      <div class="section-header">
-        <div>
-          <h2>Project Progress Audit (As of 17/11/2026)</h2>
-          <p>Clear separation between completed milestones merged into <code>develop</code>/<code>main</code> and active Iteration 2 work.</p>
-        </div>
-        <span class="badge badge-progress">Updated 17/11/2026</span>
-      </div>
-
-      <div class="two-col">
-        <div class="panel success-accent">
-          <h3><span>Completed &amp; Verified</span><span class="badge badge-done">Merged</span></h3>
-          <ul class="clean-list">
-            <li><strong>It0 — Inception (<code>v0.0.1</code>):</strong> Full 32 functional requirements (<code>RF01–RF32</code>), 1:1 client &amp; server Visual Paradigm use-case diagrams (<code>CU01–CU32</code>, <code>SCU01–SCU13</code>), Git Flow rules, and <code>DECISIONS.md</code> baseline.</li>
-            <li><strong>It1 — Elaboration (<code>v0.1.0</code>):</strong> Submitted <strong>Theoretical Assignment 1</strong> (13/11), established 3-module Maven architecture (<code>common-contracts</code>, <code>server</code>, <code>client</code> — D-017), Maven Wrapper, and GitHub Actions CI.</li>
-            <li><strong>Architectural Baseline &amp; <code>CU19</code> (<code>PR #52</code>):</strong> Implemented core domain models (<code>User</code>, <code>Role</code>, <code>AuthSession</code>, <code>Patient</code>, <code>ExaminationOrder</code>) plus full <code>PatientRegistryService</code> &amp; <code>InMemoryPatientRepository</code> with <strong>85 passing JUnit 6 tests</strong>.</li>
-            <li><strong>It2 Step 1 — Quality Infrastructure (<code>PR #58</code>, <code>PR #76</code>, Issues <code>#59–#61</code>):</strong> Bumped <code>develop</code> to <code>0.2.0-SNAPSHOT</code> and enforced <strong>JaCoCo &ge;75% line / &ge;70% branch coverage</strong> in root <code>pom.xml</code> (verified green in CI).</li>
-            <li><strong>Lab S.04.01 Black-Box Test Design (Issues <code>#74</code> &amp; <code>#75</code>):</strong> Documented Equivalence Partitions (EP), Boundary Value Analysis (BVA), and Error Guessing matrices for Orders, Reports, PACS, and Incidents; Issue <code>#74</code> closed and order edge-case tests committed.</li>
-            <li><strong>Analysis Progress (<code>CU10–CU12</code>):</strong> Mina completed BCE Communication Diagrams for <code>CU10</code> (Order procedure), <code>CU11</code> (Periodic follow-up via Timer), and <code>CU12</code> (Manage/soft-cancel orders).</li>
-          </ul>
-        </div>
-
-        <div class="panel primary-accent">
-          <h3><span>Active Now — Iteration 2 (Due 22/11)</span><span class="badge badge-progress">In Progress</span></h3>
-          <ul class="clean-list">
-            <li><strong>PR Integration (Immediate):</strong> Open &amp; merge Hatim's pushed Order test branch (<code>test/CU10-CU11-CU16-orders-test-suite</code>) and Mina's <code>CU10–CU12</code> diagram PR into <code>develop</code>.</li>
-            <li><strong>Step 2 — Remaining Physician BCE Diagrams:</strong> Balanced 3–3–3 split: Beyza modeling <code>CU13</code>, <code>CU14</code> (Reports), <code>CU15</code> (PACS Images); Ay&ccedil;a modeling <code>CU16</code> (Execution), <code>CU17</code> (Incidents), <code>CU18</code> (Order Metrics).</li>
-            <li><strong>Step 3 — Design Class Diagrams (<code>#70</code>):</strong> Hatim modeling Client Swing MVC architecture (<code>#71</code>, <code>feature/It2-client-design</code>) and Felipe modeling Server services, in-memory repos &amp; mock adapters (<code>#72</code>, <code>feature/It2-server-design</code>).</li>
-            <li><strong>Step 4 — Service Implementation &amp; JUnit 6 Suites (<code>#73</code>, <code>#75</code>):</strong> Implement Physician services &amp; mock adapters once <code>#72</code> contracts land, and implement Berke's JUnit 6 service tests matching Issue <code>#75</code> while preserving JaCoCo &ge;75% / &ge;70%.</li>
-            <li><strong>GitHub Governance Hygiene:</strong> Align titles of Issues <code>#64–#67</code> with the official Wiki, sync all issues on the GitHub Projects Kanban board (C11), and publish individual Wiki self-assessments (C16).</li>
-          </ul>
-        </div>
       </div>
     </section>
 
@@ -192,7 +305,7 @@
     <section class="section-card">
       <div class="section-header">
         <div>
-          <h2>Testing &amp; Quality Assurance Standards (Lab S.04.01 · 17/11 Summary)</h2>
+          <h2>Testing &amp; Quality Assurance Standards (Lab S.04.01 Enforced)</h2>
           <p>Core engineering standards enforced across every Pull Request and Maven build.</p>
         </div>
         <span class="badge badge-done">CI Enforced</span>
@@ -221,7 +334,7 @@
   </main>
 
   <div id="site-footer"></div>
-  <script src="data.js?v=3"></script>
-  <script src="app.js?v=3"></script>
+  <script src="data.js?v=4"></script>
+  <script src="app.js?v=4"></script>
 </body>
 </html>

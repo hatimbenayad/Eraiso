@@ -4,7 +4,130 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>2nd Delivery Kickoff · Theoretical Exercise 2 &amp; Lab Testing (ISO2 Team A.05)</title>
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=5">
+  <style>
+    .persona-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+      background: var(--surface-subtle);
+      padding: 6px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+    }
+    .persona-btn {
+      flex: 1;
+      min-width: 140px;
+      padding: 10px 14px;
+      border: 1px solid transparent;
+      border-radius: var(--radius-sm);
+      background: transparent;
+      color: var(--text-secondary);
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .persona-btn:hover {
+      background: var(--surface);
+      color: var(--text-main);
+      border-color: var(--border);
+    }
+    .persona-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+    .persona-btn small {
+      font-size: 0.72rem;
+      opacity: 0.85;
+      font-weight: 400;
+    }
+    .persona-card {
+      display: none;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      animation: fadeIn 0.25s ease-in-out;
+    }
+    .persona-card.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .task-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+    .task-box {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .task-box.step1 { border-top: 4px solid var(--primary); }
+    .task-box.step2 { border-top: 4px solid var(--accent); }
+    .task-box.step3 { border-top: 4px solid var(--warning); }
+    .code-snippet {
+      background: #0f172a;
+      color: #f8fafc;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      margin: 10px 0;
+      position: relative;
+      overflow-x: auto;
+      line-height: 1.5;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: #fff;
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .copy-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    .matrix-table th, .matrix-table td {
+      padding: 12px 14px;
+      text-align: left;
+    }
+    .status-badge {
+      display: inline-block;
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge-code { background: var(--primary-soft); color: var(--primary); }
+    .badge-theory { background: var(--accent-soft); color: var(--accent); }
+    .badge-test { background: var(--warning-soft); color: var(--warning); }
+  </style>
 </head>
 <body data-page="delivery2">
   <div id="site-navbar"></div>
@@ -14,94 +137,579 @@
       <div class="hero-eyebrow">Academic Year 2026/2027 · UCLM Software Engineering II · Delivery 2</div>
       <h1>2nd Delivery Kickoff — Theoretical Exercise 2 &amp; Testing Practicum</h1>
       <p>
-        Official guide for the <strong>Tuesday 15/12/2026</strong> submission: 3 cross-testing pairs, 3 dedicated GitHub repositories, 10-step combinatorial/decision test case design, and automated JUnit 6 + JaCoCo (&ge;80%) execution.
+        The complete, end-to-end execution blueprint for <strong>Delivery 2 (Due Tuesday 15/12/2026)</strong>. Divided into 3 pairs, across 3 dedicated GitHub repositories, implementing a 3-stage rotational pipeline to ensure strict independent verification.
       </p>
       <div class="hero-meta">
         <span class="meta-pill green">Submission Deadline: Tuesday 15/12/2026</span>
         <span class="meta-pill">Score: Up to 10.0 Points (3.33 pts / problem)</span>
-        <span class="meta-pill">3 Standalone Repos: ISO2-2025-GrupoA05-Testing-P1 / P2 / P3</span>
-        <span class="meta-pill green">Quality Gate: &ge;80% Statement Coverage (JaCoCo)</span>
+        <span class="meta-pill green">Quality Gate: &ge;80% JaCoCo Statement Coverage</span>
+        <span class="meta-pill">Independent Verification: Rotational 3-Pair Model</span>
       </div>
     </header>
 
-    <!-- EXECUTIVE PRINCIPLE: DEVELOPERS DO NOT TEST THEIR OWN CODE -->
+    <!-- CORE ARCHITECTURE & INDEPENDENT VERIFICATION NOTICE -->
     <section class="purpose-banner" aria-label="Core delivery philosophy">
-      <div class="purpose-icon">!</div>
+      <div class="purpose-icon">⚖️</div>
       <div>
-        <h2>The Core Engineering Principle (Developers Do Not Test Their Own Code)</h2>
+        <h2>The Golden Rule of Delivery 2: Developers Do NOT Test Their Own Code!</h2>
         <p>
-          In professional software engineering, independent verification is paramount: <strong>developers who implement code must never design or execute their own tests</strong>. To simulate this, our 6-member team splits into <strong>3 pairs</strong> across <strong>3 distinct problems</strong> in a rotational pipeline: Pair 1 implements, Pair 2 designs the formal test cases (Theory), and Pair 3 implements the JUnit 6 tests on a dedicated <code>hotfix</code> branch (Lab).
+          According to UCLM Software Engineering II specifications (ET.02.00 Slide 2): <em>"Developers responsible for writing the code should NOT perform the testing!"</em><br>
+          To satisfy this professional standard, our 6-member team rotates through <strong>3 distinct roles</strong> across the <strong>3 problems</strong>. If your pair writes the code for a problem, a completely different pair designs the theoretical test cases, and the third pair implements the automated JUnit 5 test suite on a dedicated <code>hotfix</code> branch!
         </p>
       </div>
     </section>
 
-    <!-- ROTATIONAL WORKFLOW MATRIX (TABLE 1) -->
+    <!-- OFFICIAL PAIR ALLOCATION -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <h2>Official Pairs for Delivery 2 (Agreed with Prof. Ismael)</h2>
+          <p>These are the official pairings communicated to the instructor via Outlook.</p>
+        </div>
+        <span class="badge badge-done">Official Roster</span>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:14px;margin-top:12px;">
+        <div class="panel primary-accent" style="padding:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+            <h3 style="color:var(--primary);font-size:1.05rem;margin:0;">Pair 1</h3>
+            <span class="status-badge badge-code">Team Lead Pair</span>
+          </div>
+          <p style="font-size:0.95rem;font-weight:600;margin:0 0 4px 0;">Hatim Ben Ayad &amp; Felipe Dionisio</p>
+          <p style="font-size:0.8rem;color:var(--text-muted);margin:0;">GitHub: <code>@hatimbenayad</code> &amp; <code>@Felipe-Dionisio</code></p>
+        </div>
+
+        <div class="panel purple-accent" style="padding:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+            <h3 style="color:#8b5cf6;font-size:1.05rem;margin:0;">Pair 2</h3>
+            <span class="status-badge badge-theory">Research Pair</span>
+          </div>
+          <p style="font-size:0.95rem;font-weight:600;margin:0 0 4px 0;">Mina Alimohammadi &amp; Ayça Beril Gümüş</p>
+          <p style="font-size:0.8rem;color:var(--text-muted);margin:0;">GitHub: <code>@minaOZ</code> &amp; <code>@aycagorgulu0</code></p>
+        </div>
+
+        <div class="panel success-accent" style="padding:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+            <h3 style="color:var(--success);font-size:1.05rem;margin:0;">Pair 3</h3>
+            <span class="status-badge badge-test">QA &amp; Test Pair</span>
+          </div>
+          <p style="font-size:0.95rem;font-weight:600;margin:0 0 4px 0;">Beyza Nur Topuz &amp; Berke Taha Özdemir</p>
+          <p style="font-size:0.8rem;color:var(--text-muted);margin:0;">GitHub: <code>@beyzabalota1</code> &amp; <code>@berquepica</code></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROTATIONAL WORKFLOW MATRIX TABLE -->
     <section class="section-card">
       <div class="section-header">
         <div>
           <h2>Work Allocation &amp; Cross-Pair Rotational Matrix (Group A.05)</h2>
-          <p>Strict division of labor where every pair experiences all three development stages across the three problems.</p>
+          <p>Strict division of labor where every pair experiences all three stages without ever testing their own code.</p>
         </div>
-        <span class="badge badge-done">3 Pairs Defined</span>
+        <span class="badge badge-done">100% Balanced</span>
       </div>
 
-      <!-- Pair Definitions -->
-      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:12px;margin-bottom:18px;">
-        <div class="panel primary-accent" style="padding:12px 16px;">
-          <h3 style="color:var(--accent);font-size:0.95rem;margin-bottom:4px;">Pair 1 (P1)</h3>
-          <p style="font-size:0.88rem;color:var(--text-secondary);margin:0;"><strong>Hatim Ben Ayad</strong> (Coordinator) &amp; <strong>Ayça Beril Gümüş</strong></p>
-        </div>
-        <div class="panel purple-accent" style="padding:12px 16px;">
-          <h3 style="color:#a855f7;font-size:0.95rem;margin-bottom:4px;">Pair 2 (P2)</h3>
-          <p style="font-size:0.88rem;color:var(--text-secondary);margin:0;"><strong>Mina Alimohammadi</strong> &amp; <strong>Felipe Dionisio</strong></p>
-        </div>
-        <div class="panel success-accent" style="padding:12px 16px;">
-          <h3 style="color:var(--success);font-size:0.95rem;margin-bottom:4px;">Pair 3 (P3)</h3>
-          <p style="font-size:0.88rem;color:var(--text-secondary);margin:0;"><strong>Berke Taha Özdemir</strong> &amp; <strong>Beyza Nur Topuz</strong></p>
-        </div>
-      </div>
-
-      <!-- Rotational Table -->
       <div class="data-table-wrap">
-        <table class="data-table">
+        <table class="data-table matrix-table">
           <thead>
             <tr>
-              <th style="width:240px;">Problem &amp; Dedicated Repo</th>
-              <th>Step 1: Program Implementation (Maven)</th>
-              <th>Step 2: Test Case Design (Theory PDF)</th>
-              <th>Step 3: JUnit 6 &amp; JaCoCo &ge;80% (Lab)</th>
+              <th style="width:250px;">Problem &amp; Dedicated Repository</th>
+              <th>Step 1: Program Implementation (Maven)<br><small style="font-weight:normal;color:var(--text-muted);">Branch: <code>develop</code></small></th>
+              <th>Step 2: Test Design (Theory PDF)<br><small style="font-weight:normal;color:var(--text-muted);">10-Question Formal Report</small></th>
+              <th>Step 3: JUnit 5 &amp; JaCoCo &ge;80% (Lab)<br><small style="font-weight:normal;color:var(--text-muted);">Branch: <code>hotfix</code></small></th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>
                 <strong>Problem 1: Parking Fee Calculator</strong><br>
-                <code>ISO2-2025-GrupoA05-Testing-P1</code>
+                <a href="https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P1" target="_blank" style="font-family:var(--font-mono);font-size:0.8rem;color:var(--primary);">ISO2-2025-GrupoA05-Testing-P1 ↗</a>
               </td>
-              <td><span class="badge badge-done">Pair 1 (Hatim &amp; Ayça)</span><br><small style="color:var(--text-muted);">Implement on <code>develop</code></small></td>
-              <td><span class="badge badge-open">Pair 2 (Mina &amp; Felipe)</span><br><small style="color:var(--text-muted);">10-Question Theory PDF</small></td>
-              <td><span class="badge badge-progress">Pair 3 (Berke &amp; Beyza)</span><br><small style="color:var(--text-muted);">JUnit on <code>hotfix</code> branch</small></td>
+              <td>
+                <span class="status-badge badge-code">Pair 1 (Hatim &amp; Felipe)</span><br>
+                <small style="color:var(--text-secondary);">Code domain classes on branch <code>develop</code></small>
+              </td>
+              <td>
+                <span class="status-badge badge-theory">Pair 2 (Mina &amp; Ayça)</span><br>
+                <small style="color:var(--text-secondary);">Compile <code>...-P1.pdf</code> with 10 questions</small>
+              </td>
+              <td>
+                <span class="status-badge badge-test">Pair 3 (Beyza &amp; Berke)</span><br>
+                <small style="color:var(--text-secondary);">Implement JUnit on <code>hotfix</code> (&ge;80% cov)</small>
+              </td>
             </tr>
+
             <tr>
               <td>
                 <strong>Problem 2: University Scholarships</strong><br>
-                <code>ISO2-2025-GrupoA05-Testing-P2</code>
+                <a href="https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P2" target="_blank" style="font-family:var(--font-mono);font-size:0.8rem;color:var(--primary);">ISO2-2025-GrupoA05-Testing-P2 ↗</a>
               </td>
-              <td><span class="badge badge-done">Pair 2 (Mina &amp; Felipe)</span><br><small style="color:var(--text-muted);">Implement on <code>develop</code></small></td>
-              <td><span class="badge badge-open">Pair 3 (Berke &amp; Beyza)</span><br><small style="color:var(--text-muted);">10-Question Theory PDF</small></td>
-              <td><span class="badge badge-progress">Pair 1 (Hatim &amp; Ayça)</span><br><small style="color:var(--text-muted);">JUnit on <code>hotfix</code> branch</small></td>
+              <td>
+                <span class="status-badge badge-code">Pair 2 (Mina &amp; Ayça)</span><br>
+                <small style="color:var(--text-secondary);">Code domain classes on branch <code>develop</code></small>
+              </td>
+              <td>
+                <span class="status-badge badge-theory">Pair 3 (Beyza &amp; Berke)</span><br>
+                <small style="color:var(--text-secondary);">Compile <code>...-P2.pdf</code> with 10 questions</small>
+              </td>
+              <td>
+                <span class="status-badge badge-test">Pair 1 (Hatim &amp; Felipe)</span><br>
+                <small style="color:var(--text-secondary);">Implement JUnit on <code>hotfix</code> (&ge;80% cov)</small>
+              </td>
             </tr>
+
             <tr>
               <td>
                 <strong>Problem 3: Smart Greenhouse Irrigation</strong><br>
-                <code>ISO2-2025-GrupoA05-Testing-P3</code>
+                <a href="https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P3" target="_blank" style="font-family:var(--font-mono);font-size:0.8rem;color:var(--primary);">ISO2-2025-GrupoA05-Testing-P3 ↗</a>
               </td>
-              <td><span class="badge badge-done">Pair 3 (Berke &amp; Beyza)</span><br><small style="color:var(--text-muted);">Implement on <code>develop</code></small></td>
-              <td><span class="badge badge-open">Pair 1 (Hatim &amp; Ayça)</span><br><small style="color:var(--text-muted);">10-Question Theory PDF</small></td>
-              <td><span class="badge badge-progress">Pair 2 (Mina &amp; Felipe)</span><br><small style="color:var(--text-muted);">JUnit on <code>hotfix</code> branch</small></td>
+              <td>
+                <span class="status-badge badge-code">Pair 3 (Beyza &amp; Berke)</span><br>
+                <small style="color:var(--text-secondary);">Code domain classes on branch <code>develop</code></small>
+              </td>
+              <td>
+                <span class="status-badge badge-theory">Pair 1 (Hatim &amp; Felipe)</span><br>
+                <small style="color:var(--text-secondary);">Compile <code>...-P3.pdf</code> with 10 questions</small>
+              </td>
+              <td>
+                <span class="status-badge badge-test">Pair 2 (Mina &amp; Ayça)</span><br>
+                <small style="color:var(--text-secondary);">Implement JUnit on <code>hotfix</code> (&ge;80% cov)</small>
+              </td>
             </tr>
           </tbody>
         </table>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE TEAMMATE DASHBOARD (WHAT EACH PERSON MUST DO) -->
+    <section class="section-card" id="teammate-actions">
+      <div class="section-header">
+        <div>
+          <h2>Interactive Teammate Action Center: What Must I Do?</h2>
+          <p>Click your name below to instantly view your exact 3 assignments, target repositories, branch rules, and copyable Git commands.</p>
+        </div>
+      </div>
+
+      <!-- Navigation tabs -->
+      <div class="persona-nav" role="tablist">
+        <button class="persona-btn active" onclick="selectPersona('hatim')">
+          Hatim Ben Ayad
+          <small>Pair 1 (Coordinator)</small>
+        </button>
+        <button class="persona-btn" onclick="selectPersona('felipe')">
+          Felipe Dionisio
+          <small>Pair 1 (Developer / QA)</small>
+        </button>
+        <button class="persona-btn" onclick="selectPersona('mina')">
+          Mina Alimohammadi
+          <small>Pair 2 (Developer / QA)</small>
+        </button>
+        <button class="persona-btn" onclick="selectPersona('ayca')">
+          Ayça Beril Gümüş
+          <small>Pair 2 (Developer / QA)</small>
+        </button>
+        <button class="persona-btn" onclick="selectPersona('beyza')">
+          Beyza Nur Topuz
+          <small>Pair 3 (Developer / QA)</small>
+        </button>
+        <button class="persona-btn" onclick="selectPersona('berke')">
+          Berke Taha Özdemir
+          <small>Pair 3 (Developer / QA)</small>
+        </button>
+      </div>
+
+      <!-- HATIM & FELIPE (PAIR 1) -->
+      <div id="persona-hatim" class="persona-card active">
+        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:14px;">
+          <div>
+            <h3 style="font-size:1.15rem;margin:0;color:var(--text-main);">Hatim Ben Ayad · Pair 1 Lead</h3>
+            <p style="font-size:0.85rem;color:var(--text-muted);margin:0;">Partner: Felipe Dionisio · Workload: 3 Problems (Code P1, Theory P3, Test P2)</p>
+          </div>
+          <span class="status-badge badge-code">Pair 1 Assignment</span>
+        </div>
+
+        <div class="task-grid">
+          <div class="task-box step1">
+            <div>
+              <span class="status-badge badge-code" style="margin-bottom:6px;">Task 1: Code Implementation</span>
+              <h4 style="margin:4px 0;">Problem 1: Parking Fee Calculator</h4>
+              <p style="font-size:0.83rem;color:var(--text-secondary);">Implement parking duration calculation, rate rules (€0.05/min after 30 min, max €20/day), and argument validation.</p>
+              <ul style="font-size:0.8rem;color:var(--text-muted);padding-left:16px;margin:8px 0;">
+                <li>Repository: <code>ISO2-2025-GrupoA05-Testing-P1</code></li>
+                <li>Target Branch: <strong><code>develop</code></strong></li>
+                <li>Deadline: <strong>November 28</strong></li>
+              </ul>
+            </div>
+            <div class="code-snippet">
+              <button class="copy-btn" onclick="copyText(this, 'git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P1.git\ncd ISO2-2025-GrupoA05-Testing-P1\ngit checkout develop')">Copy</button>
+git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P1.git
+cd ISO2-2025-GrupoA05-Testing-P1
+git checkout develop
+            </div>
+          </div>
+
+          <div class="task-box step2">
+            <div>
+              <span class="status-badge badge-theory" style="margin-bottom:6px;">Task 2: Theory PDF Design</span>
+              <h4 style="margin:4px 0;">Problem 3: Smart Greenhouse Irrigation</h4>
+              <p style="font-size:0.83rem;color:var(--text-secondary);">Analyze Beyza &amp; Berke's greenhouse code. Answer all 10 questions (EP, BVA, PICT, MC/DC) and compile the PDF.</p>
+              <ul style="font-size:0.8rem;color:var(--text-muted);padding-left:16px;margin:8px 0;">
+                <li>Deliverable: <code>ISO2-2025-GrupoA05-Testing-P3.pdf</code></li>
+                <li>Format: 10-Question Structured Report</li>
+                <li>Deadline: <strong>December 05</strong></li>
+              </ul>
+            </div>
+            <div style="background:var(--surface-subtle);padding:10px;border-radius:4px;font-size:0.8rem;color:var(--text-secondary);margin-top:10px;">
+              💡 Work together with Felipe to compute the truth tables and boundary values for solar radiation rules.
+            </div>
+          </div>
+
+          <div class="task-box step3">
+            <div>
+              <span class="status-badge badge-test" style="margin-bottom:6px;">Task 3: Automated Testing</span>
+              <h4 style="margin:4px 0;">Problem 2: University Scholarships</h4>
+              <p style="font-size:0.83rem;color:var(--text-secondary);">Implement JUnit 5 tests against Mina &amp; Ayça's scholarship code using Beyza &amp; Berke's test vectors. Verify &ge;80% coverage.</p>
+              <ul style="font-size:0.8rem;color:var(--text-muted);padding-left:16px;margin:8px 0;">
+                <li>Repository: <code>ISO2-2025-GrupoA05-Testing-P2</code></li>
+                <li>Working Branch: <strong><code>hotfix</code></strong> (Strictly forbidden on develop!)</li>
+                <li>Deadline: <strong>December 12</strong></li>
+              </ul>
+            </div>
+            <div class="code-snippet">
+              <button class="copy-btn" onclick="copyText(this, 'git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P2.git\ncd ISO2-2025-GrupoA05-Testing-P2\ngit checkout hotfix\nmvn clean test jacoco:report')">Copy</button>
+git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P2.git
+cd ISO2-2025-GrupoA05-Testing-P2
+git checkout hotfix
+mvn clean test jacoco:report
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FELIPE (PAIR 1) -->
+      <div id="persona-felipe" class="persona-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:14px;">
+          <div>
+            <h3 style="font-size:1.15rem;margin:0;color:var(--text-main);">Felipe Dionisio · Pair 1 Co-Lead</h3>
+            <p style="font-size:0.85rem;color:var(--text-muted);margin:0;">Partner: Hatim Ben Ayad · Workload: 3 Problems (Code P1, Theory P3, Test P2)</p>
+          </div>
+          <span class="status-badge badge-code">Pair 1 Assignment</span>
+        </div>
+
+        <div class="task-grid">
+          <div class="task-box step1">
+            <div>
+              <span class="status-badge badge-code" style="margin-bottom:6px;">Task 1: Code Implementation</span>
+              <h4 style="margin:4px 0;">Problem 1: Parking Fee Calculator</h4>
+              <p style="font-size:0.83rem;color:var(--text-secondary);">Collaborate with Hatim to write clean Java 21 domain classes on <code>develop</code> branch in P1.</p>
+              <ul style="font-size:0.8rem;color:var(--text-muted);padding-left:16px;margin:8px 0;">
+                <li>Repository: <code>ISO2-2025-GrupoA05-Testing-P1</code></li>
+                <li>Branch: <strong><code>develop</code></strong></li>
+              </ul>
+            </div>
+            <div class="code-snippet">
+              <button class="copy-btn" onclick="copyText(this, 'git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P1.git\ncd ISO2-2025-GrupoA05-Testing-P1\ngit checkout develop')">Copy</button>
+git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P1.git
+cd ISO2-2025-GrupoA05-Testing-P1
+git checkout develop
+            </div>
+          </div>
+
+          <div class="task-box step2">
+            <div>
+              <span class="status-badge badge-theory" style="margin-bottom:6px;">Task 2: Theory PDF Design</span>
+              <h4 style="margin:4px 0;">Problem 3: Smart Greenhouse Irrigation</h4>
+              <p style="font-size:0.83rem;color:var(--text-secondary);">Design test matrices, partition intervals, and MC/DC truth table for the 5 greenhouse decision conditions.</p>
+              <ul style="font-size:0.8rem;color:var(--text-muted);padding-left:16px;margin:8px 0;">
+                <li>Deliverable: <code>ISO2-2025-GrupoA05-Testing-P3.pdf</code></li>
+              </ul>
+            </div>
+            <div style="background:var(--surface-subtle);padding:10px;border-radius:4px;font-size:0.8rem;color:var(--text-secondary);margin-top:10px;">
+              💡 Ensure PICT is executed to generate 2-way combinations for the soil moisture / temperature variables.
+            </div>
+          </div>
+
+          <div class="task-box step3">
+            <div>
+              <span class="status-badge badge-test" style="margin-bottom:6px;">Task 3: Automated Testing</span>
+              <h4 style="margin:4px 0;">Problem 2: University Scholarships</h4>
+              <p style="font-size:0.83rem;color:var(--text-secondary);">Write JUnit 5 tests on <code>hotfix</code> verifying that scholarship criteria are accurately checked.</p>
+              <ul style="font-size:0.8rem;color:var(--text-muted);padding-left:16px;margin:8px 0;">
+                <li>Repository: <code>ISO2-2025-GrupoA05-Testing-P2</code></li>
+                <li>Branch: <strong><code>hotfix</code></strong></li>
+              </ul>
+            </div>
+            <div class="code-snippet">
+              <button class="copy-btn" onclick="copyText(this, 'git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P2.git\ncd ISO2-2025-GrupoA05-Testing-P2\ngit checkout hotfix\nmvn clean test jacoco:report')">Copy</button>
+git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P2.git
+cd ISO2-2025-GrupoA05-Testing-P2
+git checkout hotfix
+mvn clean test jacoco:report
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MINA & AYÇA (PAIR 2) -->
+      <div id="persona-mina" class="persona-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:14px;">
+          <div>
+            <h3 style="font-size:1.15rem;margin:0;color:var(--text-main);">Mina Alimohammadi · Pair 2</h3>
+            <p style="font-size:0.85rem;color:var(--text-muted);margin:0;">Partner: Ayça Beril Gümüş · Workload: 3 Problems (Code P2, Theory P1, Test P3)</p>
+          </div>
+          <span class="status-badge badge-theory">Pair 2 Assignment</span>
+        </div>
+
+        <div class="task-grid">
+          <div class="task-box step1">
+            <div>
+              <span class="status-badge badge-code" style="margin-bottom:6px;">Task 1: Code Implementation</span>
+              <h4 style="margin:4px 0;">Problem 2: University Scholarships</h4>
+              <p style="font-size:0.83rem;color:var(--text-secondary);">Write the domain model for scholarship evaluations (Excellence, Residence, Large Family, Inclusion) on <code>develop</code>.</p>
+              <ul style="font-size:0.8rem;color:var(--text-muted);padding-left:16px;margin:8px 0;">
+                <li>Repository: <code>ISO2-2025-GrupoA05-Testing-P2</code></li>
+                <li>Branch: <strong><code>develop</code></strong></li>
+                <li>Deadline: <strong>November 28</strong></li>
+              </ul>
+            </div>
+            <div class="code-snippet">
+              <button class="copy-btn" onclick="copyText(this, 'git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P2.git\ncd ISO2-2025-GrupoA05-Testing-P2\ngit checkout develop')">Copy</button>
+git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P2.git
+cd ISO2-2025-GrupoA05-Testing-P2
+git checkout develop
+            </div>
+          </div>
+
+          <div class="task-box step2">
+            <div>
+              <span class="status-badge badge-theory" style="margin-bottom:6px;">Task 2: Theory PDF Design</span>
+              <h4 style="margin:4px 0;">Problem 1: Parking Fee Calculator</h4>
+              <p style="font-size:0.83rem;color:var(--text-secondary);">Analyze Hatim &amp; Felipe's parking code. Compile the 10-Question report including boundary minutes (29, 30, 31, 1440 min).</p>
+              <ul style="font-size:0.8rem;color:var(--text-muted);padding-left:16px;margin:8px 0;">
+                <li>Deliverable: <code>ISO2-2025-GrupoA05-Testing-P1.pdf</code></li>
+                <li>Deadline: <strong>December 05</strong></li>
+              </ul>
+            </div>
+            <div style="background:var(--surface-subtle);padding:10px;border-radius:4px;font-size:0.8rem;color:var(--text-secondary);margin-top:10px;">
+              💡 Work with Ayça to document all 10 questions in a clean LaTeX or Word PDF according to TW.02.01.
+            </div>
+          </div>
+
+          <div class="task-box step3">
+            <div>
+              <span class="status-badge badge-test" style="margin-bottom:6px;">Task 3: Automated Testing</span>
+              <h4 style="margin:4px 0;">Problem 3: Smart Greenhouse Irrigation</h4>
+              <p style="font-size:0.83rem;color:var(--text-secondary);">Implement JUnit 5 tests against Beyza &amp; Berke's greenhouse code using Hatim &amp; Felipe's test designs. Verify &ge;80% coverage.</p>
+              <ul style="font-size:0.8rem;color:var(--text-muted);padding-left:16px;margin:8px 0;">
+                <li>Repository: <code>ISO2-2025-GrupoA05-Testing-P3</code></li>
+                <li>Branch: <strong><code>hotfix</code></strong></li>
+                <li>Deadline: <strong>December 12</strong></li>
+              </ul>
+            </div>
+            <div class="code-snippet">
+              <button class="copy-btn" onclick="copyText(this, 'git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P3.git\ncd ISO2-2025-GrupoA05-Testing-P3\ngit checkout hotfix\nmvn clean test jacoco:report')">Copy</button>
+git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P3.git
+cd ISO2-2025-GrupoA05-Testing-P3
+git checkout hotfix
+mvn clean test jacoco:report
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AYÇA (PAIR 2) -->
+      <div id="persona-ayca" class="persona-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:14px;">
+          <div>
+            <h3 style="font-size:1.15rem;margin:0;color:var(--text-main);">Ayça Beril Gümüş · Pair 2</h3>
+            <p style="font-size:0.85rem;color:var(--text-muted);margin:0;">Partner: Mina Alimohammadi · Workload: 3 Problems (Code P2, Theory P1, Test P3)</p>
+          </div>
+          <span class="status-badge badge-theory">Pair 2 Assignment</span>
+        </div>
+
+        <div class="task-grid">
+          <div class="task-box step1">
+            <div>
+              <span class="status-badge badge-code" style="margin-bottom:6px;">Task 1: Code Implementation</span>
+              <h4 style="margin:4px 0;">Problem 2: University Scholarships</h4>
+              <p style="font-size:0.83rem;color:var(--text-secondary);">Collaborate with Mina to write clean Java domain classes on <code>develop</code> in P2 with proper validation exceptions.</p>
+              <ul style="font-size:0.8rem;color:var(--text-muted);padding-left:16px;margin:8px 0;">
+                <li>Repository: <code>ISO2-2025-GrupoA05-Testing-P2</code></li>
+                <li>Branch: <strong><code>develop</code></strong></li>
+              </ul>
+            </div>
+            <div class="code-snippet">
+              <button class="copy-btn" onclick="copyText(this, 'git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P2.git\ncd ISO2-2025-GrupoA05-Testing-P2\ngit checkout develop')">Copy</button>
+git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P2.git
+cd ISO2-2025-GrupoA05-Testing-P2
+git checkout develop
+            </div>
+          </div>
+
+          <div class="task-box step2">
+            <div>
+              <span class="status-badge badge-theory" style="margin-bottom:6px;">Task 2: Theory PDF Design</span>
+              <h4 style="margin:4px 0;">Problem 1: Parking Fee Calculator</h4>
+              <p style="font-size:0.83rem;color:var(--text-secondary);">Design test vectors for parking duration calculations, multi-day stays, and invalid negative time spans.</p>
+              <ul style="font-size:0.8rem;color:var(--text-muted);padding-left:16px;margin:8px 0;">
+                <li>Deliverable: <code>ISO2-2025-GrupoA05-Testing-P1.pdf</code></li>
+              </ul>
+            </div>
+            <div style="background:var(--surface-subtle);padding:10px;border-radius:4px;font-size:0.8rem;color:var(--text-secondary);margin-top:10px;">
+              💡 Work with Mina to compile the 10 questions into the final PDF deliverable.
+            </div>
+          </div>
+
+          <div class="task-box step3">
+            <div>
+              <span class="status-badge badge-test" style="margin-bottom:6px;">Task 3: Automated Testing</span>
+              <h4 style="margin:4px 0;">Problem 3: Smart Greenhouse Irrigation</h4>
+              <p style="font-size:0.83rem;color:var(--text-secondary);">Write and execute JUnit 5 tests on <code>hotfix</code> covering all watering modes and radiation limits with JaCoCo &ge;80%.</p>
+              <ul style="font-size:0.8rem;color:var(--text-muted);padding-left:16px;margin:8px 0;">
+                <li>Repository: <code>ISO2-2025-GrupoA05-Testing-P3</code></li>
+                <li>Branch: <strong><code>hotfix</code></strong></li>
+              </ul>
+            </div>
+            <div class="code-snippet">
+              <button class="copy-btn" onclick="copyText(this, 'git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P3.git\ncd ISO2-2025-GrupoA05-Testing-P3\ngit checkout hotfix\nmvn clean test jacoco:report')">Copy</button>
+git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P3.git
+cd ISO2-2025-GrupoA05-Testing-P3
+git checkout hotfix
+mvn clean test jacoco:report
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BEYZA & BERKE (PAIR 3) -->
+      <div id="persona-beyza" class="persona-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:14px;">
+          <div>
+            <h3 style="font-size:1.15rem;margin:0;color:var(--text-main);">Beyza Nur Topuz · Pair 3 Lead</h3>
+            <p style="font-size:0.85rem;color:var(--text-muted);margin:0;">Partner: Berke Taha Özdemir · Workload: 3 Problems (Code P3, Theory P2, Test P1)</p>
+          </div>
+          <span class="status-badge badge-test">Pair 3 Assignment</span>
+        </div>
+
+        <div class="task-grid">
+          <div class="task-box step1">
+            <div>
+              <span class="status-badge badge-code" style="margin-bottom:6px;">Task 1: Code Implementation</span>
+              <h4 style="margin:4px 0;">Problem 3: Smart Greenhouse Irrigation</h4>
+              <p style="font-size:0.83rem;color:var(--text-secondary);">Implement greenhouse irrigation controller with moisture thresholds, weather sensors, and solar radiation rules on <code>develop</code>.</p>
+              <ul style="font-size:0.8rem;color:var(--text-muted);padding-left:16px;margin:8px 0;">
+                <li>Repository: <code>ISO2-2025-GrupoA05-Testing-P3</code></li>
+                <li>Branch: <strong><code>develop</code></strong></li>
+                <li>Deadline: <strong>November 28</strong></li>
+              </ul>
+            </div>
+            <div class="code-snippet">
+              <button class="copy-btn" onclick="copyText(this, 'git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P3.git\ncd ISO2-2025-GrupoA05-Testing-P3\ngit checkout develop')">Copy</button>
+git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P3.git
+cd ISO2-2025-GrupoA05-Testing-P3
+git checkout develop
+            </div>
+          </div>
+
+          <div class="task-box step2">
+            <div>
+              <span class="status-badge badge-theory" style="margin-bottom:6px;">Task 2: Theory PDF Design</span>
+              <h4 style="margin:4px 0;">Problem 2: University Scholarships</h4>
+              <p style="font-size:0.83rem;color:var(--text-secondary);">Analyze Mina &amp; Ayça's scholarship code. Design 10-Question report covering income tiers, GPA limits, and multi-condition rules.</p>
+              <ul style="font-size:0.8rem;color:var(--text-muted);padding-left:16px;margin:8px 0;">
+                <li>Deliverable: <code>ISO2-2025-GrupoA05-Testing-P2.pdf</code></li>
+                <li>Deadline: <strong>December 05</strong></li>
+              </ul>
+            </div>
+            <div style="background:var(--surface-subtle);padding:10px;border-radius:4px;font-size:0.8rem;color:var(--text-secondary);margin-top:10px;">
+              💡 Work with Berke to test the 4 scholarship categories against edge boundaries (e.g. GPA 8.49 vs 8.50).
+            </div>
+          </div>
+
+          <div class="task-box step3">
+            <div>
+              <span class="status-badge badge-test" style="margin-bottom:6px;">Task 3: Automated Testing</span>
+              <h4 style="margin:4px 0;">Problem 1: Parking Fee Calculator</h4>
+              <p style="font-size:0.83rem;color:var(--text-secondary);">Implement JUnit 5 tests against Hatim &amp; Felipe's parking code using Mina &amp; Ayça's test suite. Verify &ge;80% coverage.</p>
+              <ul style="font-size:0.8rem;color:var(--text-muted);padding-left:16px;margin:8px 0;">
+                <li>Repository: <code>ISO2-2025-GrupoA05-Testing-P1</code></li>
+                <li>Branch: <strong><code>hotfix</code></strong></li>
+                <li>Deadline: <strong>December 12</strong></li>
+              </ul>
+            </div>
+            <div class="code-snippet">
+              <button class="copy-btn" onclick="copyText(this, 'git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P1.git\ncd ISO2-2025-GrupoA05-Testing-P1\ngit checkout hotfix\nmvn clean test jacoco:report')">Copy</button>
+git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P1.git
+cd ISO2-2025-GrupoA05-Testing-P1
+git checkout hotfix
+mvn clean test jacoco:report
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BERKE (PAIR 3) -->
+      <div id="persona-berke" class="persona-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:14px;">
+          <div>
+            <h3 style="font-size:1.15rem;margin:0;color:var(--text-main);">Berke Taha Özdemir · Pair 3</h3>
+            <p style="font-size:0.85rem;color:var(--text-muted);margin:0;">Partner: Beyza Nur Topuz · Workload: 3 Problems (Code P3, Theory P2, Test P1)</p>
+          </div>
+          <span class="status-badge badge-test">Pair 3 Assignment</span>
+        </div>
+
+        <div class="task-grid">
+          <div class="task-box step1">
+            <div>
+              <span class="status-badge badge-code" style="margin-bottom:6px;">Task 1: Code Implementation</span>
+              <h4 style="margin:4px 0;">Problem 3: Smart Greenhouse Irrigation</h4>
+              <p style="font-size:0.83rem;color:var(--text-secondary);">Collaborate with Beyza to build the domain engine for greenhouse irrigation on <code>develop</code> in P3.</p>
+              <ul style="font-size:0.8rem;color:var(--text-muted);padding-left:16px;margin:8px 0;">
+                <li>Repository: <code>ISO2-2025-GrupoA05-Testing-P3</code></li>
+                <li>Branch: <strong><code>develop</code></strong></li>
+              </ul>
+            </div>
+            <div class="code-snippet">
+              <button class="copy-btn" onclick="copyText(this, 'git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P3.git\ncd ISO2-2025-GrupoA05-Testing-P3\ngit checkout develop')">Copy</button>
+git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P3.git
+cd ISO2-2025-GrupoA05-Testing-P3
+git checkout develop
+            </div>
+          </div>
+
+          <div class="task-box step2">
+            <div>
+              <span class="status-badge badge-theory" style="margin-bottom:6px;">Task 2: Theory PDF Design</span>
+              <h4 style="margin:4px 0;">Problem 2: University Scholarships</h4>
+              <p style="font-size:0.83rem;color:var(--text-secondary);">Formulate Equivalence Classes, Boundary Analysis, and Pairwise PICT sets for the 4 scholarship award types.</p>
+              <ul style="font-size:0.8rem;color:var(--text-muted);padding-left:16px;margin:8px 0;">
+                <li>Deliverable: <code>ISO2-2025-GrupoA05-Testing-P2.pdf</code></li>
+              </ul>
+            </div>
+            <div style="background:var(--surface-subtle);padding:10px;border-radius:4px;font-size:0.8rem;color:var(--text-secondary);margin-top:10px;">
+              💡 Work with Beyza to complete the 10 questions and format the final PDF submission.
+            </div>
+          </div>
+
+          <div class="task-box step3">
+            <div>
+              <span class="status-badge badge-test" style="margin-bottom:6px;">Task 3: Automated Testing</span>
+              <h4 style="margin:4px 0;">Problem 1: Parking Fee Calculator</h4>
+              <p style="font-size:0.83rem;color:var(--text-secondary);">Implement JUnit 5 tests on <code>hotfix</code> verifying parking pricing and exception handling with JaCoCo &ge;80%.</p>
+              <ul style="font-size:0.8rem;color:var(--text-muted);padding-left:16px;margin:8px 0;">
+                <li>Repository: <code>ISO2-2025-GrupoA05-Testing-P1</code></li>
+                <li>Branch: <strong><code>hotfix</code></strong></li>
+              </ul>
+            </div>
+            <div class="code-snippet">
+              <button class="copy-btn" onclick="copyText(this, 'git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P1.git\ncd ISO2-2025-GrupoA05-Testing-P1\ngit checkout hotfix\nmvn clean test jacoco:report')">Copy</button>
+git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P1.git
+cd ISO2-2025-GrupoA05-Testing-P1
+git checkout hotfix
+mvn clean test jacoco:report
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -109,23 +717,23 @@
     <section class="section-card">
       <div class="section-header">
         <div>
-          <h2>The 3 Problem Specifications (ET.02.02, ET.02.03, ET.02.04)</h2>
-          <p>Exact domain logic, inputs, business rules, exceptions, and encapsulation constraints.</p>
+          <h2>The 3 Problem Specifications (Domain Logic &amp; Constraints)</h2>
+          <p>Carefully study the business rules and constraints before writing code or designing test cases.</p>
         </div>
       </div>
 
       <div style="display:flex;flex-direction:column;gap:16px;">
         <!-- Problem 1 -->
-        <div class="panel primary-accent" style="padding:16px 18px;">
+        <div class="panel primary-accent" style="padding:18px;">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-            <h3 style="color:var(--accent);margin:0;">Problem 1: Parking Fee Calculator (ET.02.02)</h3>
+            <h3 style="color:var(--primary);margin:0;font-size:1.05rem;">Problem 1: Parking Fee Calculator (ET.02.02)</h3>
             <span class="badge badge-neutral">Repo: ISO2-2025-GrupoA05-Testing-P1</span>
           </div>
           <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:10px;">
             Calculate total parking stay cost based on entry and exit Date/Time ticket objects.
           </p>
           <ul class="clean-list" style="font-size:0.85rem;color:var(--text-secondary);display:flex;flex-direction:column;gap:6px;">
-            <li><strong>Encapsulation &amp; Validation:</strong> If <code>exitTime &lt; entryTime</code> or if null objects are passed, throw an appropriate exception. Implement validations at constructor level with full encapsulation.</li>
+            <li><strong>Encapsulation &amp; Validation:</strong> If <code>exitTime &lt; entryTime</code> or if null objects are passed, throw an appropriate custom exception. Implement validations at constructor level with full encapsulation.</li>
             <li><strong>Pricing Rules:</strong>
               <div style="padding-left:14px;color:var(--text-muted);margin-top:2px;">
                 &bull; First <strong>30 minutes</strong>: completely free (€0.00).<br>
@@ -133,14 +741,14 @@
                 &bull; Daily ceiling: capped at a strict maximum limit of <strong>€20.00 per day</strong>.
               </div>
             </li>
-            <li><strong>Architecture:</strong> CLI-based presentation component decoupled from domain calculation classes.</li>
+            <li><strong>Architecture:</strong> Domain logic decoupled from UI/CLI.</li>
           </ul>
         </div>
 
         <!-- Problem 2 -->
-        <div class="panel purple-accent" style="padding:16px 18px;">
+        <div class="panel purple-accent" style="padding:18px;">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-            <h3 style="color:#a855f7;margin:0;">Problem 2: University Scholarship Eligibility (ET.02.03)</h3>
+            <h3 style="color:#8b5cf6;margin:0;font-size:1.05rem;">Problem 2: University Scholarship Eligibility (ET.02.03)</h3>
             <span class="badge badge-neutral">Repo: ISO2-2025-GrupoA05-Testing-P2</span>
           </div>
           <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:10px;">
@@ -156,9 +764,9 @@
         </div>
 
         <!-- Problem 3 -->
-        <div class="panel success-accent" style="padding:16px 18px;">
+        <div class="panel success-accent" style="padding:18px;">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-            <h3 style="color:var(--success);margin:0;">Problem 3: Agricultural Smart Greenhouse Irrigation (ET.02.04)</h3>
+            <h3 style="color:var(--success);margin:0;font-size:1.05rem;">Problem 3: Agricultural Smart Greenhouse Irrigation (ET.02.04)</h3>
             <span class="badge badge-neutral">Repo: ISO2-2025-GrupoA05-Testing-P3</span>
           </div>
           <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:10px;">
@@ -186,81 +794,121 @@
       </div>
 
       <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:12px;">
-        <div style="background:var(--bg-secondary);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
-          <strong>1. Pseudocode:</strong> Write the clean algorithmic pseudocode for the identified method(s).
+        <div style="background:var(--bg-secondary);padding:14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+          <strong>1. Pseudocode:</strong> Clean algorithmic pseudocode for the identified method(s).
         </div>
-        <div style="background:var(--bg-secondary);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+        <div style="background:var(--bg-secondary);padding:14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
           <strong>2. Test Units:</strong> Formally identify all test units (classes and methods under test).
         </div>
-        <div style="background:var(--bg-secondary);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+        <div style="background:var(--bg-secondary);padding:14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
           <strong>3. Test Variables:</strong> Identify and categorize all input parameters, states, and return variables.
         </div>
-        <div style="background:var(--bg-secondary);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+        <div style="background:var(--bg-secondary);padding:14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
           <strong>4. Test Value Partitions:</strong> Tabulate test values using Equivalence Partitioning (EP), Boundary Value Analysis (BVA), and Error Guessing.
         </div>
-        <div style="background:var(--bg-secondary);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
-          <strong>5. Combinatorial Maximum:</strong> Calculate theoretical cartesian product of all identified test values.
+        <div style="background:var(--bg-secondary);padding:14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+          <strong>5. Combinatorial Maximum:</strong> Calculate theoretical Cartesian product of all identified test values.
         </div>
-        <div style="background:var(--bg-secondary);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+        <div style="background:var(--bg-secondary);padding:14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
           <strong>6. Each-Choice Criteria:</strong> Define the minimal test suite where every valid and invalid value is executed at least once.
         </div>
-        <div style="background:var(--bg-secondary);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
-          <strong>7. Pairwise Testing (PICT):</strong> Generate pairwise 2-way combinatorial test sets (verified using Microsoft PICT tool).
+        <div style="background:var(--bg-secondary);padding:14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+          <strong>7. Pairwise Testing (PICT):</strong> Generate pairwise 2-way combinatorial test sets (using Microsoft PICT tool).
         </div>
-        <div style="background:var(--bg-secondary);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+        <div style="background:var(--bg-secondary);padding:14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
           <strong>8. Decision Coverage:</strong> Propose test suites guaranteeing 100% decision/branch coverage on all conditional branches.
         </div>
-        <div style="background:var(--bg-secondary);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+        <div style="background:var(--bg-secondary);padding:14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
           <strong>9. MC/DC Coverage:</strong> Propose Modified Condition/Decision Coverage test vectors proving independence of each atomic predicate.
         </div>
-        <div style="background:var(--bg-secondary);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+        <div style="background:var(--bg-secondary);padding:14px;border-radius:var(--radius-sm);border:1px solid var(--border);">
           <strong>10. Comparative Evaluation:</strong> Analytical commentary comparing suite sizes, test effectiveness, and code design influence on testability.
         </div>
       </div>
     </section>
 
-    <!-- STEP-BY-STEP GETTING STARTED CHECKLIST -->
+    <!-- TEAM ANNOUNCEMENT TEMPLATE -->
     <section class="section-card">
       <div class="section-header">
         <div>
-          <h2>Step-by-Step Action Plan: How Team A.05 Gets Started</h2>
-          <p>Follow this exact sequence to avoid blocking teammates across the rotational pipeline.</p>
+          <h2>Ready-to-Send WhatsApp / Teams Announcement</h2>
+          <p>Copy this message and send it to the team group so everyone is aligned immediately!</p>
         </div>
+        <button class="btn btn-primary" onclick="copyAnnouncement()">📋 Copy Full Announcement</button>
       </div>
 
-      <div class="panel success-accent" style="padding:16px 18px;">
-        <ol class="clean-list" style="display:flex;flex-direction:column;gap:12px;font-size:0.88rem;color:var(--text-secondary);padding-left:18px;">
-          <li>
-            <strong>Step 1 — Create the 3 GitHub Repositories (Coordinator):</strong>
-            Create <code>ISO2-2025-GrupoA05-Testing-P1</code>, <code>...-P2</code>, and <code>...-P3</code> on GitHub under <code>hatimbenayad</code>. Grant write access to all 6 teammates and practical professors.
-          </li>
-          <li>
-            <strong>Step 2 — Implement Java Programs on <code>develop</code> (Deadline: Nov 28):</strong>
-            Each pair initializes their Maven project on <code>develop</code> with clean SOLID architecture (P1 does Parking, P2 does Scholarships, P3 does Irrigation).
-          </li>
-          <li>
-            <strong>Step 3 — Link Repos in Main Project Wiki (Mandatory Constraint):</strong>
-            In our main repository (<code>2026-ISO2-A.05</code>), create a Wiki section titled <strong>"Testing Part"</strong> containing direct links to all three testing repositories.
-          </li>
-          <li>
-            <strong>Step 4 — Theory Test Case Design (Deadline: Dec 05):</strong>
-            The second pair analyzes the code, answers questions 1–10, and compiles the final <code>ISO2-2025-GrupoA05-Testing-PM.pdf</code> report.
-          </li>
-          <li>
-            <strong>Step 5 — Laboratory JUnit 6 Implementation on <code>hotfix</code> (Deadline: Dec 12):</strong>
-            The third pair checks out a dedicated <strong><code>hotfix</code></strong> branch from <code>develop</code>, implements tests in <code>src/test/java</code>, and runs <code>mvn verify</code> ensuring <strong>&ge;80% statement coverage</strong> via JaCoCo.
-          </li>
-          <li>
-            <strong>Step 6 — Final Submission (Tuesday 15/12/2026):</strong>
-            Coordinator packages the 3 PDF reports into a single ZIP file and uploads it to Moodle/Virtual Campus.
-          </li>
-        </ol>
-      </div>
+      <div style="background:var(--surface-subtle);padding:18px;border-radius:var(--radius-sm);border:1px solid var(--border);font-family:var(--font-sans);font-size:0.9rem;line-height:1.6;color:var(--text-main);white-space:pre-wrap;" id="announcement-text">Hey team! 👋
+Here is the official breakdown for Delivery 2 (Theoretical Exercise 2 & Testing Practicum, due Dec 15).
+Following our discussion and confirmation with Professor Ismael on Outlook, we have 3 official pairs:
+• Pair 1: Hatim & Felipe
+• Pair 2: Mina & Ayça
+• Pair 3: Beyza & Berke
+
+To satisfy the professor's strict rule that *developers must NOT test their own code*, we rotate through 3 separate repositories:
+
+1️⃣ Problem 1 (Parking Fee):
+  - Code (develop branch): Pair 1 (Hatim & Felipe)
+  - Theory PDF (10 Qs): Pair 2 (Mina & Ayça)
+  - JUnit 5 Tests (hotfix branch, ≥80% JaCoCo): Pair 3 (Beyza & Berke)
+
+2️⃣ Problem 2 (Scholarships):
+  - Code (develop branch): Pair 2 (Mina & Ayça)
+  - Theory PDF (10 Qs): Pair 3 (Beyza & Berke)
+  - JUnit 5 Tests (hotfix branch, ≥80% JaCoCo): Pair 1 (Hatim & Felipe)
+
+3️⃣ Problem 3 (Greenhouse):
+  - Code (develop branch): Pair 3 (Beyza & Berke)
+  - Theory PDF (10 Qs): Pair 1 (Hatim & Felipe)
+  - JUnit 5 Tests (hotfix branch, ≥80% JaCoCo): Pair 2 (Mina & Ayça)
+
+All 3 repos are live on GitHub with Maven & JaCoCo ≥80% pre-configured.
+You can view your exact personal assignments, clone commands, and step-by-step deadlines on our Eraiso portal:
+👉 https://hatimbenayad.github.io/Eraiso/second-delivery-kickoff.html
+
+Let's do this smoothly! 🚀</div>
     </section>
   </main>
 
   <div id="site-footer"></div>
-  <script src="data.js?v=4"></script>
-  <script src="app.js?v=4"></script>
+  <script src="data.js?v=5"></script>
+  <script src="app.js?v=5"></script>
+  <script>
+    function selectPersona(id) {
+      document.querySelectorAll('.persona-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.persona-card').forEach(c => c.classList.remove('active'));
+      
+      const targetCard = document.getElementById('persona-' + id);
+      if (targetCard) {
+        targetCard.classList.add('active');
+      }
+      
+      // highlight button
+      const buttons = document.querySelectorAll('.persona-btn');
+      buttons.forEach(b => {
+        if (b.getAttribute('onclick') && b.getAttribute('onclick').includes(id)) {
+          b.classList.add('active');
+        }
+      });
+    }
+
+    function copyText(btn, text) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => {
+          const old = btn.textContent;
+          btn.textContent = 'Copied!';
+          setTimeout(() => btn.textContent = old, 1800);
+        });
+      }
+    }
+
+    function copyAnnouncement() {
+      const text = document.getElementById('announcement-text').innerText;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => {
+          alert('Announcement copied to clipboard! You can paste it into WhatsApp or Teams.');
+        });
+      }
+    }
+  </script>
 </body>
 </html>

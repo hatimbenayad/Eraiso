@@ -281,269 +281,524 @@
       </div>
     </section>
 
-    <!-- ITERATION 1: IMPLEMENTATION SPRINT & AI AGENT PROMPTS -->
+    <!-- ITERATION 1: BALANCED 50/50 WORKLOAD & AI PROMPTS -->
     <section class="section-card" id="iteration-1">
       <div class="section-header">
         <div>
-          <h2>Iteration 1: Implementation Sprints &amp; AI Agent Prompts (Deadline: Nov 28)</h2>
+          <h2>Iteration 1: Equal Pair Workload &amp; AI Agent Prompts (Deadline: Nov 28)</h2>
           <p>
-            Copy and paste these exact prompts directly into <strong>Cursor, Claude, Antigravity, or Copilot</strong>. Each prompt instructs the AI to clone the repo, checkout <code>develop</code>, scaffold all domain classes and validations, verify <code>mvn clean compile</code>, and push to GitHub.
+            To guarantee equal individual grades and commit history, <strong>every member has their own assigned GitHub Issue, dedicated branch, and task</strong>. Member A builds the domain entity/validations, and Member B builds the business engine/CLI.
           </p>
         </div>
-        <span class="badge badge-done">Sprint 1 Ready</span>
+        <span class="badge badge-done">2 Issues Per Repo (6 Total)</span>
       </div>
 
-      <!-- CRITICAL WARNING -->
-      <div class="panel warning-accent" style="padding:14px 18px;margin-bottom:22px;border-left:4px solid var(--warning);background:var(--warning-soft);">
-        <strong style="color:var(--warning);font-size:0.95rem;">⚠️ Critical Rule for Iteration 1:</strong>
-        <p style="font-size:0.88rem;color:var(--text-secondary);margin:4px 0 0 0;">
-          Do <strong>NOT</strong> write or commit any JUnit test cases during Iteration 1! To adhere to the professor's independent verification standard (<em>"Developers must not test their own code"</em>), each pair only develops domain logic on branch <code>develop</code>. Test suites will be designed in Iteration 2 (PDF) and coded in Iteration 3 (JUnit on branch <code>hotfix</code>) by the cross-testing pairs!
-        </p>
+      <!-- WORKLOAD & COLLABORATION STRATEGY -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:14px;margin-bottom:20px;">
+        <div style="background:var(--surface-subtle);padding:14px 16px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+          <strong style="color:var(--primary);font-size:0.92rem;">👤 Member A (Domain &amp; Validations Architect):</strong>
+          <p style="font-size:0.84rem;color:var(--text-secondary);margin:4px 0 0 0;">
+            Implements the primary entity model, constructor boundary validations, and custom exceptions on <code>feat/issue-1-...</code>. Opens PR #1 to <code>develop</code>.
+          </p>
+        </div>
+        <div style="background:var(--surface-subtle);padding:14px 16px;border-radius:var(--radius-sm);border:1px solid var(--border);">
+          <strong style="color:var(--accent);font-size:0.92rem;">👤 Member B (Business Engine &amp; CLI Architect):</strong>
+          <p style="font-size:0.84rem;color:var(--text-secondary);margin:4px 0 0 0;">
+            Implements the evaluation/calculation engine and the decoupled console interface on <code>feat/issue-2-...</code>. Pulls updated <code>develop</code> and opens PR #2.
+          </p>
+        </div>
       </div>
 
-      <!-- 3 PROMPT BOXES -->
-      <div style="display:flex;flex-direction:column;gap:26px;">
+      <!-- 3 PROBLEM REPOSITORIES (DUAL MEMBER CARDS) -->
+      <div style="display:flex;flex-direction:column;gap:32px;">
 
-        <!-- BOX 1: PAIR 1 (HATIM & FELIPE) -->
-        <div class="panel primary-accent" style="padding:20px;border-radius:var(--radius-md);border:1px solid var(--border);border-top:5px solid var(--primary);background:var(--surface);">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+        <!-- ==================== PROBLEM 1 (PAIR 1: HATIM & FELIPE) ==================== -->
+        <div style="border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;background:var(--surface);">
+          <div style="background:var(--surface-subtle);padding:16px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
             <div>
-              <span class="status-badge badge-code" style="margin-bottom:6px;">Pair 1 Assignment</span>
-              <h3 style="font-size:1.15rem;margin:2px 0;color:var(--text-main);">Problem 1: Parking Fee Calculator (ET.02.02)</h3>
-              <p style="font-size:0.85rem;color:var(--text-muted);margin:0;">
-                Assignees: <strong>Hatim Ben Ayad</strong> &amp; <strong>Felipe Dionisio</strong> &bull; Repo: <a href="https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P1" target="_blank" style="color:var(--primary);font-family:var(--font-mono);">ISO2-2025-GrupoA05-Testing-P1</a> &bull; Target Branch: <code>develop</code>
+              <span class="status-badge badge-code">Repository 1 · Pair 1</span>
+              <h3 style="margin:4px 0 0 0;font-size:1.15rem;color:var(--text-main);">Problem 1: Parking Fee Calculator (ET.02.02)</h3>
+              <p style="margin:0;font-size:0.83rem;color:var(--text-muted);">
+                GitHub Repo: <a href="https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P1" target="_blank" style="color:var(--primary);font-family:var(--font-mono);">ISO2-2025-GrupoA05-Testing-P1 ↗</a> &bull; Target Branch: <code>develop</code>
               </p>
             </div>
-            <button class="btn btn-primary" onclick="copyAiPrompt('prompt-p1', this)">📋 Copy Pair 1 Prompt</button>
+            <span class="badge badge-neutral">Hatim Ben Ayad &amp; Felipe Dionisio</span>
           </div>
 
-          <p style="font-size:0.86rem;color:var(--text-secondary);margin-bottom:10px;">
-            <strong>What this prompt builds:</strong> <code>ParkingTicket</code> (encapsulated entry/exit validation), <code>ParkingCalculator</code> (30-min free tier, €0.05/min, €20/day maximum ceiling), custom exceptions, and decoupled <code>ParkingCLI</code> console application.
-          </p>
-
-          <div class="code-snippet" style="max-height:300px;overflow-y:auto;position:relative;">
-            <button class="copy-btn" onclick="copyAiPrompt('prompt-p1', this)">Copy</button>
-            <pre id="prompt-p1" style="margin:0;font-family:var(--font-mono);font-size:0.8rem;white-space:pre-wrap;color:#f8fafc;">You are an expert Java 21 software engineer. We are developing the core domain logic for Problem 1 (Parking Fee Calculator, ET.02.02) for UCLM Software Engineering II, Delivery 2.
-
+          <div style="padding:20px;display:grid;grid-template-columns:repeat(auto-fit, minmax(340px, 1fr));gap:20px;">
+            <!-- HATIM CARD -->
+            <div style="border:1px solid var(--border);border-top:4px solid var(--primary);border-radius:var(--radius-sm);padding:16px;background:var(--bg);">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+                <div>
+                  <h4 style="margin:0;font-size:1rem;color:var(--text-main);">Hatim Ben Ayad</h4>
+                  <small style="color:var(--primary);font-weight:600;">Issue #1 · Domain &amp; Validations Architect</small>
+                </div>
+                <button class="btn btn-primary" style="font-size:0.75rem;padding:4px 8px;" onclick="copyAiPrompt('prompt-p1-hatim', this)">📋 Copy Hatim's Prompt</button>
+              </div>
+              <ul style="font-size:0.8rem;color:var(--text-secondary);padding-left:16px;margin:8px 0;">
+                <li><strong>Branch:</strong> <code>feat/issue-1-parking-ticket-model</code></li>
+                <li><strong>Classes:</strong> <code>ParkingTicket.java</code>, <code>InvalidParkingStayException</code>, <code>NullArgumentException</code></li>
+                <li><strong>Validations:</strong> Null checks, exit before entry check, duration in minutes.</li>
+              </ul>
+              <div class="code-snippet" style="max-height:220px;overflow-y:auto;position:relative;">
+                <button class="copy-btn" onclick="copyAiPrompt('prompt-p1-hatim', this)">Copy</button>
+                <pre id="prompt-p1-hatim" style="margin:0;font-family:var(--font-mono);font-size:0.76rem;white-space:pre-wrap;color:#f8fafc;">You are an expert Java 21 software engineer working on Problem 1 (Parking Fee Calculator, ET.02.02) for UCLM Software Engineering II, Delivery 2.
 Repository: https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P1.git
-Branch: develop
-Pair: Pair 1 (Hatim Ben Ayad & Felipe Dionisio)
+Assignee: Hatim Ben Ayad (Pair 1 Lead)
+GitHub Issue: #1 - feat(domain): ParkingTicket entity, constructor validations, and custom stay exceptions
 
-CRITICAL INSTRUCTION: Implement ONLY the domain model, validations, custom exceptions, and decoupled CLI on the 'develop' branch. Do NOT write any JUnit test cases (tests are strictly reserved for Iteration 3 on the 'hotfix' branch by Pair 3).
+CRITICAL GOAL: Implement ONLY the domain entity, constructor boundary validations, and custom exceptions on a dedicated feature branch. Do NOT implement test cases.
 
-Please execute the following steps in sequence:
+Steps to execute:
 
-1. Clone and switch to develop branch:
+1. Clone and branch off develop:
    git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P1.git
    cd ISO2-2025-GrupoA05-Testing-P1
    git checkout develop
+   git checkout -b feat/issue-1-parking-ticket-model
 
-2. Implement Java 21 Classes under package `es.uclm.esi.iso2.parking`:
-   a) `ParkingTicket.java`:
-      - Fields: `LocalDateTime entryTime`, `LocalDateTime exitTime` (immutable/encapsulated).
+2. Implement the following Java 21 files under package `es.uclm.esi.iso2.parking`:
+
+   a) `InvalidParkingStayException.java`:
+      - Unchecked exception extending `IllegalArgumentException`.
+      - Constructor accepting message string.
+
+   b) `NullArgumentException.java`:
+      - Unchecked exception extending `IllegalArgumentException`.
+      - Constructor accepting message string.
+
+   c) `ParkingTicket.java`:
+      - Private final fields:
+        * `LocalDateTime entryTime`
+        * `LocalDateTime exitTime`
       - Constructor `ParkingTicket(LocalDateTime entryTime, LocalDateTime exitTime)`:
-        * If either parameter is null, throw `NullArgumentException("Entry and exit times must not be null")`.
-        * If `exitTime.isBefore(entryTime)`, throw `InvalidParkingStayException("Exit time cannot be earlier than entry time")`.
-      - Getters with proper encapsulation.
-      - Helper method: `long getDurationInMinutes()` calculating minutes between entry and exit.
-
-   b) `ParkingCalculator.java`:
-      - Method: `public BigDecimal calculateTotalCost(ParkingTicket ticket)`:
-        * Null ticket validation (throws NullArgumentException).
-        * Duration calculation:
-          - If duration <= 30 minutes: Cost is €0.00.
-          - If duration > 30 minutes:
-            Calculate days (24-hour periods) and remaining minutes.
-            Each full 24-hour period (1440 min) is charged up to the daily maximum ceiling of €20.00.
-            For any partial day: minute 31 onward charged at €0.05 per minute (i.e. €0.05 * (minutes - 30)), capped at the maximum daily limit of €20.00.
-            Total cost = (full_days * 20.00) + min(partial_day_cost, 20.00), rounded to 2 decimal places.
-      - Method: `public BigDecimal calculateCost(LocalDateTime entry, LocalDateTime exit)` overload that constructs a ParkingTicket.
-
-   c) Exceptions:
-      - `InvalidParkingStayException.java`: unchecked exception extending `IllegalArgumentException`.
-      - `NullArgumentException.java`: unchecked exception extending `IllegalArgumentException`.
-
-   d) Decoupled CLI Presentation under `es.uclm.esi.iso2.parking.cli`:
-      - `ParkingCLI.java`: A command-line component that reads user console input (entry date/time `yyyy-MM-dd HH:mm` and exit date/time), calls `ParkingCalculator`, and prints the itemized stay duration and total cost, catching exceptions gracefully. Domain logic MUST NOT depend on this CLI class (loose coupling).
+        * If `entryTime == null || exitTime == null`: throw new `NullArgumentException("Entry and exit times must not be null")`.
+        * If `exitTime.isBefore(entryTime)`: throw new `InvalidParkingStayException("Exit time (" + exitTime + ") cannot be earlier than entry time (" + entryTime + ")")`.
+      - Getter methods:
+        * `public LocalDateTime getEntryTime()`
+        * `public LocalDateTime getExitTime()`
+      - Utility calculation method:
+        * `public long getDurationInMinutes()`: returns `java.time.temporal.ChronoUnit.MINUTES.between(entryTime, exitTime)`.
+      - Override `toString()`, `equals()`, and `hashCode()` with clean formatting.
 
 3. Verify compilation:
    mvn clean compile
 
-4. Commit and push to origin develop:
+4. Commit and push feature branch:
    git add src/
-   git commit -m "feat(parking): implement ParkingTicket, ParkingCalculator, domain exceptions, and decoupled CLI (closes Iteration 1)"
-   git push origin develop</pre>
+   git commit -m "feat(parking): implement ParkingTicket domain model and stay validation exceptions (closes #1)"
+   git push -u origin feat/issue-1-parking-ticket-model
+
+5. Create Pull Request on GitHub:
+   Open PR from `feat/issue-1-parking-ticket-model` into `develop` titled "feat(domain): ParkingTicket entity and stay validation exceptions (#1)" and merge it into develop.</pre>
+              </div>
+            </div>
+
+            <!-- FELIPE CARD -->
+            <div style="border:1px solid var(--border);border-top:4px solid var(--accent);border-radius:var(--radius-sm);padding:16px;background:var(--bg);">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+                <div>
+                  <h4 style="margin:0;font-size:1rem;color:var(--text-main);">Felipe Dionisio</h4>
+                  <small style="color:var(--accent);font-weight:600;">Issue #2 · Pricing Engine &amp; CLI Architect</small>
+                </div>
+                <button class="btn btn-primary" style="font-size:0.75rem;padding:4px 8px;background:var(--accent);border-color:var(--accent);" onclick="copyAiPrompt('prompt-p1-felipe', this)">📋 Copy Felipe's Prompt</button>
+              </div>
+              <ul style="font-size:0.8rem;color:var(--text-secondary);padding-left:16px;margin:8px 0;">
+                <li><strong>Branch:</strong> <code>feat/issue-2-parking-calculator-cli</code></li>
+                <li><strong>Classes:</strong> <code>ParkingCalculator.java</code>, <code>ParkingCLI.java</code></li>
+                <li><strong>Rules:</strong> 30 min free, €0.05/min, €20/day maximum ceiling, decoupled CLI runner.</li>
+              </ul>
+              <div class="code-snippet" style="max-height:220px;overflow-y:auto;position:relative;">
+                <button class="copy-btn" onclick="copyAiPrompt('prompt-p1-felipe', this)">Copy</button>
+                <pre id="prompt-p1-felipe" style="margin:0;font-family:var(--font-mono);font-size:0.76rem;white-space:pre-wrap;color:#f8fafc;">You are an expert Java 21 software engineer working on Problem 1 (Parking Fee Calculator, ET.02.02) for UCLM Software Engineering II, Delivery 2.
+Repository: https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P1.git
+Assignee: Felipe Dionisio (Pair 1 Co-Lead)
+GitHub Issue: #2 - feat(calc-cli): ParkingCalculator pricing engine (€20/day cap) and decoupled console CLI
+
+PREREQUISITE: Hatim's ParkingTicket and exceptions must be present on `develop`.
+CRITICAL GOAL: Implement the pricing calculation algorithm (€0.05/min, 30m free, €20.00/day maximum ceiling) and a decoupled CLI presentation layer. Do NOT implement test cases.
+
+Steps to execute:
+
+1. Fetch latest develop and create your feature branch:
+   git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P1.git
+   cd ISO2-2025-GrupoA05-Testing-P1
+   git checkout develop
+   git pull origin develop
+   git checkout -b feat/issue-2-parking-calculator-cli
+
+2. Implement the following Java 21 files:
+
+   a) In package `es.uclm.esi.iso2.parking`:
+      `ParkingCalculator.java`:
+      - Constants:
+        * `FREE_TIER_MINUTES = 30`
+        * `RATE_PER_MINUTE = new BigDecimal("0.05")`
+        * `DAILY_MAX_CEILING = new BigDecimal("20.00")`
+        * `MINUTES_PER_DAY = 1440` (24 hours * 60)
+      - Method `public BigDecimal calculateTotalCost(ParkingTicket ticket)`:
+        * If `ticket == null`, throw `NullArgumentException("Parking ticket cannot be null")`.
+        * `long totalMinutes = ticket.getDurationInMinutes()`.
+        * If `totalMinutes <= FREE_TIER_MINUTES`: return `BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP)`.
+        * If stay spans multiple days:
+          - `long fullDays = totalMinutes / MINUTES_PER_DAY`.
+          - `long remainingMinutes = totalMinutes % MINUTES_PER_DAY`.
+          - `BigDecimal fullDaysCost = DAILY_MAX_CEILING.multiply(BigDecimal.valueOf(fullDays))`.
+          - For remainingMinutes: if remainingMinutes <= FREE_TIER_MINUTES: partialCost = ZERO. Otherwise partialCost = min(RATE_PER_MINUTE * (remainingMinutes - 30), DAILY_MAX_CEILING).
+          - Return `fullDaysCost.add(partialCost).setScale(2, RoundingMode.HALF_UP)`.
+      - Convenience overload:
+        * `public BigDecimal calculateTotalCost(LocalDateTime entry, LocalDateTime exit)`: creates new ParkingTicket(entry, exit) and delegates.
+
+   b) In package `es.uclm.esi.iso2.parking.cli`:
+      `ParkingCLI.java`:
+      - Decoupled console runner with `public static void main(String[] args)`:
+      - Reads `yyyy-MM-dd HH:mm` entry and exit times from `Scanner(System.in)`.
+      - Instantiates `ParkingCalculator`, prints duration in minutes/days, itemized bill, and total cost in EUR.
+      - Gracefully catches `NullArgumentException`, `InvalidParkingStayException`, and `DateTimeParseException`, outputting clean error messages to `System.err`.
+
+3. Verify compilation:
+   mvn clean compile
+
+4. Commit and push feature branch:
+   git add src/
+   git commit -m "feat(parking): implement ParkingCalculator pricing engine and decoupled CLI (closes #2)"
+   git push -u origin feat/issue-2-parking-calculator-cli
+
+5. Create Pull Request on GitHub:
+   Open PR from `feat/issue-2-parking-calculator-cli` into `develop` titled "feat(calc-cli): ParkingCalculator pricing engine and decoupled CLI (#2)" and merge it into develop.</pre>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- BOX 2: PAIR 2 (MINA & AYÇA) -->
-        <div class="panel purple-accent" style="padding:20px;border-radius:var(--radius-md);border:1px solid var(--border);border-top:5px solid #8b5cf6;background:var(--surface);">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+        <!-- ==================== PROBLEM 2 (PAIR 2: MINA & AYÇA) ==================== -->
+        <div style="border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;background:var(--surface);">
+          <div style="background:var(--surface-subtle);padding:16px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
             <div>
-              <span class="status-badge badge-theory" style="margin-bottom:6px;">Pair 2 Assignment</span>
-              <h3 style="font-size:1.15rem;margin:2px 0;color:var(--text-main);">Problem 2: University Scholarships Eligibility (ET.02.03)</h3>
-              <p style="font-size:0.85rem;color:var(--text-muted);margin:0;">
-                Assignees: <strong>Mina Alimohammadi</strong> &amp; <strong>Ayça Beril Gümüş</strong> &bull; Repo: <a href="https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P2" target="_blank" style="color:#8b5cf6;font-family:var(--font-mono);">ISO2-2025-GrupoA05-Testing-P2</a> &bull; Target Branch: <code>develop</code>
+              <span class="status-badge badge-theory">Repository 2 · Pair 2</span>
+              <h3 style="margin:4px 0 0 0;font-size:1.15rem;color:var(--text-main);">Problem 2: University Scholarships Eligibility (ET.02.03)</h3>
+              <p style="margin:0;font-size:0.83rem;color:var(--text-muted);">
+                GitHub Repo: <a href="https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P2" target="_blank" style="color:#8b5cf6;font-family:var(--font-mono);">ISO2-2025-GrupoA05-Testing-P2 ↗</a> &bull; Target Branch: <code>develop</code>
               </p>
             </div>
-            <button class="btn btn-primary" style="background:#8b5cf6;border-color:#8b5cf6;" onclick="copyAiPrompt('prompt-p2', this)">📋 Copy Pair 2 Prompt</button>
+            <span class="badge badge-neutral">Mina Alimohammadi &amp; Ayça Beril Gümüş</span>
           </div>
 
-          <p style="font-size:0.86rem;color:var(--text-secondary);margin-bottom:10px;">
-            <strong>What this prompt builds:</strong> <code>StudentProfile</code> (validations for GPA 0-10, income, distance, disability 0-100%, siblings), <code>ScholarshipCategory</code> enum, <code>ScholarshipEvaluator</code> (zero-ambiguity rules for Excellence, Residence, Large Family, Inclusion), and decoupled <code>ScholarshipCLI</code>.
-          </p>
-
-          <div class="code-snippet" style="max-height:300px;overflow-y:auto;position:relative;">
-            <button class="copy-btn" onclick="copyAiPrompt('prompt-p2', this)">Copy</button>
-            <pre id="prompt-p2" style="margin:0;font-family:var(--font-mono);font-size:0.8rem;white-space:pre-wrap;color:#f8fafc;">You are an expert Java 21 software engineer. We are developing the core domain logic for Problem 2 (University Scholarships Eligibility, ET.02.03) for UCLM Software Engineering II, Delivery 2.
-
+          <div style="padding:20px;display:grid;grid-template-columns:repeat(auto-fit, minmax(340px, 1fr));gap:20px;">
+            <!-- MINA CARD -->
+            <div style="border:1px solid var(--border);border-top:4px solid #8b5cf6;border-radius:var(--radius-sm);padding:16px;background:var(--bg);">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+                <div>
+                  <h4 style="margin:0;font-size:1rem;color:var(--text-main);">Mina Alimohammadi</h4>
+                  <small style="color:#8b5cf6;font-weight:600;">Issue #1 · Student Model &amp; Enum Architect</small>
+                </div>
+                <button class="btn btn-primary" style="font-size:0.75rem;padding:4px 8px;background:#8b5cf6;border-color:#8b5cf6;" onclick="copyAiPrompt('prompt-p2-mina', this)">📋 Copy Mina's Prompt</button>
+              </div>
+              <ul style="font-size:0.8rem;color:var(--text-secondary);padding-left:16px;margin:8px 0;">
+                <li><strong>Branch:</strong> <code>feat/issue-1-student-profile-model</code></li>
+                <li><strong>Classes:</strong> <code>StudentProfile.java</code>, <code>ScholarshipCategory.java</code>, <code>InvalidStudentProfileException</code></li>
+                <li><strong>Validations:</strong> GPA [0-10], income >= 0, distance >= 0, disability [0-100%], siblings >= 0.</li>
+              </ul>
+              <div class="code-snippet" style="max-height:220px;overflow-y:auto;position:relative;">
+                <button class="copy-btn" onclick="copyAiPrompt('prompt-p2-mina', this)">Copy</button>
+                <pre id="prompt-p2-mina" style="margin:0;font-family:var(--font-mono);font-size:0.76rem;white-space:pre-wrap;color:#f8fafc;">You are an expert Java 21 software engineer working on Problem 2 (University Scholarships Eligibility, ET.02.03) for UCLM Software Engineering II, Delivery 2.
 Repository: https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P2.git
-Branch: develop
-Pair: Pair 2 (Mina Alimohammadi & Ayça Beril Gümüş)
+Assignee: Mina Alimohammadi (Pair 2 Lead)
+GitHub Issue: #1 - feat(domain): StudentProfile entity, constructor boundary validations, and ScholarshipCategory enum
 
-CRITICAL INSTRUCTION: Implement ONLY the domain model, validations, custom exceptions, and decoupled CLI on the 'develop' branch. Do NOT write any JUnit test cases (tests are strictly reserved for Iteration 3 on the 'hotfix' branch by Pair 1).
+CRITICAL GOAL: Implement ONLY the domain entity, constructor boundary validations, and category enum on a dedicated feature branch. Do NOT implement test cases.
 
-Please execute the following steps in sequence:
+Steps to execute:
 
-1. Clone and switch to develop branch:
+1. Clone and branch off develop:
    git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P2.git
    cd ISO2-2025-GrupoA05-Testing-P2
    git checkout develop
+   git checkout -b feat/issue-1-student-profile-model
 
-2. Implement Java 21 Classes under package `es.uclm.esi.iso2.scholarship`:
-   a) `StudentProfile.java`:
-      - Fields (encapsulated):
-        * `double gpa` (Academic GPA from 0.0 to 10.0)
-        * `BigDecimal familyIncome` (Annual family income in Euros)
-        * `double campusDistanceKm` (Distance in km)
-        * `double disabilityPercentage` (Degree of disability from 0.0 to 100.0)
-        * `int numberOfSiblings` (Number of siblings >= 0)
-      - Constructor with strict domain validations:
-        * GPA < 0.0 or GPA > 10.0: throw `InvalidStudentProfileException("GPA must be between 0.0 and 10.0")`.
-        * familyIncome is null or < 0: throw `InvalidStudentProfileException("Family income must be non-negative")`.
-        * campusDistanceKm < 0.0: throw `InvalidStudentProfileException("Distance must be non-negative")`.
-        * disabilityPercentage < 0.0 or > 100.0: throw `InvalidStudentProfileException("Disability must be between 0% and 100%")`.
-        * numberOfSiblings < 0: throw `InvalidStudentProfileException("Siblings count cannot be negative")`.
-      - Getters with full encapsulation.
+2. Implement the following Java 21 files under package `es.uclm.esi.iso2.scholarship`:
+
+   a) `InvalidStudentProfileException.java`:
+      - Unchecked exception extending `IllegalArgumentException`.
+      - Constructor accepting message string.
 
    b) `ScholarshipCategory.java` (Enum):
-      - Values:
-        * `EXCELLENCE` ("Excellence Scholarship: Full tuition waiver + €1,000 stipend")
-        * `RESIDENCE` ("Residence Scholarship: Full tuition waiver + housing allowance")
-        * `LARGE_FAMILY` ("Large Family Scholarship: Full tuition waiver")
-        * `INCLUSION` ("Inclusion Scholarship: Full tuition waiver + assistive technology funding")
-        * `NONE` ("No scholarship awarded")
+      - Enum values with `name`, `description`, and `awardAmountDescription`:
+        * `EXCELLENCE` ("Excellence Scholarship", "Full tuition waiver + €1,000 stipend")
+        * `RESIDENCE` ("Residence Scholarship", "Full tuition waiver + housing allowance")
+        * `LARGE_FAMILY` ("Large Family Scholarship", "Full tuition waiver")
+        * `INCLUSION` ("Inclusion Scholarship", "Full tuition waiver + assistive technology funding")
+        * `NONE` ("No Scholarship", "Student does not meet eligibility criteria")
 
-   c) `ScholarshipEvaluator.java`:
-      - Method: `public ScholarshipCategory evaluateScholarship(StudentProfile student)`:
-        * Zero-Ambiguity Rule: No student may receive conflicting awards. Evaluates rules with documented priority:
-          1. Excellence: GPA >= 8.5 AND familyIncome < €30,000 -> EXCELLENCE.
-          2. Inclusion: disabilityPercentage >= 33.0 AND GPA >= 5.0 -> INCLUSION.
-          3. Residence: (GPA >= 6.5 AND GPA <= 8.4) AND familyIncome < €20,000 AND campusDistanceKm > 50.0 -> RESIDENCE.
-          4. Large Family: GPA >= 5.0 AND familyIncome < €15,000 AND numberOfSiblings >= 3 -> LARGE_FAMILY.
-          5. Default -> NONE.
-
-   d) `InvalidStudentProfileException.java`:
-      - Unchecked exception extending `IllegalArgumentException`.
-
-   e) Decoupled CLI Presentation under `es.uclm.esi.iso2.scholarship.cli`:
-      - `ScholarshipCLI.java`: Reads student GPA, income, distance, disability %, and siblings from console, invokes `ScholarshipEvaluator`, and prints the designated award category. Decoupled from the domain logic.
+   c) `StudentProfile.java`:
+      - Private final fields:
+        * `double gpa` (0.0 to 10.0)
+        * `BigDecimal familyIncome` (annual income in Euros)
+        * `double campusDistanceKm` (distance in kilometers >= 0.0)
+        * `double disabilityPercentage` (0.0 to 100.0)
+        * `int numberOfSiblings` (>= 0)
+      - Constructor with strict domain validations:
+        * If `gpa < 0.0 || gpa > 10.0`: throw new `InvalidStudentProfileException("GPA must be between 0.0 and 10.0. Given: " + gpa)`.
+        * If `familyIncome == null || familyIncome.compareTo(BigDecimal.ZERO) < 0`: throw new `InvalidStudentProfileException("Family income must be non-negative. Given: " + familyIncome)`.
+        * If `campusDistanceKm < 0.0`: throw new `InvalidStudentProfileException("Campus distance must be non-negative. Given: " + campusDistanceKm)`.
+        * If `disabilityPercentage < 0.0 || disabilityPercentage > 100.0`: throw new `InvalidStudentProfileException("Disability percentage must be between 0.0 and 100.0. Given: " + disabilityPercentage)`.
+        * If `numberOfSiblings < 0`: throw new `InvalidStudentProfileException("Number of siblings cannot be negative. Given: " + numberOfSiblings)`.
+      - Full encapsulation: Getters for all fields, override `toString()`, `equals()`, and `hashCode()`.
 
 3. Verify compilation:
    mvn clean compile
 
-4. Commit and push to origin develop:
+4. Commit and push feature branch:
    git add src/
-   git commit -m "feat(scholarship): implement StudentProfile, ScholarshipEvaluator, domain exceptions, and decoupled CLI (closes Iteration 1)"
-   git push origin develop</pre>
+   git commit -m "feat(scholarship): implement StudentProfile entity, boundary validations, and ScholarshipCategory enum (closes #1)"
+   git push -u origin feat/issue-1-student-profile-model
+
+5. Create Pull Request on GitHub:
+   Open PR from `feat/issue-1-student-profile-model` into `develop` titled "feat(domain): StudentProfile entity and ScholarshipCategory enum (#1)" and merge it into develop.</pre>
+              </div>
+            </div>
+
+            <!-- AYÇA CARD -->
+            <div style="border:1px solid var(--border);border-top:4px solid #ec4899;border-radius:var(--radius-sm);padding:16px;background:var(--bg);">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+                <div>
+                  <h4 style="margin:0;font-size:1rem;color:var(--text-main);">Ayça Beril Gümüş</h4>
+                  <small style="color:#ec4899;font-weight:600;">Issue #2 · Rules Engine &amp; CLI Architect</small>
+                </div>
+                <button class="btn btn-primary" style="font-size:0.75rem;padding:4px 8px;background:#ec4899;border-color:#ec4899;" onclick="copyAiPrompt('prompt-p2-ayca', this)">📋 Copy Ayça's Prompt</button>
+              </div>
+              <ul style="font-size:0.8rem;color:var(--text-secondary);padding-left:16px;margin:8px 0;">
+                <li><strong>Branch:</strong> <code>feat/issue-2-scholarship-evaluator-cli</code></li>
+                <li><strong>Classes:</strong> <code>ScholarshipEvaluator.java</code>, <code>ScholarshipCLI.java</code></li>
+                <li><strong>Rules:</strong> Excellence, Inclusion, Residence, Large Family (zero-ambiguity order), decoupled CLI.</li>
+              </ul>
+              <div class="code-snippet" style="max-height:220px;overflow-y:auto;position:relative;">
+                <button class="copy-btn" onclick="copyAiPrompt('prompt-p2-ayca', this)">Copy</button>
+                <pre id="prompt-p2-ayca" style="margin:0;font-family:var(--font-mono);font-size:0.76rem;white-space:pre-wrap;color:#f8fafc;">You are an expert Java 21 software engineer working on Problem 2 (University Scholarships Eligibility, ET.02.03) for UCLM Software Engineering II, Delivery 2.
+Repository: https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P2.git
+Assignee: Ayça Beril Gümüş (Pair 2 Co-Lead)
+GitHub Issue: #2 - feat(evaluator-cli): ScholarshipEvaluator zero-ambiguity rule engine and decoupled console CLI
+
+PREREQUISITE: Mina's StudentProfile, ScholarshipCategory, and exceptions must be present on `develop`.
+CRITICAL GOAL: Implement the multi-criteria evaluation engine (with zero ambiguity priority) and decoupled CLI presentation. Do NOT implement test cases.
+
+Steps to execute:
+
+1. Fetch latest develop and create your feature branch:
+   git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P2.git
+   cd ISO2-2025-GrupoA05-Testing-P2
+   git checkout develop
+   git pull origin develop
+   git checkout -b feat/issue-2-scholarship-evaluator-cli
+
+2. Implement the following Java 21 files:
+
+   a) In package `es.uclm.esi.iso2.scholarship`:
+      `ScholarshipEvaluator.java`:
+      - Method `public ScholarshipCategory evaluate(StudentProfile student)`:
+        * If `student == null`, throw `InvalidStudentProfileException("Student profile cannot be null")`.
+        * Apply eligibility rules with explicit priority order to satisfy the zero-ambiguity requirement:
+          1. **Excellence Scholarship:**
+             If `student.getGpa() >= 8.5 && student.getFamilyIncome().compareTo(new BigDecimal("30000")) < 0` -> return `ScholarshipCategory.EXCELLENCE`.
+          2. **Inclusion Scholarship:**
+             If `student.getDisabilityPercentage() >= 33.0 && student.getGpa() >= 5.0` -> return `ScholarshipCategory.INCLUSION`.
+          3. **Residence Scholarship:**
+             If `(student.getGpa() >= 6.5 && student.getGpa() <= 8.4) && student.getFamilyIncome().compareTo(new BigDecimal("20000")) < 0 && student.getCampusDistanceKm() > 50.0` -> return `ScholarshipCategory.RESIDENCE`.
+          4. **Large Family Scholarship:**
+             If `student.getGpa() >= 5.0 && student.getFamilyIncome().compareTo(new BigDecimal("15000")) < 0 && student.getNumberOfSiblings() >= 3` -> return `ScholarshipCategory.LARGE_FAMILY`.
+          5. **Default:**
+             return `ScholarshipCategory.NONE`.
+
+   b) In package `es.uclm.esi.iso2.scholarship.cli`:
+      `ScholarshipCLI.java`:
+      - Decoupled console runner with `public static void main(String[] args)`:
+      - Reads GPA, Family Income, Campus Distance, Disability %, and Number of Siblings from console using `Scanner`.
+      - Instantiates `StudentProfile` (catching validation exceptions) and calls `ScholarshipEvaluator`.
+      - Outputs awarded category name, description, and financial benefits in a formatted card.
+
+3. Verify compilation:
+   mvn clean compile
+
+4. Commit and push feature branch:
+   git add src/
+   git commit -m "feat(scholarship): implement ScholarshipEvaluator zero-ambiguity engine and decoupled CLI (closes #2)"
+   git push -u origin feat/issue-2-scholarship-evaluator-cli
+
+5. Create Pull Request on GitHub:
+   Open PR from `feat/issue-2-scholarship-evaluator-cli` into `develop` titled "feat(evaluator-cli): ScholarshipEvaluator engine and decoupled CLI (#2)" and merge it into develop.</pre>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- BOX 3: PAIR 3 (BEYZA & BERKE) -->
-        <div class="panel success-accent" style="padding:20px;border-radius:var(--radius-md);border:1px solid var(--border);border-top:5px solid var(--success);background:var(--surface);">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+        <!-- ==================== PROBLEM 3 (PAIR 3: BEYZA & BERKE) ==================== -->
+        <div style="border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;background:var(--surface);">
+          <div style="background:var(--surface-subtle);padding:16px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
             <div>
-              <span class="status-badge badge-test" style="margin-bottom:6px;">Pair 3 Assignment</span>
-              <h3 style="font-size:1.15rem;margin:2px 0;color:var(--text-main);">Problem 3: Agricultural Smart Greenhouse Irrigation (ET.02.04)</h3>
-              <p style="font-size:0.85rem;color:var(--text-muted);margin:0;">
-                Assignees: <strong>Beyza Nur Topuz</strong> &amp; <strong>Berke Taha Özdemir</strong> &bull; Repo: <a href="https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P3" target="_blank" style="color:var(--success);font-family:var(--font-mono);">ISO2-2025-GrupoA05-Testing-P3</a> &bull; Target Branch: <code>develop</code>
+              <span class="status-badge badge-test">Repository 3 · Pair 3</span>
+              <h3 style="margin:4px 0 0 0;font-size:1.15rem;color:var(--text-main);">Problem 3: Agricultural Smart Greenhouse Irrigation (ET.02.04)</h3>
+              <p style="margin:0;font-size:0.83rem;color:var(--text-muted);">
+                GitHub Repo: <a href="https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P3" target="_blank" style="color:var(--success);font-family:var(--font-mono);">ISO2-2025-GrupoA05-Testing-P3 ↗</a> &bull; Target Branch: <code>develop</code>
               </p>
             </div>
-            <button class="btn btn-primary" style="background:var(--success);border-color:var(--success);" onclick="copyAiPrompt('prompt-p3', this)">📋 Copy Pair 3 Prompt</button>
+            <span class="badge badge-neutral">Beyza Nur Topuz &amp; Berke Taha Özdemir</span>
           </div>
 
-          <p style="font-size:0.86rem;color:var(--text-secondary);margin-bottom:10px;">
-            <strong>What this prompt builds:</strong> <code>SensorReading</code> (soil moisture 0-100%, temperature, rain forecasts, time of day), <code>IrrigationMode</code> enum, <code>IrrigationController</code> (Heavy/Light watering, Emergency Drainage, Solar Radiation 12:00-16:00 delay vs Critical Watering), and decoupled <code>GreenhouseCLI</code>.
-          </p>
-
-          <div class="code-snippet" style="max-height:300px;overflow-y:auto;position:relative;">
-            <button class="copy-btn" onclick="copyAiPrompt('prompt-p3', this)">Copy</button>
-            <pre id="prompt-p3" style="margin:0;font-family:var(--font-mono);font-size:0.8rem;white-space:pre-wrap;color:#f8fafc;">You are an expert Java 21 software engineer. We are developing the core domain logic for Problem 3 (Smart Greenhouse Irrigation, ET.02.04) for UCLM Software Engineering II, Delivery 2.
-
+          <div style="padding:20px;display:grid;grid-template-columns:repeat(auto-fit, minmax(340px, 1fr));gap:20px;">
+            <!-- BEYZA CARD -->
+            <div style="border:1px solid var(--border);border-top:4px solid var(--success);border-radius:var(--radius-sm);padding:16px;background:var(--bg);">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+                <div>
+                  <h4 style="margin:0;font-size:1rem;color:var(--text-main);">Beyza Nur Topuz</h4>
+                  <small style="color:var(--success);font-weight:600;">Issue #1 · Sensor Model &amp; Enum Architect</small>
+                </div>
+                <button class="btn btn-primary" style="font-size:0.75rem;padding:4px 8px;background:var(--success);border-color:var(--success);" onclick="copyAiPrompt('prompt-p3-beyza', this)">📋 Copy Beyza's Prompt</button>
+              </div>
+              <ul style="font-size:0.8rem;color:var(--text-secondary);padding-left:16px;margin:8px 0;">
+                <li><strong>Branch:</strong> <code>feat/issue-1-sensor-reading-model</code></li>
+                <li><strong>Classes:</strong> <code>SensorReading.java</code>, <code>IrrigationMode.java</code>, <code>InvalidSensorReadingException</code></li>
+                <li><strong>Validations:</strong> Moisture [0-100%], temp bounds [-40°C to 60°C], non-null time.</li>
+              </ul>
+              <div class="code-snippet" style="max-height:220px;overflow-y:auto;position:relative;">
+                <button class="copy-btn" onclick="copyAiPrompt('prompt-p3-beyza', this)">Copy</button>
+                <pre id="prompt-p3-beyza" style="margin:0;font-family:var(--font-mono);font-size:0.76rem;white-space:pre-wrap;color:#f8fafc;">You are an expert Java 21 software engineer working on Problem 3 (Smart Greenhouse Irrigation, ET.02.04) for UCLM Software Engineering II, Delivery 2.
 Repository: https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P3.git
-Branch: develop
-Pair: Pair 3 (Beyza Nur Topuz & Berke Taha Özdemir)
+Assignee: Beyza Nur Topuz (Pair 3 Lead)
+GitHub Issue: #1 - feat(domain): SensorReading entity, physical sensor validations, and IrrigationMode enum
 
-CRITICAL INSTRUCTION: Implement ONLY the domain model, validations, custom exceptions, and decoupled CLI on the 'develop' branch. Do NOT write any JUnit test cases (tests are strictly reserved for Iteration 3 on the 'hotfix' branch by Pair 2).
+CRITICAL GOAL: Implement ONLY the domain entity, sensor validations, and irrigation mode enum on a dedicated feature branch. Do NOT implement test cases.
 
-Please execute the following steps in sequence:
+Steps to execute:
 
-1. Clone and switch to develop branch:
+1. Clone and branch off develop:
    git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P3.git
    cd ISO2-2025-GrupoA05-Testing-P3
    git checkout develop
+   git checkout -b feat/issue-1-sensor-reading-model
 
-2. Implement Java 21 Classes under package `es.uclm.esi.iso2.greenhouse`:
-   a) `SensorReading.java`:
-      - Fields (encapsulated):
-        * `double soilMoisturePercentage` (0.0 to 100.0)
-        * `double ambientTemperatureCelsius` (Degrees Celsius)
-        * `boolean rainForecastedWithin24Hours` (true/false)
-        * `boolean imminentRainForecasted` (true/false)
-        * `LocalTime timeOfDay` (HH:mm)
-      - Constructor with strict domain validations:
-        * soilMoisturePercentage < 0.0 or > 100.0: throw `InvalidSensorReadingException("Soil moisture must be between 0% and 100%")`.
-        * timeOfDay is null: throw `InvalidSensorReadingException("Time of day must not be null")`.
-        * ambientTemperatureCelsius < -50.0 or > 70.0: throw `InvalidSensorReadingException("Temperature out of physical sensor bounds")`.
-      - Getters with full encapsulation.
+2. Implement the following Java 21 files under package `es.uclm.esi.iso2.greenhouse`:
+
+   a) `InvalidSensorReadingException.java`:
+      - Unchecked exception extending `IllegalArgumentException`.
+      - Constructor accepting message string.
 
    b) `IrrigationMode.java` (Enum):
-      - Values:
-        * `HEAVY_WATERING` ("Heavy Watering: Deep soil hydration")
-        * `LIGHT_WATERING` ("Light Watering: Standard soil maintenance")
-        * `DO_NOT_WATER` ("Do Not Water: Rain imminent or adequate moisture")
-        * `EMERGENCY_DRAINAGE` ("Emergency Drainage: Active root freeze protection")
-        * `POSTPONED_SOLAR_RADIATION` ("Postponed: Peak solar radiation (12:00-16:00)")
-        * `CRITICAL_WATERING` ("Critical Watering: Immediate hydration despite solar radiation")
-        * `STANDBY` ("Standby: No action required")
+      - Enum values with code and action descriptions:
+        * `HEAVY_WATERING` ("Heavy Watering", "Moisture < 20%, Temp > 25°C, No rain in 24h")
+        * `LIGHT_WATERING` ("Light Watering", "Moisture 20-40%, Temp > 25°C, No rain in 24h")
+        * `DO_NOT_WATER` ("Do Not Water", "Moisture < 40% but imminent rain forecasted")
+        * `EMERGENCY_DRAINAGE` ("Emergency Drainage", "Moisture > 60%, Temp < 5°C - prevent root freeze")
+        * `POSTPONED_SOLAR_RADIATION` ("Postponed", "Peak solar radiation (12:00-16:00) delay")
+        * `CRITICAL_WATERING` ("Critical Watering", "Moisture < 10% during peak solar radiation")
+        * `STANDBY` ("Standby", "Soil conditions optimal, no intervention needed")
 
-   c) `IrrigationController.java`:
-      - Method: `public IrrigationMode evaluateIrrigation(SensorReading reading)`:
-        * Null check (throws InvalidSensorReadingException).
-        * Business Rules in order:
-          1. Emergency Drainage: If soilMoisture > 60.0 AND ambientTemperature < 5.0 -> EMERGENCY_DRAINAGE (prevents root freeze damage).
-          2. Peak Solar Radiation Rule (12:00 PM to 4:00 PM / 12:00 to 16:00 inclusive):
-             - If timeOfDay is between 12:00 and 16:00:
-               * If soilMoisture < 10.0 -> CRITICAL_WATERING (critical emergency hydration).
-               * Otherwise -> POSTPONED_SOLAR_RADIATION (all standard watering postponed).
-          3. Imminent Rain Rule: If soilMoisture < 40.0 AND imminentRainForecasted is true -> DO_NOT_WATER.
-          4. Heavy Watering: If soilMoisture < 20.0 AND ambientTemperature > 25.0 AND NOT rainForecastedWithin24Hours -> HEAVY_WATERING.
-          5. Light Watering: If (soilMoisture >= 20.0 AND soilMoisture <= 40.0) AND ambientTemperature > 25.0 AND NOT rainForecastedWithin24Hours -> LIGHT_WATERING.
-          6. Default -> STANDBY.
-
-   d) `InvalidSensorReadingException.java`:
-      - Unchecked exception extending `IllegalArgumentException`.
-
-   e) Decoupled CLI Presentation under `es.uclm.esi.iso2.greenhouse.cli`:
-      - `GreenhouseCLI.java`: Reads soil moisture, temperature, rain forecasts, and time of day from console, passes reading to `IrrigationController`, and prints the irrigation command. Decoupled from domain logic.
+   c) `SensorReading.java`:
+      - Private final fields:
+        * `double soilMoisturePercentage` (0.0 to 100.0)
+        * `double ambientTemperatureCelsius` (-40.0 to 60.0)
+        * `boolean rainForecastedWithin24Hours` (boolean)
+        * `boolean imminentRainForecasted` (boolean)
+        * `LocalTime timeOfDay` (java.time.LocalTime)
+      - Constructor with domain validations:
+        * If `soilMoisturePercentage < 0.0 || soilMoisturePercentage > 100.0`: throw new `InvalidSensorReadingException("Soil moisture must be between 0.0% and 100.0%. Given: " + soilMoisturePercentage)`.
+        * If `ambientTemperatureCelsius < -40.0 || ambientTemperatureCelsius > 60.0`: throw new `InvalidSensorReadingException("Ambient temperature out of operational range (-40°C to 60°C). Given: " + ambientTemperatureCelsius)`.
+        * If `timeOfDay == null`: throw new `InvalidSensorReadingException("Time of day must not be null")`.
+      - Full encapsulation: Getters for all fields, override `toString()`, `equals()`, and `hashCode()`.
 
 3. Verify compilation:
    mvn clean compile
 
-4. Commit and push to origin develop:
+4. Commit and push feature branch:
    git add src/
-   git commit -m "feat(greenhouse): implement SensorReading, IrrigationController, domain exceptions, and decoupled CLI (closes Iteration 1)"
-   git push origin develop</pre>
+   git commit -m "feat(greenhouse): implement SensorReading entity, sensor validations, and IrrigationMode enum (closes #1)"
+   git push -u origin feat/issue-1-sensor-reading-model
+
+5. Create Pull Request on GitHub:
+   Open PR from `feat/issue-1-sensor-reading-model` into `develop` titled "feat(domain): SensorReading entity and IrrigationMode enum (#1)" and merge it into develop.</pre>
+              </div>
+            </div>
+
+            <!-- BERKE CARD -->
+            <div style="border:1px solid var(--border);border-top:4px solid #f59e0b;border-radius:var(--radius-sm);padding:16px;background:var(--bg);">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+                <div>
+                  <h4 style="margin:0;font-size:1rem;color:var(--text-main);">Berke Taha Özdemir</h4>
+                  <small style="color:#f59e0b;font-weight:600;">Issue #2 · Irrigation Controller &amp; CLI Architect</small>
+                </div>
+                <button class="btn btn-primary" style="font-size:0.75rem;padding:4px 8px;background:#f59e0b;border-color:#f59e0b;" onclick="copyAiPrompt('prompt-p3-berke', this)">📋 Copy Berke's Prompt</button>
+              </div>
+              <ul style="font-size:0.8rem;color:var(--text-secondary);padding-left:16px;margin:8px 0;">
+                <li><strong>Branch:</strong> <code>feat/issue-2-irrigation-controller-cli</code></li>
+                <li><strong>Classes:</strong> <code>IrrigationController.java</code>, <code>GreenhouseCLI.java</code></li>
+                <li><strong>Rules:</strong> Emergency Drainage (<5°C), Solar delay (12:00-16:00) vs Critical, Heavy/Light modes, decoupled CLI.</li>
+              </ul>
+              <div class="code-snippet" style="max-height:220px;overflow-y:auto;position:relative;">
+                <button class="copy-btn" onclick="copyAiPrompt('prompt-p3-berke', this)">Copy</button>
+                <pre id="prompt-p3-berke" style="margin:0;font-family:var(--font-mono);font-size:0.76rem;white-space:pre-wrap;color:#f8fafc;">You are an expert Java 21 software engineer working on Problem 3 (Smart Greenhouse Irrigation, ET.02.04) for UCLM Software Engineering II, Delivery 2.
+Repository: https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P3.git
+Assignee: Berke Taha Özdemir (Pair 3 Co-Lead)
+GitHub Issue: #2 - feat(controller-cli): IrrigationController decision engine (solar radiation rules) and decoupled console CLI
+
+PREREQUISITE: Beyza's SensorReading, IrrigationMode, and exceptions must be present on `develop`.
+CRITICAL GOAL: Implement the irrigation decision engine (with peak solar radiation and emergency freeze protection) and decoupled CLI presentation. Do NOT implement test cases.
+
+Steps to execute:
+
+1. Fetch latest develop and create your feature branch:
+   git clone https://github.com/hatimbenayad/ISO2-2025-GrupoA05-Testing-P3.git
+   cd ISO2-2025-GrupoA05-Testing-P3
+   git checkout develop
+   git pull origin develop
+   git checkout -b feat/issue-2-irrigation-controller-cli
+
+2. Implement the following Java 21 files:
+
+   a) In package `es.uclm.esi.iso2.greenhouse`:
+      `IrrigationController.java`:
+      - Constants:
+        * `PEAK_START = LocalTime.of(12, 0)`
+        * `PEAK_END = LocalTime.of(16, 0)`
+      - Method `public IrrigationMode evaluate(SensorReading reading)`:
+        * If `reading == null`, throw `InvalidSensorReadingException("Sensor reading cannot be null")`.
+        * Execute business rules with strict priority:
+          1. **Emergency Drainage (Root freeze prevention):**
+             If `reading.getSoilMoisturePercentage() > 60.0 && reading.getAmbientTemperatureCelsius() < 5.0` -> return `IrrigationMode.EMERGENCY_DRAINAGE`.
+          2. **Peak Solar Radiation Rule (12:00 PM to 4:00 PM):**
+             boolean isPeakSolar = !reading.getTimeOfDay().isBefore(PEAK_START) && !reading.getTimeOfDay().isAfter(PEAK_END);
+             if (isPeakSolar) {
+                 if (reading.getSoilMoisturePercentage() < 10.0) {
+                     return IrrigationMode.CRITICAL_WATERING; // Emergency watering permitted
+                 }
+                 return IrrigationMode.POSTPONED_SOLAR_RADIATION; // Standard watering delayed
+             }
+          3. **Imminent Rain Rule:**
+             If `reading.getSoilMoisturePercentage() < 40.0 && reading.isImminentRainForecasted()` -> return `IrrigationMode.DO_NOT_WATER`.
+          4. **Heavy Watering:**
+             If `reading.getSoilMoisturePercentage() < 20.0 && reading.getAmbientTemperatureCelsius() > 25.0 && !reading.isRainForecastedWithin24Hours()` -> return `IrrigationMode.HEAVY_WATERING`.
+          5. **Light Watering:**
+             If `(reading.getSoilMoisturePercentage() >= 20.0 && reading.getSoilMoisturePercentage() <= 40.0) && reading.getAmbientTemperatureCelsius() > 25.0 && !reading.isRainForecastedWithin24Hours()` -> return `IrrigationMode.LIGHT_WATERING`.
+          6. **Default:**
+             return `IrrigationMode.STANDBY`.
+
+   b) In package `es.uclm.esi.iso2.greenhouse.cli`:
+      `GreenhouseCLI.java`:
+      - Decoupled console runner with `public static void main(String[] args)`:
+      - Reads Soil Moisture %, Temperature °C, Rain Forecasts, and Time of Day (HH:mm) from console.
+      - Constructs `SensorReading` and passes to `IrrigationController`.
+      - Prints recommended irrigation action with explanation and safety warnings.
+
+3. Verify compilation:
+   mvn clean compile
+
+4. Commit and push feature branch:
+   git add src/
+   git commit -m "feat(greenhouse): implement IrrigationController decision engine and decoupled CLI (closes #2)"
+   git push -u origin feat/issue-2-irrigation-controller-cli
+
+5. Create Pull Request on GitHub:
+   Open PR from `feat/issue-2-irrigation-controller-cli` into `develop` titled "feat(controller-cli): IrrigationController engine and decoupled CLI (#2)" and merge it into develop.</pre>
+              </div>
+            </div>
           </div>
         </div>
 

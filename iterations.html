@@ -4,170 +4,447 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Iterations Focus · SESCAM Radiodiagnostics (ISO2 Team A.05)</title>
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body data-page="iterations">
   <div id="site-navbar"></div>
 
   <main class="container">
     <header class="page-hero">
-      <div class="hero-eyebrow">Unified Process Phasing · Iteration Scope &amp; Next Sprint Preview</div>
-      <h1>Active Iteration Scope &amp; Next Sprint Roadmap</h1>
+      <div class="hero-eyebrow">Unified Process Phasing · Iteration 2 Closed (v0.2.0) · Iteration 3 (Construction II) Active</div>
+      <h1>Active Sprint Scope &amp; Construction II Master Roadmap</h1>
       <p>
-        Detailed breakdown of <strong>This Iteration (Iteration 2 — Construction I)</strong>: completed evidence, the exact remaining implementation tasks before release <code>v0.2.0</code>, and the immediate preview of <strong>The Next Iteration (Iteration 3 — Construction II)</strong>.
+        Full operational breakdown of <strong>Iteration 3 (Construction II — Baseline 0.3.0-SNAPSHOT)</strong>: the remaining 23 use cases across Patient Portal, Admissions &amp; Scheduling, and SysAdmin governance, alongside the completed verification audit for <strong>Release v0.2.0</strong> and the path to final Transition delivery (<code>v1.0.0</code>).
       </p>
       <div class="hero-meta">
-        <span class="meta-pill green">Active: Iteration 2 (v0.2.0-SNAPSHOT)</span>
-        <span class="meta-pill">Next: Iteration 3 (v0.3.0-SNAPSHOT)</span>
-        <span class="meta-pill">Milestone #3: 10 Open · 5 Closed</span>
-        <span class="meta-pill green">85+ Unit Tests Passing</span>
+        <span class="meta-pill green">Delivered: Release v0.2.0 (Construction I)</span>
+        <span class="meta-pill">Active Sprint: Iteration 3 (v0.3.0-SNAPSHOT)</span>
+        <span class="meta-pill green">245 Automated Tests Passing (0 Failures)</span>
+        <span class="meta-pill green">JaCoCo Quality Gate: &ge;75% Line / &ge;70% Branch Verified</span>
+        <span class="meta-pill">Final Delivery: v1.0.0 (15/12/2026)</span>
       </div>
     </header>
 
-    <!-- SECTION 1: THIS ITERATION (IT2) -->
+    <!-- SECTION 1: COMPLETED SPRINT AUDIT (IT2 - RELEASE V0.2.0) -->
     <section class="section-card">
       <div class="section-header">
         <div>
           <div style="display:flex;align-items:center;gap:8px;">
-            <span class="badge badge-progress" style="font-size:0.85rem;">Active Sprint</span>
-            <h2>Iteration 2: Construction I — Diagnostic &amp; Clinical Core</h2>
+            <span class="badge badge-done" style="font-size:0.85rem;">Delivered &amp; Tagged</span>
+            <h2>Iteration 2: Construction I — Diagnostic &amp; Clinical Core (Delivered in v0.2.0)</h2>
           </div>
-          <p>Target Release: <code>v0.2.0</code> · Focus: Physician Examination Orders (<code>CU10–CU18</code>), In-Memory Repositories, Mock Adapters, and Quality Gates.</p>
+          <p>Official Release: <code>v0.2.0</code> · Milestone #3 (it2-Construction): 21 of 21 Issues Closed (100% Complete) · Git Tag: <code>v0.2.0</code> on <code>main</code>.</p>
         </div>
-        <span class="meta-pill green">60% Mapped · Coding In Progress</span>
+        <span class="meta-pill green">Milestone 100% Closed</span>
       </div>
 
-      <!-- Completed in It2 vs Left to do in It2 -->
       <div class="two-col" style="margin-top:16px;">
-        <!-- Left: Completed Work -->
+        <!-- Left: Delivered Architecture & Code -->
         <div class="panel success-accent" style="padding:16px 18px;">
           <h3 style="color:var(--success);margin-bottom:12px;display:flex;align-items:center;gap:6px;">
-            <span>✓</span> What We Have Done So Far in It2
+            <span>[Verified]</span> Core Architectural Deliverables Merged in v0.2.0
           </h3>
           <ul class="clean-list" style="display:flex;flex-direction:column;gap:10px;font-size:0.88rem;color:var(--text-secondary);">
             <li>
-              <strong>SQA Quality Infrastructure Gate (PR #76):</strong> Root POM configured with JUnit <code>6.1.3</code> and JaCoCo <code>0.8.14</code> enforcing &ge;75% line and &ge;70% branch coverage on every build. <em>Closed #60.</em>
+              <strong>Automated Multi-Module Quality Gate (PR #76):</strong> JUnit 6.1.3 and JaCoCo 0.8.14 multi-module staging enforcing &ge;75% line coverage and &ge;70% branch coverage on every build. <em>Closed #60, #87.</em>
             </li>
             <li>
-              <strong>Core Domain Baseline (PR #52):</strong> 20 Java classes in <code>common-contracts</code>: <code>ExaminationOrder</code>, <code>OrderStatus</code>, <code>Priority</code>, <code>Patient</code>, <code>AuthSession</code>, and DTOs.
+              <strong>Examination Order Domain &amp; Service (PR #111):</strong> Full lifecycle implementation of <code>ExaminationOrderService</code>, <code>IOrderRepository</code>, and <code>InMemoryOrderRepository</code> supporting CU10, CU11, CU12, CU16, and soft-cancellation (D-015). <em>Closed #82.</em>
             </li>
             <li>
-              <strong>Server Component Design (PR #80):</strong> UML Design Class Diagram for domain services, repositories, and mock adapters merged (<code>It2-server-design.svg</code> &amp; <code>.vpp</code>). <em>Closed #72.</em>
+              <strong>Diagnostic Report Service (PR #109):</strong> Implementation of <code>DiagnosticReportService</code>, report drafting, validation, and specialist signature workflows (CU14). <em>Closed #84.</em>
             </li>
             <li>
-              <strong>Black-Box Test Matrices (PR #79):</strong> Documented Equivalence Partitions (EP) and Boundary Value Analysis (BVA) for orders on Issue #74; expanded <code>ExaminationOrderTest</code>. <em>Closed #74.</em>
+              <strong>Synthetic External Adapters (PR #110):</strong> Deterministic in-memory adapters for RIS/PACS (synthetic DICOM slices, E04) and Hospital EHR (episodes, E02) adhering to Decision D-012. <em>Closed #85.</em>
             </li>
             <li>
-              <strong>Physician Communication Models:</strong> Completed BCE diagrams for <code>CU10</code>, <code>CU11</code>, <code>CU12</code>, <code>CU13</code>, and <code>CU18</code> committed on branch <code>feature/CU10-CU18-analysis-communication</code>.
+              <strong>Physician Desktop Swing UI (PR #108):</strong> Modular Swing interface with <code>MainWindowFrame</code>, <code>PhysicianWorkspacePanel</code>, <code>OrderPrescriptionView</code>, and <code>ClientOrderController</code>. <em>Closed #83.</em>
             </li>
           </ul>
         </div>
 
-        <!-- Right: What is Left to do in It2 -->
-        <div class="panel danger-accent" style="padding:16px 18px;">
-          <h3 style="color:var(--danger);margin-bottom:12px;display:flex;align-items:center;gap:6px;">
-            <span>⚡</span> What Is Left For Us To Do to Finish It2
+        <!-- Right: Governance & Traceability -->
+        <div class="panel primary-accent" style="padding:16px 18px;">
+          <h3 style="color:var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:6px;">
+            <span>[Audited]</span> Governance, Test Suites &amp; Traceability Baselines
           </h3>
           <ul class="clean-list" style="display:flex;flex-direction:column;gap:10px;font-size:0.88rem;color:var(--text-secondary);">
             <li>
-              <strong>1. Backend Order Service (#82):</strong> Implement <code>IOrderRepository</code>, <code>InMemoryOrderRepository</code>, and <code>ExaminationOrderService</code> (CU10, CU11, CU12, CU16 &amp; D-015 soft-cancel). <br><span class="badge badge-open" style="font-size:0.75rem;">Assigned to @beyzabalota1</span>
+              <strong>Comprehensive Test Suite (245 Tests):</strong> 65 tests in <code>common-contracts</code>, 163 tests in <code>server</code>, and 17 tests in <code>client</code> with 0 failures and 0 errors.
             </li>
             <li>
-              <strong>2. Desktop Swing UI Scaffold (#83):</strong> Build <code>MainWindowFrame</code>, <code>PhysicianWorkspacePanel</code>, <code>OrderPrescriptionView</code>, and <code>ClientOrderController</code>. <br><span class="badge badge-open" style="font-size:0.75rem;">Assigned to @berquepica</span>
+              <strong>Master Requirements Traceability Matrix (Issue #113):</strong> Full 32-row bidirectional RTM table deployed on project wiki mapping all RFs to use cases, BCE diagrams, design interfaces, classes, JUnit suites, and release milestones.
             </li>
             <li>
-              <strong>3. Diagnostic Report Service (#84):</strong> Implement <code>InMemoryReportRepository</code> &amp; <code>DiagnosticReportService</code> for report drafting and signature (CU14). <br><span class="badge badge-open" style="font-size:0.75rem;">Assigned to @aycagorgulu0</span>
+              <strong>Formalized Decision Index (D-001 through D-027):</strong> Complete records for centralized backlog governance (D-026) and repository administrator ruleset bypass protocol (D-027). <em>Closed #112.</em>
             </li>
             <li>
-              <strong>4. Mock External Adapters (#85):</strong> Simulated RIS/PACS (E04) and EHR (E02) synthetic adapters adhering to Decision D-012. <br><span class="badge badge-open" style="font-size:0.75rem;">Assigned to @minaOZ</span>
+              <strong>AI Telemetry Log &amp; Assistant Rules (PR #116, #117):</strong> Empirical token consumption tracking (<code>AI_TOKEN_LOG.md</code>) and AI assistant constraints (<code>AGENTS.md</code>) preventing reference repository plagiarism. <em>Closed #114, #115.</em>
             </li>
             <li>
-              <strong>5. PACS &amp; Reports Black-Box Tests (#75):</strong> Implement test suite for image viewing and diagnostic report validation.
-            </li>
-            <li>
-              <strong>6. Client Component Design (#71):</strong> Commit <code>It2-client-design.svg</code> and source <code>.vpp</code> project file.
-            </li>
-            <li>
-              <strong>7. Verification &amp; Tagging:</strong> Run <code>mvn clean verify</code> ensuring all 3 modules pass &ge;75% JaCoCo gate, merge into <code>develop</code>, and tag release <code>v0.2.0</code>.
+              <strong>Formal Release Tagging:</strong> Git tag <code>v0.2.0</code> published on <code>main</code>, release notes published, and <code>develop</code> initialized with <code>0.3.0-SNAPSHOT</code>. <em>Closed #86.</em>
             </li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- SECTION 2: THE NEXT ITERATION (IT3) -->
+    <!-- SECTION 2: THE ACTIVE SPRINT (IT3 - CONSTRUCTION II) -->
     <section class="section-card">
       <div class="section-header">
         <div>
           <div style="display:flex;align-items:center;gap:8px;">
-            <span class="badge badge-planned" style="font-size:0.85rem;">Upcoming Sprint</span>
-            <h2>The Next Iteration: Iteration 3 (Construction II)</h2>
+            <span class="badge badge-progress" style="font-size:0.85rem;">Active Sprint</span>
+            <h2>Iteration 3: Construction II — Patient Portal, Admissions &amp; SysAdmin Governance</h2>
           </div>
-          <p>Target Release: <code>v0.3.0-SNAPSHOT</code> · Focus: Patient Portal (<code>CU01–CU09</code>), Admissions &amp; Modality Room Scheduling (<code>CU20–CU26</code>), and Notifications.</p>
+          <p>Target Release: <code>v0.3.0</code> · Baseline: <code>0.3.0-SNAPSHOT</code> · Focus: 23 Remaining Use Cases across Patient Portal, Admissions Scheduling, and System Administration.</p>
         </div>
-        <span class="meta-pill">Starts Immediately After It2 Delivery</span>
+        <span class="meta-pill">Sprint Duration: 25/11 – 06/12/2026</span>
+      </div>
+
+      <!-- Scope Breakdown by Actor Domains -->
+      <div style="margin-top:20px;">
+        <h3 style="font-size:1.05rem;color:var(--text-primary);margin-bottom:12px;">Detailed Functional Scope: 23 Use Cases Grouped by Actor Domain</h3>
+        
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:16px;">
+          
+          <!-- Domain 1: Patient Portal -->
+          <div class="panel primary-accent" style="padding:16px 18px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+              <h4 style="color:var(--accent);margin:0;font-size:0.95rem;">1. Patient Portal (RF01–RF09)</h4>
+              <span class="badge badge-progress" style="font-size:0.75rem;">9 Use Cases</span>
+            </div>
+            <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:12px;">Self-service clinical workflows for patients to consult history, appointments, diagnostic reports, and DICOM imaging.</p>
+            <div class="data-table-wrap">
+              <table class="data-table" style="font-size:0.82rem;">
+                <thead>
+                  <tr>
+                    <th style="width:55px;">ID</th>
+                    <th>Use Case Name</th>
+                    <th>Technical Contract / Deliverable</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>CU01</code></td>
+                    <td>Request Radiological Appointment</td>
+                    <td><code>IAppointmentService.requestAppointment()</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>CU02</code></td>
+                    <td>Consult Scheduled Appointments</td>
+                    <td><code>AppointmentFilterDto</code>, patient calendar query</td>
+                  </tr>
+                  <tr>
+                    <td><code>CU03</code></td>
+                    <td>Request Soft Cancellation</td>
+                    <td>Soft-cancel state transition (D-015)</td>
+                  </tr>
+                  <tr>
+                    <td><code>CU04</code></td>
+                    <td>Consult Diagnostic Reports</td>
+                    <td>Published report retrieval via <code>IDiagnosticReportService</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>CU05</code></td>
+                    <td>View DICOM Imaging Slices</td>
+                    <td>Synthetic DICOM slice viewer via PACS adapter</td>
+                  </tr>
+                  <tr>
+                    <td><code>CU06</code></td>
+                    <td>Download Diagnostic Report PDF</td>
+                    <td>Report formatting &amp; export pipeline</td>
+                  </tr>
+                  <tr>
+                    <td><code>CU07</code></td>
+                    <td>Appointment Notifications</td>
+                    <td>Automated notification dispatcher engine</td>
+                  </tr>
+                  <tr>
+                    <td><code>CU08</code></td>
+                    <td>Consult Medical History Summary</td>
+                    <td>Integration with EHR episode mock adapter</td>
+                  </tr>
+                  <tr>
+                    <td><code>CU09</code></td>
+                    <td>Update Contact Preferences</td>
+                    <td>Patient communication channel configuration</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Domain 2: Admissions & Administrative Staff -->
+          <div class="panel warning-accent" style="padding:16px 18px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+              <h4 style="color:#d97706;margin:0;font-size:0.95rem;">2. Admissions &amp; Scheduling (RF19–RF26)</h4>
+              <span class="badge badge-progress" style="font-size:0.75rem;">8 Use Cases</span>
+            </div>
+            <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:12px;">Inpatient admission intake, equipment room scheduling, tariff billing, and incident logging.</p>
+            <div class="data-table-wrap">
+              <table class="data-table" style="font-size:0.82rem;">
+                <thead>
+                  <tr>
+                    <th style="width:55px;">ID</th>
+                    <th>Use Case Name</th>
+                    <th>Technical Contract / Deliverable</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>CU19</code></td>
+                    <td>Search Patient &amp; Bed Allocation</td>
+                    <td>Patient CIP lookup &amp; ward bed assignment</td>
+                  </tr>
+                  <tr>
+                    <td><code>CU20</code></td>
+                    <td>Register Clinical Admission</td>
+                    <td><code>IAdmissionsService.registerAdmission()</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>CU21</code></td>
+                    <td>Allocate Equipment Room Schedule</td>
+                    <td>CT, MRI, X-Ray room calendar allocation</td>
+                  </tr>
+                  <tr>
+                    <td><code>CU22</code></td>
+                    <td>Modify / Reschedule Appointment</td>
+                    <td>Room schedule conflict detection &amp; rebooking</td>
+                  </tr>
+                  <tr>
+                    <td><code>CU23</code></td>
+                    <td>Cancel Appointment Justified</td>
+                    <td>Operational cancellation reason registration</td>
+                  </tr>
+                  <tr>
+                    <td><code>CU24</code></td>
+                    <td>Calculate Procedure Tariff &amp; Invoice</td>
+                    <td><code>IBillingService</code>, procedure tariff calculator</td>
+                  </tr>
+                  <tr>
+                    <td><code>CU25</code></td>
+                    <td>Health Insurance Authorization</td>
+                    <td>Insurance policy verification &amp; co-pay tracking</td>
+                  </tr>
+                  <tr>
+                    <td><code>CU26</code></td>
+                    <td>Register Admission Incidents</td>
+                    <td>Incident audit trail &amp; equipment delay log</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Domain 3: SysAdmin & Security Governance -->
+          <div class="panel purple-accent" style="padding:16px 18px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+              <h4 style="color:#a855f7;margin:0;font-size:0.95rem;">3. SysAdmin Governance (RF27–RF32)</h4>
+              <span class="badge badge-progress" style="font-size:0.75rem;">6 Use Cases</span>
+            </div>
+            <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:12px;">RBAC user account security, equipment room maintenance windows, audit logs, and metrics.</p>
+            <div class="data-table-wrap">
+              <table class="data-table" style="font-size:0.82rem;">
+                <thead>
+                  <tr>
+                    <th style="width:55px;">ID</th>
+                    <th>Use Case Name</th>
+                    <th>Technical Contract / Deliverable</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>CU27</code></td>
+                    <td>User Account &amp; RBAC Management</td>
+                    <td><code>IAdminService</code>, user onboarding &amp; role assignment</td>
+                  </tr>
+                  <tr>
+                    <td><code>CU28</code></td>
+                    <td>Reset Credentials &amp; Revoke Session</td>
+                    <td>Password reset &amp; active session token revocation</td>
+                  </tr>
+                  <tr>
+                    <td><code>CU29</code></td>
+                    <td>Equipment Maintenance Windows</td>
+                    <td>Modality operating hours &amp; downtime calendar</td>
+                  </tr>
+                  <tr>
+                    <td><code>CU30</code></td>
+                    <td>Consult Security Audit Trails</td>
+                    <td>Immutable access log inspection &amp; audit query</td>
+                  </tr>
+                  <tr>
+                    <td><code>CU31</code></td>
+                    <td>Configure External Adapters</td>
+                    <td>EHR / PACS mock endpoint latency &amp; parameters</td>
+                  </tr>
+                  <tr>
+                    <td><code>CU32</code></td>
+                    <td>System Operational Metrics</td>
+                    <td>Throughput, turnaround time &amp; utilization stats</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: RADIT EXECUTION PLAN FOR ITERATION 3 -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <h2>RADIT Engineering Pipeline for Iteration 3</h2>
+          <p>Strict discipline-by-discipline execution ensuring 100% architectural rigor and traceability from requirements to tests.</p>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:14px;margin-top:14px;">
+        
+        <div class="panel primary-accent" style="padding:14px;">
+          <h4 style="color:var(--accent);margin-bottom:8px;font-size:0.92rem;">R &mdash; Requirements</h4>
+          <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.45;">
+            Freeze validation invariants for <code>Appointment</code>, <code>Admission</code>, <code>Invoice</code>, and <code>UserAccount</code>. Verify bidirectional alignment with the Master RTM table.
+          </p>
+        </div>
+
+        <div class="panel warning-accent" style="padding:14px;">
+          <h4 style="color:#d97706;margin-bottom:8px;font-size:0.92rem;">A &mdash; Analysis</h4>
+          <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.45;">
+            Model BCE Communication Diagrams (<code>&lt;&lt;boundary&gt;&gt;</code>, <code>&lt;&lt;control&gt;&gt;</code>, <code>&lt;&lt;entity&gt;&gt;</code>) in Visual Paradigm for all 23 use cases in <code>docs/diagrams/analysis/</code>.
+          </p>
+        </div>
+
+        <div class="panel purple-accent" style="padding:14px;">
+          <h4 style="color:#a855f7;margin-bottom:8px;font-size:0.92rem;">D &mdash; Design</h4>
+          <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.45;">
+            Extend <code>common-contracts</code> with DTOs and contracts (<code>IAppointmentService</code>, <code>IAdmissionsService</code>, <code>IBillingService</code>, <code>IAdminService</code>). Update Client &amp; Server UML Design Class Diagrams.
+          </p>
+        </div>
+
+        <div class="panel success-accent" style="padding:14px;">
+          <h4 style="color:var(--success);margin-bottom:8px;font-size:0.92rem;">I &mdash; Implementation</h4>
+          <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.45;">
+            Implement backend domain services with in-memory persistence in <code>server</code>; build Patient Portal views, Admissions scheduling grid, and SysAdmin console tabs in <code>client</code>.
+          </p>
+        </div>
+
+        <div class="panel danger-accent" style="padding:14px;">
+          <h4 style="color:var(--danger);margin-bottom:8px;font-size:0.92rem;">T &mdash; Testing &amp; SQA</h4>
+          <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.45;">
+            Document Black-Box test design matrices (EP, BVA, Error Guessing) in GitHub issues; implement JUnit 6 test suites; maintain JaCoCo &ge;75% line and &ge;70% branch gates.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 4: TEAM TASK ALLOCATION MATRIX -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <h2>Iteration 3 Team Task Allocation &amp; Ownership Matrix</h2>
+          <p>Balanced 6-person work breakdown across actor domains, branch conventions, and deliverable commitments.</p>
+        </div>
+      </div>
+
+      <div class="data-table-wrap" style="margin-top:14px;">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width:140px;">Team Member</th>
+              <th style="width:130px;">Actor Domain</th>
+              <th style="width:110px;">Assigned Scope</th>
+              <th>Primary Technical Deliverables</th>
+              <th style="width:180px;">Target Feature Branch</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Hatim Ben Ayad</strong><br><small style="color:var(--text-muted);">Coordinator</small></td>
+              <td>Admissions &amp; Intake</td>
+              <td><code>CU19–CU23</code></td>
+              <td><code>IAdmissionsService</code>, bed allocation, equipment room scheduling calendar, conflict detection, backlog governance.</td>
+              <td><code>feature/It3-admissions-scheduling</code></td>
+            </tr>
+            <tr>
+              <td><strong>Ayça Görgülü</strong><br><small style="color:var(--text-muted);">Developer / Tester</small></td>
+              <td>Admissions &amp; Billing</td>
+              <td><code>CU24–CU26</code></td>
+              <td><code>IBillingService</code>, procedure tariff calculation, insurance payment authorization, admission incident logging.</td>
+              <td><code>feature/It3-billing-incidents</code></td>
+            </tr>
+            <tr>
+              <td><strong>Beyza Balota</strong><br><small style="color:var(--text-muted);">Developer / Tester</small></td>
+              <td>Patient Portal</td>
+              <td><code>CU01–CU05</code></td>
+              <td><code>IAppointmentService</code>, patient appointment request, consultation, soft cancellation, report &amp; DICOM viewing.</td>
+              <td><code>feature/It3-patient-portal-core</code></td>
+            </tr>
+            <tr>
+              <td><strong>Berke Pica</strong><br><small style="color:var(--text-muted);">Developer / UI Lead</small></td>
+              <td>Patient Portal &amp; UI</td>
+              <td><code>CU06–CU09</code></td>
+              <td>PDF export pipeline, notification dispatcher engine, clinical episode summary, contact preferences, Client Swing views.</td>
+              <td><code>feature/It3-patient-portal-ui</code></td>
+            </tr>
+            <tr>
+              <td><strong>Mina Özdoğan</strong><br><small style="color:var(--text-muted);">Developer / Tester</small></td>
+              <td>SysAdmin &amp; Security</td>
+              <td><code>CU27–CU29</code></td>
+              <td><code>IAdminService</code>, user account lifecycle, RBAC role assignment, password reset, equipment maintenance windows.</td>
+              <td><code>feature/It3-admin-user-management</code></td>
+            </tr>
+            <tr>
+              <td><strong>Felipe Dionisio</strong><br><small style="color:var(--text-muted);">Developer / SQA Lead</small></td>
+              <td>SysAdmin &amp; SQA</td>
+              <td><code>CU30–CU32</code></td>
+              <td>Security audit logging (CU30), external adapter configuration (CU31), operational metrics (CU32), SQA regression gate.</td>
+              <td><code>feature/It3-admin-audit-metrics</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 5: ROADMAP TO FINAL TRANSITION (V1.0.0) -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <h2>Lifecycle Roadmap to Final Transition Delivery (v1.0.0)</h2>
+          <p>Chronological milestones leading to final software evaluation on December 15, 2026.</p>
+        </div>
       </div>
 
       <div class="two-col" style="margin-top:16px;">
-        <!-- Functional Modules in It3 -->
         <div class="panel primary-accent" style="padding:16px 18px;">
-          <h3 style="color:var(--accent);margin-bottom:12px;">Planned Functional Work Breakdown (CU01–CU09 &amp; CU20–CU26)</h3>
-          <ul class="clean-list" style="display:flex;flex-direction:column;gap:10px;font-size:0.88rem;color:var(--text-secondary);">
-            <li>
-              <strong>Patient Portal Workflows (RF01–RF09):</strong>
-              <div style="font-size:0.83rem;color:var(--text-muted);margin-top:3px;">
-                Patient requests radiological appointment (CU01), consults scheduled appointments (CU02), requests soft cancellation (CU03), consults published diagnostic reports (CU04), and views DICOM images (CU05).
-              </div>
-            </li>
-            <li>
-              <strong>Admissions &amp; Reception Personnel (RF20–RF23):</strong>
-              <div style="font-size:0.83rem;color:var(--text-muted);margin-top:3px;">
-                Inpatient/outpatient clinical admission check-in (CU20), calendar schedule allocation for radiodiagnostic rooms (CU21), and schedule modification/reassignment (CU22).
-              </div>
-            </li>
-            <li>
-              <strong>Billing, Invoicing &amp; Incident Auditing (RF24–RF26):</strong>
-              <div style="font-size:0.83rem;color:var(--text-muted);margin-top:3px;">
-                Calculate procedure fees and generate invoices (CU24), record insurance payment coverage (CU25), and admissions incident registration (CU26).
-              </div>
-            </li>
-            <li>
-              <strong>Notification Dispatcher Engine (CU07, CU26):</strong>
-              <div style="font-size:0.83rem;color:var(--text-muted);margin-top:3px;">
-                Automated notification service alerting patients of confirmed appointment dates and notifying physicians of emergency findings.
-              </div>
-            </li>
+          <h3 style="color:var(--accent);margin-bottom:12px;">Milestone 4: Iteration 3 (Construction II) Baseline</h3>
+          <ul class="clean-list" style="display:flex;flex-direction:column;gap:8px;font-size:0.88rem;color:var(--text-secondary);">
+            <li><strong>Target Release:</strong> <code>v0.3.0</code> (Construction II Baseline).</li>
+            <li><strong>Scope Completed:</strong> 100% of the 32 system use cases (CU01–CU32) implemented across backend and client.</li>
+            <li><strong>Quality Verification:</strong> Complete JUnit 6 regression suite exceeding 350+ automated tests across all 3 modules.</li>
+            <li><strong>Target Close Date:</strong> December 06, 2026.</li>
           </ul>
         </div>
 
-        <!-- Dependency Rationale -->
         <div class="panel purple-accent" style="padding:16px 18px;">
-          <h3 style="color:#a855f7;margin-bottom:12px;">Architectural Dependency Rationale (Why It3 Follows It2)</h3>
-          <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.5;margin-bottom:12px;">
-            In the Unified Process, construction order is strictly governed by <strong>entity and operational dependencies</strong>:
-          </p>
-          <ul class="clean-list" style="display:flex;flex-direction:column;gap:8px;font-size:0.85rem;color:var(--text-secondary);">
-            <li>
-              <strong>Orders Precede Appointments:</strong> A Patient or Admissions clerk cannot schedule an appointment (CU01 / CU21) unless a validated <code>ExaminationOrder</code> with procedure modality and priority exists (built in It2).
-            </li>
-            <li>
-              <strong>Reports Precede Patient Access:</strong> A Patient cannot view clinical findings or images (CU04 / CU05) until the Physician diagnostic report service and PACS adapter (built in It2) are active.
-            </li>
-            <li>
-              <strong>Shared Contracts:</strong> Iteration 3 directly reuses the <code>AuthSession</code> RBAC tokens, in-memory repository architecture (D-030), and Mock Adapters (D-012) proven in Iteration 2.
-            </li>
+          <h3 style="color:#a855f7;margin-bottom:12px;">Milestone 5: Iteration 4 (Transition &amp; Final Release)</h3>
+          <ul class="clean-list" style="display:flex;flex-direction:column;gap:8px;font-size:0.88rem;color:var(--text-secondary);">
+            <li><strong>Target Release:</strong> <code>v1.0.0</code> (Official Final Delivery).</li>
+            <li><strong>Focus:</strong> System-wide integration smoke tests, non-functional performance benchmarks, and user manual documentation.</li>
+            <li><strong>Final Deliverables:</strong> Tagged release <code>v1.0.0</code> on <code>main</code>, self-assessment report, and evaluation demonstration.</li>
+            <li><strong>Evaluation Date:</strong> December 15, 2026.</li>
           </ul>
-          <div style="margin-top:14px;padding:10px 12px;background:var(--bg-primary);border-radius:var(--radius-sm);border:1px solid var(--border);">
-            <strong style="color:var(--text-primary);font-size:0.82rem;">Transition Gate:</strong>
-            <span style="font-size:0.82rem;color:var(--text-muted);">Completing It3 unlocks the final Transition Phase (It4 / ItN), where all 32 use cases undergo end-to-end acceptance testing for the Dec 15 delivery.</span>
-          </div>
         </div>
       </div>
     </section>
   </main>
 
   <div id="site-footer"></div>
-  <script src="data.js?v=4"></script>
-  <script src="app.js?v=4"></script>
+  <script src="data.js?v=5"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>

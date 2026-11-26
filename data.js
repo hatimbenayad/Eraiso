@@ -1,19 +1,19 @@
 /* ==========================================================================
    SESCAM Radiodiagnostics — Team A.05 Centralized Data & AI Context Generator
-   Last Updated: 17/11/2026 (Iteration 2 — Construction I · v0.2.0-SNAPSHOT)
+   Last Updated: 24/11/2026 (Iteration 3 — Construction II · v0.3.0-SNAPSHOT)
    ========================================================================== */
 
 window.PORTAL_DATA = {
   meta: {
     repoUrl: "https://github.com/hatimbenayad/2026-ISO2-A.05",
     wikiUrl: "https://github.com/hatimbenayad/2026-ISO2-A.05/wiki",
-    lastUpdated: "17/11/2026",
-    currentIteration: "Iteration 2 — Construction I",
-    currentVersion: "0.2.0-SNAPSHOT",
-    testsPassing: 85,
+    lastUpdated: "24/11/2026",
+    currentIteration: "Iteration 3 — Construction II",
+    currentVersion: "0.3.0-SNAPSHOT",
+    testsPassing: 245,
     lineCoverageGate: "75%",
     branchCoverageGate: "70%",
-    nextDeadline: "22/11/2026 (Before Santa Tecla Break)"
+    nextDeadline: "06/12/2026 (Construction II Delivery)"
   },
 
   /* ------------------------------------------------------------------------

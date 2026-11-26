@@ -769,57 +769,35 @@ window.PORTAL_DATA = {
     {
       iter: "It2",
       phase: "Construction I",
-      dates: "14/11 – 22/11/2026",
-      version: "v0.2.0-SNAPSHOT",
+      dates: "14/11 – 24/11/2026",
+      version: "v0.2.0",
       hours: "60 h",
-      status: "in-progress",
+      status: "done",
       useCases: "CU10–CU12, CU14–CU17 (Core Physician Clinical Flow) + JaCoCo/JUnit 6 Gate",
-      deliverables: "JaCoCo >=75% line / >=70% branch gate (PR #76 merged), Lab S.04.01 Black-Box Test Matrices (#74, #75), BCE Communication Diagrams (CU10–CU18), Client (#71) & Server (#72) Design Class Diagrams, Physician services & mock adapters.",
-      why: "Core clinical value of SESCAM Radiodiagnostics: physician orders trigger all downstream scheduling and reporting. Bounded to 60 h before Santa Tecla to respect team exam dates."
-    },
-    {
-      iter: "Break",
-      phase: "Santa Tecla Academic Break",
-      dates: "23/11 – 27/11/2026",
-      version: "Freeze",
-      hours: "0 h",
-      status: "freeze",
-      useCases: "None — Official Non-Working Holiday Period (Decision D-016)",
-      deliverables: "Zero billable project hours scheduled to prevent burnout and maintain realistic university schedule compliance.",
-      why: "Explicitly logged in DECISIONS.md (D-016) and Theory Assignment 1 capacity plan."
+      deliverables: "Delivered & tagged v0.2.0: ExaminationOrderService, DiagnosticReportService, synthetic PACS & EHR mock adapters, Physician Swing UI, 245 passing unit/integration tests with JaCoCo line >= 75% / branch >= 70% (Closed Milestone #3).",
+      why: "Core clinical value of SESCAM Radiodiagnostics: physician orders trigger all downstream scheduling and reporting."
     },
     {
       iter: "It3",
       phase: "Construction II",
-      dates: "28/11 – 04/12/2026",
+      dates: "25/11 – 06/12/2026",
       version: "v0.3.0",
       hours: "70 h",
-      status: "planned",
-      useCases: "CU13, CU18, CU20–CU25 (Schedules, Bookings, Worklists & Triage)",
-      deliverables: "Appointment slot allocation (CU20), rescheduling & D-015 soft-cancelling (CU21–CU22), daily worklists, waiting-list triage priorities (CU23–CU25), execution schedules & order metrics (CU13, CU18).",
-      why: "Strict dependency order: administrative scheduling and waiting-list triage operate directly on Physician Orders created in It2."
-    },
-    {
-      iter: "It4",
-      phase: "Construction III",
-      dates: "05/12 – 10/12/2026",
-      version: "v0.4.0",
-      hours: "65 h",
-      status: "planned",
-      useCases: "CU01–CU09 (Patient Portal & Timer Alerts), CU26 & CU32 (Analytics)",
-      deliverables: "Patient self-service appointment management (CU01–CU04), automated Timer reminders (CU05), history/incidents/surveys (CU06–CU09), D-018 own-care RBAC, and operational/global statistics (CU26, CU32).",
-      why: "Patients can only view/confirm bookings and receive reminders once orders (It2) and appointments (It3) exist; analytics aggregate all upstream data."
+      status: "in-progress",
+      useCases: "CU01–CU09, CU19–CU26, CU27–CU32 (Patient Portal, Admissions Scheduling, SysAdmin Governance)",
+      deliverables: "Patient self-service appointment requests & DICOM viewer (CU01–CU09), Admissions bed & room allocation calendar, tariff billing & incident logging (CU19–CU26), SysAdmin RBAC user accounts, equipment maintenance & audit logs (CU27–CU32).",
+      why: "Strict dependency order: administrative scheduling, patient self-service, and security governance operate directly on Physician Orders and Reports created in It2."
     },
     {
       iter: "ItN",
-      phase: "Transition",
-      dates: "11/12 – 15/12/2026",
+      phase: "Transition & Final Delivery",
+      dates: "07/12 – 15/12/2026",
       version: "v1.0.0",
       hours: "80 h",
       status: "planned",
-      useCases: "Full System Integration & Final QA (CU01–CU32)",
-      deliverables: "End-to-end integration tests, ISO/IEC 25010 audit, Testing Deliverable 2 (>=75% coverage + defect log), packaged JARs, User Manual, completed Wiki Self-Assessments, and final lab submission (Dec 15).",
-      why: "Final stabilization, verification, and academic delivery of the complete SESCAM Radiodiagnostics system."
+      useCases: "Full System Integration, Packaging & Academic Defense (CU01–CU32)",
+      deliverables: "End-to-end integration regression testing across all 32 use cases, multi-module packaging (JARs/WAR), Javadoc aggregation, User Manuals, completed Wiki Self-Assessments (C16), Release v1.0.0 tag, and final course evaluation on Dec 15.",
+      why: "Final stabilization, verification, user documentation, and academic evaluation of the complete SESCAM Radiodiagnostics platform."
     }
   ],
 

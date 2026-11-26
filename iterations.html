@@ -410,15 +410,17 @@
       </div>
     </section>
 
-    <!-- SECTION 5: ROADMAP TO FINAL TRANSITION (V1.0.0) -->
+    <!-- SECTION 5: ROADMAP TO FINAL TRANSITION & COURSE EVALUATION (V1.0.0) -->
     <section class="section-card">
       <div class="section-header">
         <div>
-          <h2>Lifecycle Roadmap to Final Transition Delivery (v1.0.0)</h2>
-          <p>Chronological milestones leading to final software evaluation on December 15, 2026.</p>
+          <h2>Lifecycle Roadmap: From Construction II to Final Academic Delivery (15/12/2026)</h2>
+          <p>Chronological step-by-step master plan of every requirement, deliverable, and milestone until the final course evaluation.</p>
         </div>
+        <span class="badge badge-planned">Final Phase Master Plan</span>
       </div>
 
+      <!-- High-Level Milestones Comparison -->
       <div class="two-col" style="margin-top:16px;">
         <div class="panel primary-accent" style="padding:16px 18px;">
           <h3 style="color:var(--accent);margin-bottom:12px;">Milestone 4: Iteration 3 (Construction II) Baseline</h3>
@@ -431,13 +433,104 @@
         </div>
 
         <div class="panel purple-accent" style="padding:16px 18px;">
-          <h3 style="color:#a855f7;margin-bottom:12px;">Milestone 5: Iteration 4 (Transition &amp; Final Release)</h3>
+          <h3 style="color:#a855f7;margin-bottom:12px;">Milestone 5: Iteration N (Transition &amp; Final Delivery)</h3>
           <ul class="clean-list" style="display:flex;flex-direction:column;gap:8px;font-size:0.88rem;color:var(--text-secondary);">
             <li><strong>Target Release:</strong> <code>v1.0.0</code> (Official Final Delivery).</li>
-            <li><strong>Focus:</strong> System-wide integration smoke tests, non-functional performance benchmarks, and user manual documentation.</li>
-            <li><strong>Final Deliverables:</strong> Tagged release <code>v1.0.0</code> on <code>main</code>, self-assessment report, and evaluation demonstration.</li>
-            <li><strong>Evaluation Date:</strong> December 15, 2026.</li>
+            <li><strong>Focus:</strong> System integration, multi-module packaging, Javadoc, User Manuals, and Wiki Self-Assessments.</li>
+            <li><strong>Final Deliverables:</strong> Tagged release <code>v1.0.0</code> on <code>main</code>, Moodle deliverable, and oral demonstration.</li>
+            <li><strong>Final Evaluation Date:</strong> December 15, 2026.</li>
           </ul>
+        </div>
+      </div>
+
+      <!-- Detailed 7-Step Transition Execution Checklist -->
+      <div style="margin-top:24px;">
+        <h3 style="font-size:1.05rem;color:var(--text-primary);margin-bottom:12px;">
+          The Complete Transition Phase Execution Plan (Dec 07 &ndash; Dec 15, 2026)
+        </h3>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:16px;">
+          The 7 mandatory engineering activities required to finalize the SESCAM Radiodiagnostics system and satisfy all course constraints (ISO/IEC 25010, GitFlow D-020, Constraint C16).
+        </p>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:14px;">
+          
+          <!-- Step 1 -->
+          <div class="panel" style="padding:14px 16px;background:var(--bg-secondary);border:1px solid var(--border);">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+              <span class="badge badge-planned" style="font-size:0.75rem;">Phase 1</span>
+              <strong style="font-size:0.9rem;color:var(--text-primary);">1. End-to-End System Integration</strong>
+            </div>
+            <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.45;margin:0;">
+              Execute full regression user journeys connecting the Desktop Swing Client, REST Backend, and synthetic PACS/EHR adapters across all 32 use cases (Patient &rarr; Physician &rarr; Admissions &rarr; Radiologist &rarr; SysAdmin).
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="panel" style="padding:14px 16px;background:var(--bg-secondary);border:1px solid var(--border);">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+              <span class="badge badge-planned" style="font-size:0.75rem;">Phase 2</span>
+              <strong style="font-size:0.9rem;color:var(--text-primary);">2. SQA &amp; ISO/IEC 25010 Compliance Audit</strong>
+            </div>
+            <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.45;margin:0;">
+              Verify that JaCoCo coverage satisfies &ge;75% line and &ge;70% branch thresholds across every submodule (targeting &gt;80% overall). Author Testing Deliverable 2 with complete boundary value matrices and defect logs.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="panel" style="padding:14px 16px;background:var(--bg-secondary);border:1px solid var(--border);">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+              <span class="badge badge-planned" style="font-size:0.75rem;">Phase 3</span>
+              <strong style="font-size:0.9rem;color:var(--text-primary);">3. Aggregated Javadoc &amp; Multi-Module Packaging</strong>
+            </div>
+            <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.45;margin:0;">
+              Execute <code>mvn clean javadoc:aggregate</code> to compile cross-module technical API docs in <code>target/site/apidocs</code>. Package standalone executable JAR artifacts via <code>mvn clean package</code>.
+            </p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="panel" style="padding:14px 16px;background:var(--bg-secondary);border:1px solid var(--border);">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+              <span class="badge badge-planned" style="font-size:0.75rem;">Phase 4</span>
+              <strong style="font-size:0.9rem;color:var(--text-primary);">4. Role-Based User Manuals</strong>
+            </div>
+            <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.45;margin:0;">
+              Author step-by-step user documentation with UI screenshots for all four operational roles: Patient Portal, Physician Order Workspace, Admissions Bed/Room Scheduling, and SysAdmin Governance Console.
+            </p>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="panel" style="padding:14px 16px;background:var(--bg-secondary);border:1px solid var(--border);">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+              <span class="badge badge-critical" style="font-size:0.75rem;">Constraint C16</span>
+              <strong style="font-size:0.9rem;color:var(--text-primary);">5. Wiki Individual Self-Assessments</strong>
+            </div>
+            <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.45;margin:0;">
+              Mandatory completion of the <em>"Self-Assessment and Experience"</em> section on the GitHub wiki. All 6 team members record individual appraisals, logged hours, and reflections on AI-assisted development.
+            </p>
+          </div>
+
+          <!-- Step 6 -->
+          <div class="panel" style="padding:14px 16px;background:var(--bg-secondary);border:1px solid var(--border);">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+              <span class="badge badge-planned" style="font-size:0.75rem;">Phase 6</span>
+              <strong style="font-size:0.9rem;color:var(--text-primary);">6. Production Release v1.0.0 Tagging</strong>
+            </div>
+            <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.45;margin:0;">
+              Execute GitFlow release protocol: merge <code>release/1.0.0</code> into <code>main</code>, create annotated tag <code>v1.0.0</code>, publish the official GitHub Release with release notes, and back-merge to <code>develop</code>.
+            </p>
+          </div>
+
+          <!-- Step 7 -->
+          <div class="panel success-accent" style="padding:14px 16px;background:var(--bg-secondary);border:1px solid var(--border);grid-column:1 / -1;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+              <span class="badge badge-done" style="font-size:0.75rem;">Final Milestone</span>
+              <strong style="font-size:0.9rem;color:var(--success);">7. Academic Submission &amp; Oral Defense (December 15, 2026)</strong>
+            </div>
+            <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.45;margin:0;">
+              Submit final deliverables via UCLM Moodle, freeze the GitHub repository audit baseline (commit history, PR records, burndown charts, and wiki documentation), and conduct the live project defense before the course instructors.
+            </p>
+          </div>
+
         </div>
       </div>
     </section>

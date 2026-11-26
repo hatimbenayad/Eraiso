@@ -460,11 +460,19 @@
       <!-- SUBSECTION 4.1: THREE RADIT DISCIPLINE STAGES -->
       <div style="margin-top:28px;">
         <h3 style="font-size:1.05rem;color:var(--text-primary);margin-bottom:12px;">
-          Sprint Execution Methodology: 3 RADIT Discipline Stages &amp; Member Responsibilities
+          Sprint Execution Methodology: 3 RADIT Discipline Stages &amp; Step-by-Step Workflow
         </h3>
         <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:16px;">
-          In strict accordance with the Unified Process (PUD), work within Iteration 3 is partitioned into three disciplined RADIT stages to prevent architectural drift and dependency deadlocks.
+          In strict accordance with the Unified Development Process (PUD) and Professor Ismael Caballero's GitFlow guidelines (Kickoff Slides 9, 12, 18, 19), work within Iteration 3 is partitioned into three sequential RADIT discipline stages. Each stage is tracked by a macro <strong>Stage Parent Issue</strong> that aggregates individual, atomic <strong>1 Deliverable = 1 Feature Branch = 1 Pull Request</strong> sub-issues.
         </p>
+
+        <!-- Traceability Architecture Callout -->
+        <div style="padding:12px 14px;background:var(--bg-secondary);border-radius:var(--radius-sm);border:1px solid var(--border);border-left:4px solid var(--accent);margin-bottom:18px;">
+          <strong style="color:var(--text-primary);font-size:0.86rem;">Traceability &amp; Parent-Child Issue Pattern (Kickoff Slide 19 &amp; Iteration 2 Precedent):</strong>
+          <span style="font-size:0.84rem;color:var(--text-secondary);display:block;margin-top:4px;">
+            Just as in Iteration 2 (Parent Issues #59, #62, #70, #73, #81), each RADIT stage has a dedicated Parent Issue containing the full deliverable checklist. Team members never bundle multiple diagrams or services into monolithic branches; instead, each diagram and service has its own dedicated feature branch (e.g., <code>feature/CU20-analysis-communication</code>) and its own Pull Request explicitly stating <code>Closes #sub-issue</code>. When all sub-issues of a stage pass peer review and merge into <code>develop</code>, the Stage Parent Issue is verified and closed.
+          </span>
+        </div>
 
         <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(310px, 1fr));gap:14px;">
           
@@ -475,15 +483,24 @@
               <span class="badge badge-progress" style="font-size:0.72rem;">Days 1–4 (Nov 25–28)</span>
             </div>
             <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.45;margin-bottom:10px;">
-              Model BCE communication diagrams in Visual Paradigm and freeze shared data contracts (DTOs/Interfaces) in <code>common-contracts</code> before coding backend or UI.
+              <strong>Objective:</strong> Model 23 Boundary-Control-Entity (BCE) communication diagrams in Visual Paradigm and freeze shared data contracts (DTOs &amp; Service Interfaces) in <code>common-contracts</code> before any backend or UI coding begins.
             </p>
-            <ul class="clean-list" style="display:flex;flex-direction:column;gap:6px;font-size:0.78rem;color:var(--text-secondary);">
-              <li><strong>Hatim:</strong> BCE diagrams for CU19–CU23; author <code>AdmissionDto</code>, <code>RoomScheduleDto</code>.</li>
-              <li><strong>Ayça:</strong> BCE diagrams for CU24–CU26; author <code>TariffDto</code>, <code>InvoiceDto</code>, <code>IncidentDto</code>.</li>
-              <li><strong>Beyza:</strong> BCE diagrams for CU01–CU05; author <code>AppointmentRequest</code>, <code>AppointmentDto</code>.</li>
-              <li><strong>Berke:</strong> BCE diagrams for CU06–CU09; author <code>NotificationDto</code>, <code>PdfExportRequest</code>.</li>
-              <li><strong>Mina:</strong> BCE diagrams for CU27–CU29; author <code>UserAccountDto</code>, <code>MaintenanceWindowDto</code>.</li>
-              <li><strong>Felipe:</strong> BCE diagrams for CU30–CU32; author <code>AuditEntryDto</code>, <code>SystemMetricsDto</code>.</li>
+            <div style="background:var(--bg-secondary);padding:10px;border-radius:var(--radius-sm);margin-bottom:10px;font-size:0.77rem;color:var(--text-secondary);line-height:1.4;">
+              <strong>Step-by-Step Workflow:</strong><br>
+              1. <em>Branch:</em> Member switches to <code>feature/CUxx-analysis-communication</code>.<br>
+              2. <em>Model:</em> Author BCE diagram in Visual Paradigm; export <code>CUxx-communication.png</code> &amp; <code>.vpp</code> into <code>docs/diagrams/analysis/</code>.<br>
+              3. <em>Pull Request:</em> Open PR targeting <code>develop</code> with <code>Closes #sub-issue</code>.<br>
+              4. <em>Peer Review:</em> Cross-review partner (D-009) audits BCE stereotypes &amp; approves.<br>
+              5. <em>Merge:</em> Hatim merges to <code>develop</code>. Contracts baseline (#120) freezes pure Java records.
+            </div>
+            <ul class="clean-list" style="display:flex;flex-direction:column;gap:5px;font-size:0.78rem;color:var(--text-secondary);">
+              <li><strong>Parent Issue:</strong> <code>#119</code> [It3 - Stage 1] Analysis BCE Diagrams &amp; Contracts Baseline</li>
+              <li><strong>Hatim (CU20–CU23, CU19):</strong> 4 new diagrams + 1 standardization + DTO contracts (#120–#125).</li>
+              <li><strong>Ayça (CU24–CU26):</strong> Tariffs, insurance, and occupancy report diagrams (#126–#128).</li>
+              <li><strong>Beyza (CU01–CU04):</strong> Patient appointments, confirmation &amp; soft-cancel (#129–#132).</li>
+              <li><strong>Berke (CU05–CU09):</strong> Notifications, history, surveys, guidelines diagrams (#133–#137).</li>
+              <li><strong>Mina (CU27–CU29):</strong> User accounts, modality configurations, exam catalog (#138–#140).</li>
+              <li><strong>Felipe (CU30–CU32):</strong> Security backup, adapter config, audit log diagrams (#141–#143).</li>
             </ul>
           </div>
 
@@ -494,15 +511,24 @@
               <span class="badge badge-planned" style="font-size:0.72rem;">Days 5–9 (Nov 29–Dec 03)</span>
             </div>
             <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.45;margin-bottom:10px;">
-              Implement business logic, in-memory repositories, and automated JUnit 6 unit tests in <code>server</code> across modular feature branches.
+              <strong>Objective:</strong> Implement backend domain logic, validation invariants, thread-safe in-memory repositories (<code>ConcurrentHashMap</code>), and automated JUnit 6 unit tests in <code>server</code> across modular feature branches.
             </p>
-            <ul class="clean-list" style="display:flex;flex-direction:column;gap:6px;font-size:0.78rem;color:var(--text-secondary);">
-              <li><strong>Hatim:</strong> <code>AdmissionsService</code>, bed allocation, room equipment booking conflict logic (CU19–CU23).</li>
-              <li><strong>Ayça:</strong> <code>BillingService</code>, tariff calculation algorithms, insurance payment authorization (CU24–CU26).</li>
-              <li><strong>Beyza:</strong> <code>AppointmentService</code>, appointment request validation, soft-cancellation D-015 (CU01–CU05).</li>
-              <li><strong>Berke:</strong> <code>NotificationDispatcherService</code>, PDF generation pipeline, clinical episodes (CU06–CU09).</li>
-              <li><strong>Mina:</strong> <code>AdminService</code>, user lifecycle, RBAC role assignment, password reset (CU27–CU29).</li>
-              <li><strong>Felipe:</strong> <code>SecurityAuditService</code>, immutable audit log queries, operational metrics calculation (CU30–CU32).</li>
+            <div style="background:var(--bg-secondary);padding:10px;border-radius:var(--radius-sm);margin-bottom:10px;font-size:0.77rem;color:var(--text-secondary);line-height:1.4;">
+              <strong>Step-by-Step Workflow:</strong><br>
+              1. <em>Branch:</em> Developer branches from updated <code>develop</code>.<br>
+              2. <em>Implement:</em> Build domain service &amp; repository adhering to contracts.<br>
+              3. <em>Deterministic Time:</em> Inject <code>java.time.Clock</code> (Procedure 2) for predictable testing.<br>
+              4. <em>Unit Tests:</em> Author comprehensive JUnit 6 unit test suite (&ge;80% coverage).<br>
+              5. <em>Merge:</em> PR reviewed (D-009) and merged into <code>develop</code>; closes stage parent #144.
+            </div>
+            <ul class="clean-list" style="display:flex;flex-direction:column;gap:5px;font-size:0.78rem;color:var(--text-secondary);">
+              <li><strong>Parent Issue:</strong> <code>#144</code> [It3 - Stage 2] Backend Services &amp; Repositories</li>
+              <li><strong>Hatim:</strong> <code>AdmissionsService</code> &amp; staff worklists (#145).</li>
+              <li><strong>Ayça:</strong> <code>BillingService</code> &amp; tariff/incident engine (#146).</li>
+              <li><strong>Beyza:</strong> <code>AppointmentService</code> &amp; own-care RBAC (#147).</li>
+              <li><strong>Berke:</strong> <code>NotificationDispatcher</code> &amp; PDF generation (#148).</li>
+              <li><strong>Mina:</strong> <code>AdminService</code>, user accounts &amp; modality catalog (#149).</li>
+              <li><strong>Felipe:</strong> <code>SecurityAuditService</code> &amp; adapter configuration (#150).</li>
             </ul>
           </div>
 
@@ -513,15 +539,24 @@
               <span class="badge badge-planned" style="font-size:0.72rem;">Days 10–14 (Dec 04–06)</span>
             </div>
             <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.45;margin-bottom:10px;">
-              Develop desktop Swing presentation panels in <code>client</code>, document black-box EP/BVA test matrices in issues, enforce JaCoCo quality gate, and tag Release <code>v0.3.0</code>.
+              <strong>Objective:</strong> Develop desktop Swing presentation panels in <code>client</code>, document formal black-box EP/BVA test design matrices in issues, execute multi-module regression suite, enforce JaCoCo quality gate, and tag Release <code>v0.3.0</code>.
             </p>
-            <ul class="clean-list" style="display:flex;flex-direction:column;gap:6px;font-size:0.78rem;color:var(--text-secondary);">
-              <li><strong>Hatim:</strong> Admissions room calendar Swing panel, coordinator PR reviews, release branch creation.</li>
-              <li><strong>Ayça:</strong> Billing invoice panel, admission incident log view, EP/BVA test matrix for tariffs.</li>
-              <li><strong>Beyza:</strong> Patient appointment request and reports view, EP/BVA test matrix for appointments.</li>
-              <li><strong>Berke:</strong> Multi-role tabbed navigation container, patient episode history view, UI presentation tests.</li>
-              <li><strong>Mina:</strong> SysAdmin user management console panel, EP/BVA test matrix for RBAC accounts.</li>
-              <li><strong>Felipe:</strong> Audit log inspection dashboard, multi-module regression suite execution, JaCoCo &ge;75% audit.</li>
+            <div style="background:var(--bg-secondary);padding:10px;border-radius:var(--radius-sm);margin-bottom:10px;font-size:0.77rem;color:var(--text-secondary);line-height:1.4;">
+              <strong>Step-by-Step Workflow:</strong><br>
+              1. <em>Swing Views:</em> Build modular panels (headless-safe via <code>GraphicsEnvironment</code>).<br>
+              2. <em>EP/BVA Test Design:</em> Document Equivalence Partitioning &amp; Boundary Value matrices in issue descriptions.<br>
+              3. <em>Multi-Module Audit:</em> Run <code>mvn clean verify -am "-Djava.awt.headless=true"</code>.<br>
+              4. <em>Coverage Verification:</em> JaCoCo gate verifies &ge;75% line and &ge;70% branch coverage.<br>
+              5. <em>Tagging &amp; Release:</em> Hatim cuts <code>release/0.3.0</code>, merges to <code>main</code>, tags <code>v0.3.0</code>, and bumps <code>develop</code> to <code>0.4.0-SNAPSHOT</code>.
+            </div>
+            <ul class="clean-list" style="display:flex;flex-direction:column;gap:5px;font-size:0.78rem;color:var(--text-secondary);">
+              <li><strong>Parent Issue:</strong> <code>#151</code> [It3 - Stage 3] Desktop Swing UI, Black-Box Tests &amp; Quality Gate</li>
+              <li><strong>Hatim:</strong> Admissions Swing views (#152), EP/BVA test suite (#153), Release v0.3.0 (#164).</li>
+              <li><strong>Ayça:</strong> Billing Swing views (#154) &amp; tariffs EP/BVA test suite (#155).</li>
+              <li><strong>Beyza:</strong> Patient Portal Swing views (#156) &amp; appointment test suite (#157).</li>
+              <li><strong>Berke:</strong> Navigation container UI (#158) &amp; notification test suite (#159).</li>
+              <li><strong>Mina:</strong> Admin console Swing views (#160) &amp; RBAC test suite (#161).</li>
+              <li><strong>Felipe:</strong> Audit dashboard (#162) &amp; security/metrics test suite (#163).</li>
             </ul>
           </div>
 
@@ -533,245 +568,350 @@
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
           <div>
             <h3 style="font-size:1.05rem;color:var(--text-primary);margin:0;">
-              Structured GitHub Issues Backlog for Iteration 3 (Issues #119 &ndash; #149)
+              Structured GitHub Issues Backlog for Iteration 3 (Issues #119 &ndash; #164)
             </h3>
             <p style="font-size:0.83rem;color:var(--text-muted);margin-top:4px;">
-              Pre-authored issues with Conventional Commit titles, assignees, milestones, and target branches ready for backlog integration.
+              Complete parent-child hierarchy: 3 Stage Parent Issues + 43 atomic sub-issues (1 diagram / 1 feature = 1 branch = 1 PR).
             </p>
           </div>
-          <span class="badge badge-neutral" style="font-size:0.75rem;">31 Total Issues</span>
+          <span class="badge badge-neutral" style="font-size:0.75rem;">46 Total Issues (3 Parent + 43 Sub-Issues)</span>
         </div>
 
         <div class="data-table-wrap">
           <table class="data-table" style="font-size:0.82rem;">
             <thead>
               <tr>
-                <th style="width:75px;">RADIT Stage</th>
-                <th style="width:110px;">Issue ID</th>
+                <th style="width:85px;">RADIT Stage</th>
+                <th style="width:100px;">Issue ID</th>
                 <th>Conventional Title &amp; Scope</th>
                 <th style="width:110px;">Assignee</th>
-                <th style="width:210px;">Target Feature Branch</th>
+                <th style="width:220px;">Target Feature Branch</th>
               </tr>
             </thead>
             <tbody>
-              <!-- Stage 1 Issues -->
-              <tr>
-                <td><span class="badge badge-progress" style="font-size:0.7rem;">Stage 1</span></td>
+              <!-- STAGE 1: ANALYSIS & CONTRACTS -->
+              <tr style="background:rgba(59,130,246,0.06);font-weight:600;">
+                <td><span class="badge badge-progress" style="font-size:0.7rem;">Stage 1 Parent</span></td>
                 <td><code>#119</code></td>
-                <td>analysis(admissions): BCE communication diagrams for CU19–CU23</td>
+                <td>[It3 - Stage 1] Analysis BCE Communication Diagrams &amp; Contracts Baseline (CU01–CU09, CU19–CU32)</td>
                 <td>@hatimbenayad</td>
-                <td><code>feature/CU19-CU23-admissions-analysis</code></td>
+                <td><em>Macro Stage Tracking Issue</em></td>
               </tr>
               <tr>
                 <td><span class="badge badge-progress" style="font-size:0.7rem;">Stage 1</span></td>
                 <td><code>#120</code></td>
-                <td>analysis(billing): BCE communication diagrams for CU24–CU26</td>
-                <td>@aycagorgulu0</td>
-                <td><code>feature/CU24-CU26-billing-analysis</code></td>
+                <td>contracts(domain): shared DTOs, domain models and service interfaces for Iteration 3</td>
+                <td>@hatimbenayad</td>
+                <td><code>feature/It3-common-contracts-baseline</code></td>
               </tr>
               <tr>
                 <td><span class="badge badge-progress" style="font-size:0.7rem;">Stage 1</span></td>
                 <td><code>#121</code></td>
-                <td>analysis(patient): BCE communication diagrams for CU01–CU05</td>
-                <td>@beyzabalota1</td>
-                <td><code>feature/CU01-CU05-patient-analysis</code></td>
+                <td>analysis(admissions): communication diagram for CU20 — allocate slot and finalize booking</td>
+                <td>@hatimbenayad</td>
+                <td><code>feature/CU20-analysis-communication</code></td>
               </tr>
               <tr>
                 <td><span class="badge badge-progress" style="font-size:0.7rem;">Stage 1</span></td>
                 <td><code>#122</code></td>
-                <td>analysis(patient-ui): BCE communication diagrams for CU06–CU09</td>
-                <td>@berquepica</td>
-                <td><code>feature/CU06-CU09-patient-extensions-analysis</code></td>
+                <td>analysis(admissions): communication diagram for CU21 — reschedule appointment</td>
+                <td>@hatimbenayad</td>
+                <td><code>feature/CU21-analysis-communication</code></td>
               </tr>
               <tr>
                 <td><span class="badge badge-progress" style="font-size:0.7rem;">Stage 1</span></td>
                 <td><code>#123</code></td>
-                <td>analysis(admin): BCE communication diagrams for CU27–CU29</td>
-                <td>@minaOZ</td>
-                <td><code>feature/CU27-CU29-admin-analysis</code></td>
+                <td>analysis(admissions): communication diagram for CU22 — cancel appointment</td>
+                <td>@hatimbenayad</td>
+                <td><code>feature/CU22-analysis-communication</code></td>
               </tr>
               <tr>
                 <td><span class="badge badge-progress" style="font-size:0.7rem;">Stage 1</span></td>
                 <td><code>#124</code></td>
-                <td>analysis(audit): BCE communication diagrams for CU30–CU32</td>
-                <td>@Felipe-Dionisio</td>
-                <td><code>feature/CU30-CU32-audit-analysis</code></td>
+                <td>analysis(admissions): communication diagram for CU23 — manage staff worklists</td>
+                <td>@hatimbenayad</td>
+                <td><code>feature/CU23-analysis-communication</code></td>
               </tr>
               <tr>
                 <td><span class="badge badge-progress" style="font-size:0.7rem;">Stage 1</span></td>
                 <td><code>#125</code></td>
-                <td>contracts(domain): add DTOs, domain models and service interfaces for It3</td>
+                <td>analysis(admissions): standardize CU19 patient admission communication diagram in analysis directory</td>
                 <td>@hatimbenayad</td>
-                <td><code>feature/It3-common-contracts-baseline</code></td>
+                <td><code>feature/CU19-analysis-communication</code></td>
               </tr>
-
-              <!-- Stage 2 Issues -->
               <tr>
-                <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 2</span></td>
+                <td><span class="badge badge-progress" style="font-size:0.7rem;">Stage 1</span></td>
                 <td><code>#126</code></td>
-                <td>feat(server): admissions service, patient bed search and room calendar scheduling (CU19–CU21)</td>
-                <td>@hatimbenayad</td>
-                <td><code>feature/CU19-CU21-admissions-scheduling</code></td>
+                <td>analysis(billing): communication diagram for CU24 — waiting lists and triage</td>
+                <td>@aycagorgulu0</td>
+                <td><code>feature/CU24-analysis-communication</code></td>
               </tr>
               <tr>
-                <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 2</span></td>
+                <td><span class="badge badge-progress" style="font-size:0.7rem;">Stage 1</span></td>
                 <td><code>#127</code></td>
-                <td>feat(server): appointment rescheduling and justified cancellation service (CU22, CU23)</td>
-                <td>@hatimbenayad</td>
-                <td><code>feature/CU22-CU23-reschedule-cancel</code></td>
+                <td>analysis(billing): communication diagram for CU25 — open calendar schedule slots</td>
+                <td>@aycagorgulu0</td>
+                <td><code>feature/CU25-analysis-communication</code></td>
               </tr>
               <tr>
-                <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 2</span></td>
+                <td><span class="badge badge-progress" style="font-size:0.7rem;">Stage 1</span></td>
                 <td><code>#128</code></td>
-                <td>feat(server): procedure tariff calculation and health insurance billing service (CU24, CU25)</td>
+                <td>analysis(billing): communication diagram for CU26 — operational occupancy reports</td>
                 <td>@aycagorgulu0</td>
-                <td><code>feature/CU24-CU25-tariff-billing</code></td>
+                <td><code>feature/CU26-analysis-communication</code></td>
               </tr>
               <tr>
-                <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 2</span></td>
+                <td><span class="badge badge-progress" style="font-size:0.7rem;">Stage 1</span></td>
                 <td><code>#129</code></td>
-                <td>feat(server): admission incident recording and equipment delay audit service (CU26)</td>
-                <td>@aycagorgulu0</td>
-                <td><code>feature/CU26-admission-incidents</code></td>
+                <td>analysis(patient): communication diagram for CU01 — consult scheduled appointments</td>
+                <td>@beyzabalota1</td>
+                <td><code>feature/CU01-analysis-communication</code></td>
               </tr>
               <tr>
-                <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 2</span></td>
+                <td><span class="badge badge-progress" style="font-size:0.7rem;">Stage 1</span></td>
                 <td><code>#130</code></td>
-                <td>feat(server): patient appointment self-service request and schedule consultation (CU01, CU02)</td>
+                <td>analysis(patient): communication diagram for CU02 — confirm scheduled appointments</td>
                 <td>@beyzabalota1</td>
-                <td><code>feature/CU01-CU02-appointment-service</code></td>
+                <td><code>feature/CU02-analysis-communication</code></td>
               </tr>
               <tr>
-                <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 2</span></td>
+                <td><span class="badge badge-progress" style="font-size:0.7rem;">Stage 1</span></td>
                 <td><code>#131</code></td>
-                <td>feat(server): patient soft-cancellation and published report/image viewing (CU03–CU05)</td>
+                <td>analysis(patient): communication diagram for CU03 — request reschedule</td>
                 <td>@beyzabalota1</td>
-                <td><code>feature/CU03-CU05-patient-cancel-reports</code></td>
+                <td><code>feature/CU03-analysis-communication</code></td>
               </tr>
               <tr>
-                <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 2</span></td>
+                <td><span class="badge badge-progress" style="font-size:0.7rem;">Stage 1</span></td>
                 <td><code>#132</code></td>
-                <td>feat(server): diagnostic report PDF generation and automated notification dispatcher (CU06, CU07)</td>
-                <td>@berquepica</td>
-                <td><code>feature/CU06-CU07-pdf-notifications</code></td>
+                <td>analysis(patient): communication diagram for CU04 — cancel appointment</td>
+                <td>@beyzabalota1</td>
+                <td><code>feature/CU04-analysis-communication</code></td>
               </tr>
               <tr>
-                <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 2</span></td>
+                <td><span class="badge badge-progress" style="font-size:0.7rem;">Stage 1</span></td>
                 <td><code>#133</code></td>
-                <td>feat(server): patient clinical episode summary and contact preferences service (CU08, CU09)</td>
+                <td>analysis(patient): communication diagram for CU05 — automated notification alerts</td>
                 <td>@berquepica</td>
-                <td><code>feature/CU08-CU09-episodes-preferences</code></td>
+                <td><code>feature/CU05-analysis-communication</code></td>
               </tr>
               <tr>
-                <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 2</span></td>
+                <td><span class="badge badge-progress" style="font-size:0.7rem;">Stage 1</span></td>
                 <td><code>#134</code></td>
-                <td>feat(server): user account lifecycle, credential reset and session revocation (CU27, CU28)</td>
-                <td>@minaOZ</td>
-                <td><code>feature/CU27-CU28-user-management</code></td>
+                <td>analysis(patient): communication diagram for CU06 — consult completed procedure history</td>
+                <td>@berquepica</td>
+                <td><code>feature/CU06-analysis-communication</code></td>
               </tr>
               <tr>
-                <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 2</span></td>
+                <td><span class="badge badge-progress" style="font-size:0.7rem;">Stage 1</span></td>
                 <td><code>#135</code></td>
-                <td>feat(server): modality equipment operating hours and maintenance downtime calendar (CU29)</td>
-                <td>@minaOZ</td>
-                <td><code>feature/CU29-equipment-maintenance</code></td>
+                <td>analysis(patient): communication diagram for CU07 — submit incident report</td>
+                <td>@berquepica</td>
+                <td><code>feature/CU07-analysis-communication</code></td>
               </tr>
               <tr>
-                <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 2</span></td>
+                <td><span class="badge badge-progress" style="font-size:0.7rem;">Stage 1</span></td>
                 <td><code>#136</code></td>
-                <td>feat(server): immutable security audit logging and access trail inspection (CU30)</td>
-                <td>@Felipe-Dionisio</td>
-                <td><code>feature/CU30-security-audit</code></td>
+                <td>analysis(patient): communication diagram for CU08 — complete satisfaction surveys</td>
+                <td>@berquepica</td>
+                <td><code>feature/CU08-analysis-communication</code></td>
               </tr>
               <tr>
-                <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 2</span></td>
+                <td><span class="badge badge-progress" style="font-size:0.7rem;">Stage 1</span></td>
                 <td><code>#137</code></td>
-                <td>feat(server): external adapter endpoint configuration and operational metrics reporting (CU31, CU32)</td>
+                <td>analysis(patient): communication diagram for CU09 — clinical preparation guidelines</td>
+                <td>@berquepica</td>
+                <td><code>feature/CU09-analysis-communication</code></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-progress" style="font-size:0.7rem;">Stage 1</span></td>
+                <td><code>#138</code></td>
+                <td>analysis(admin): communication diagram for CU27 — manage user accounts and roles</td>
+                <td>@minaOZ</td>
+                <td><code>feature/CU27-analysis-communication</code></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-progress" style="font-size:0.7rem;">Stage 1</span></td>
+                <td><code>#139</code></td>
+                <td>analysis(admin): communication diagram for CU28 — configure department modalities</td>
+                <td>@minaOZ</td>
+                <td><code>feature/CU28-analysis-communication</code></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-progress" style="font-size:0.7rem;">Stage 1</span></td>
+                <td><code>#140</code></td>
+                <td>analysis(admin): communication diagram for CU29 — manage clinical exam types</td>
+                <td>@minaOZ</td>
+                <td><code>feature/CU29-analysis-communication</code></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-progress" style="font-size:0.7rem;">Stage 1</span></td>
+                <td><code>#141</code></td>
+                <td>analysis(audit): communication diagram for CU30 — database backup and recovery</td>
                 <td>@Felipe-Dionisio</td>
-                <td><code>feature/CU31-CU32-adapter-metrics</code></td>
+                <td><code>feature/CU30-analysis-communication</code></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-progress" style="font-size:0.7rem;">Stage 1</span></td>
+                <td><code>#142</code></td>
+                <td>analysis(audit): communication diagram for CU31 — external adapter endpoint configuration</td>
+                <td>@Felipe-Dionisio</td>
+                <td><code>feature/CU31-analysis-communication</code></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-progress" style="font-size:0.7rem;">Stage 1</span></td>
+                <td><code>#143</code></td>
+                <td>analysis(audit): communication diagram for CU32 — consult system audit logs</td>
+                <td>@Felipe-Dionisio</td>
+                <td><code>feature/CU32-analysis-communication</code></td>
               </tr>
 
-              <!-- Stage 3 Issues -->
+              <!-- STAGE 2: BACKEND IMPLEMENTATION -->
+              <tr style="background:rgba(217,119,6,0.06);font-weight:600;">
+                <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 2 Parent</span></td>
+                <td><code>#144</code></td>
+                <td>[It3 - Stage 2] Backend Domain Services &amp; In-Memory Repositories (CU01–CU09, CU19–CU32)</td>
+                <td>@hatimbenayad</td>
+                <td><em>Macro Stage Tracking Issue</em></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 2</span></td>
+                <td><code>#145</code></td>
+                <td>feat(server): admissions booking, rescheduling and staff worklists service (CU20–CU23)</td>
+                <td>@hatimbenayad</td>
+                <td><code>feature/CU20-CU23-admissions-service</code></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 2</span></td>
+                <td><code>#146</code></td>
+                <td>feat(server): procedure tariff calculation, insurance billing and delay incident service (CU24–CU26)</td>
+                <td>@aycagorgulu0</td>
+                <td><code>feature/CU24-CU26-billing-service</code></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 2</span></td>
+                <td><code>#147</code></td>
+                <td>feat(server): patient appointment self-service, booking confirmation and soft-cancellation service (CU01–CU04)</td>
+                <td>@beyzabalota1</td>
+                <td><code>feature/CU01-CU04-appointment-service</code></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 2</span></td>
+                <td><code>#148</code></td>
+                <td>feat(server): automated notifications dispatcher, report PDF generation and clinical history service (CU05–CU09)</td>
+                <td>@berquepica</td>
+                <td><code>feature/CU05-CU09-notifications-history</code></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 2</span></td>
+                <td><code>#149</code></td>
+                <td>feat(server): sysadmin user account lifecycle, role permissions and equipment modality catalog (CU27–CU29)</td>
+                <td>@minaOZ</td>
+                <td><code>feature/CU27-CU29-admin-service</code></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 2</span></td>
+                <td><code>#150</code></td>
+                <td>feat(server): immutable audit logging, backup service and external adapter endpoints (CU30–CU32)</td>
+                <td>@Felipe-Dionisio</td>
+                <td><code>feature/CU30-CU32-audit-service</code></td>
+              </tr>
+
+              <!-- STAGE 3: TESTING & UI PRESENTATION -->
+              <tr style="background:rgba(168,85,247,0.06);font-weight:600;">
+                <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 3 Parent</span></td>
+                <td><code>#151</code></td>
+                <td>[It3 - Stage 3] Desktop Swing Presentation, Black-Box Test Suites &amp; Verification Quality Gate</td>
+                <td>@hatimbenayad</td>
+                <td><em>Macro Stage Tracking Issue</em></td>
+              </tr>
               <tr>
                 <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 3</span></td>
-                <td><code>#138</code></td>
-                <td>feat(client): admissions bed allocation and room equipment scheduling Swing views (CU19–CU23)</td>
+                <td><code>#152</code></td>
+                <td>feat(client): admissions booking calendar and staff worklist Swing views (CU20–CU23)</td>
                 <td>@hatimbenayad</td>
                 <td><code>feature/client-admissions-views</code></td>
               </tr>
               <tr>
                 <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 3</span></td>
-                <td><code>#139</code></td>
-                <td>test(admissions): black-box EP/BVA test design and JUnit 6 suite for admissions and room scheduling</td>
+                <td><code>#153</code></td>
+                <td>test(admissions): black-box EP/BVA test design and JUnit 6 suite for admissions and worklists (CU20–CU23)</td>
                 <td>@hatimbenayad</td>
-                <td><code>test/admissions-scheduling-suite</code></td>
+                <td><code>test/admissions-worklist-suite</code></td>
               </tr>
               <tr>
                 <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 3</span></td>
-                <td><code>#140</code></td>
-                <td>feat(client): procedure tariff billing and admission incident logging Swing views (CU24–CU26)</td>
+                <td><code>#154</code></td>
+                <td>feat(client): procedure tariff invoicing and delay incident logging Swing views (CU24–CU26)</td>
                 <td>@aycagorgulu0</td>
                 <td><code>feature/client-billing-views</code></td>
               </tr>
               <tr>
                 <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 3</span></td>
-                <td><code>#141</code></td>
-                <td>test(billing): black-box EP/BVA test design and JUnit 6 suite for tariffs and invoicing</td>
+                <td><code>#155</code></td>
+                <td>test(billing): black-box EP/BVA test design and JUnit 6 suite for tariffs and billing (CU24–CU26)</td>
                 <td>@aycagorgulu0</td>
                 <td><code>test/billing-tariffs-suite</code></td>
               </tr>
               <tr>
                 <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 3</span></td>
-                <td><code>#142</code></td>
-                <td>feat(client): patient portal appointment self-service and report viewing Swing views (CU01–CU05)</td>
+                <td><code>#156</code></td>
+                <td>feat(client): patient appointment self-service and confirmation Swing views (CU01–CU04)</td>
                 <td>@beyzabalota1</td>
                 <td><code>feature/client-patient-views</code></td>
               </tr>
               <tr>
                 <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 3</span></td>
-                <td><code>#143</code></td>
-                <td>test(appointments): black-box EP/BVA test design and JUnit 6 suite for appointment lifecycle</td>
+                <td><code>#157</code></td>
+                <td>test(patient): black-box EP/BVA test design and JUnit 6 suite for appointment self-service (CU01–CU04)</td>
                 <td>@beyzabalota1</td>
-                <td><code>test/patient-appointments-suite</code></td>
+                <td><code>test/patient-appointment-suite</code></td>
               </tr>
               <tr>
                 <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 3</span></td>
-                <td><code>#144</code></td>
-                <td>feat(client): multi-role navigation container, PDF export viewer and episode history UI (CU06–CU09)</td>
+                <td><code>#158</code></td>
+                <td>feat(client): multi-role navigation container, PDF export viewer and clinical history UI (CU05–CU09)</td>
                 <td>@berquepica</td>
-                <td><code>feature/client-navigation-extensions</code></td>
+                <td><code>feature/client-navigation-history</code></td>
               </tr>
               <tr>
                 <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 3</span></td>
-                <td><code>#145</code></td>
-                <td>feat(client): sysadmin user management and equipment maintenance Swing console (CU27–CU29)</td>
+                <td><code>#159</code></td>
+                <td>test(notifications): black-box EP/BVA test design and JUnit 6 suite for notifications and PDF export (CU05–CU09)</td>
+                <td>@berquepica</td>
+                <td><code>test/patient-history-suite</code></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 3</span></td>
+                <td><code>#160</code></td>
+                <td>feat(client): sysadmin user management and modality equipment configuration Swing console (CU27–CU29)</td>
                 <td>@minaOZ</td>
                 <td><code>feature/client-admin-views</code></td>
               </tr>
               <tr>
                 <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 3</span></td>
-                <td><code>#146</code></td>
-                <td>test(admin): black-box EP/BVA test design and JUnit 6 suite for user RBAC and equipment maintenance</td>
+                <td><code>#161</code></td>
+                <td>test(admin): black-box EP/BVA test design and JUnit 6 suite for user roles and modality catalog (CU27–CU29)</td>
                 <td>@minaOZ</td>
-                <td><code>test/admin-user-management-suite</code></td>
+                <td><code>test/admin-management-suite</code></td>
               </tr>
               <tr>
                 <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 3</span></td>
-                <td><code>#147</code></td>
-                <td>feat(client): security audit log inspection and operational metrics Swing dashboard (CU30–CU32)</td>
+                <td><code>#162</code></td>
+                <td>feat(client): security audit log viewer and external adapter configuration dashboard (CU30–CU32)</td>
                 <td>@Felipe-Dionisio</td>
                 <td><code>feature/client-audit-dashboard</code></td>
               </tr>
               <tr>
                 <td><span class="badge badge-planned" style="font-size:0.7rem;">Stage 3</span></td>
-                <td><code>#148</code></td>
-                <td>test(audit): black-box EP/BVA test design and JUnit 6 suite for security trails and throughput metrics</td>
+                <td><code>#163</code></td>
+                <td>test(audit): black-box EP/BVA test design and JUnit 6 suite for audit trails and system metrics (CU30–CU32)</td>
                 <td>@Felipe-Dionisio</td>
-                <td><code>test/security-audit-metrics-suite</code></td>
+                <td><code>test/audit-metrics-suite</code></td>
               </tr>
-              <tr>
-                <td><span class="badge badge-planned" style="font-size:0.7rem;">Release</span></td>
-                <td><code>#149</code></td>
+              <tr style="background:rgba(16,185,129,0.06);font-weight:600;">
+                <td><span class="badge badge-planned" style="font-size:0.7rem;">Release Gate</span></td>
+                <td><code>#164</code></td>
                 <td>build(release): Verification Quality Gate, POM Bump &amp; Git Tag for Release v0.3.0 (It3 Construction II)</td>
                 <td>@hatimbenayad</td>
                 <td><code>release/0.3.0</code></td>

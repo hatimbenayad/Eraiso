@@ -346,20 +346,29 @@
     <section class="section-card">
       <div class="section-header">
         <div>
-          <h2>Iteration 3 Team Task Allocation &amp; Ownership Matrix</h2>
-          <p>Balanced 6-person work breakdown across actor domains, branch conventions, and deliverable commitments.</p>
+          <h2>Iteration 3 Team Task Allocation &amp; Modular Feature Branching</h2>
+          <p>Fine-grained 6-person work breakdown: 1 use case = 1 feature branch (Kickoff Slide 12) to ensure high review velocity and continuous integration.</p>
         </div>
+        <span class="badge badge-progress">Modular GitFlow (D-020)</span>
       </div>
 
-      <div class="data-table-wrap" style="margin-top:14px;">
+      <!-- Kickoff Slide 12 Callout -->
+      <div style="margin-top:14px;padding:12px 14px;background:var(--bg-secondary);border-radius:var(--radius-sm);border:1px solid var(--border);border-left:4px solid var(--accent);">
+        <strong style="color:var(--text-primary);font-size:0.86rem;">Architectural Principle (Kickoff Slide 12 &amp; Decision D-020):</strong>
+        <span style="font-size:0.84rem;color:var(--text-secondary);display:block;margin-top:4px;">
+          Monolithic "catch-all" branches are strictly prohibited. In accordance with Professor Ismael Caballero's GitFlow guidelines, <em>"each use case in your plan will correspond to a feature branch"</em>. Every member delivers multiple modular, bite-sized Pull Requests (3 to 4 PRs per member) to guarantee thorough peer review (D-009), low blast radius, and clean continuous delivery tracking on GitHub Insights.
+        </span>
+      </div>
+
+      <div class="data-table-wrap" style="margin-top:16px;">
         <table class="data-table">
           <thead>
             <tr>
-              <th style="width:140px;">Team Member</th>
-              <th style="width:130px;">Actor Domain</th>
-              <th style="width:110px;">Assigned Scope</th>
-              <th>Primary Technical Deliverables</th>
-              <th style="width:180px;">Target Feature Branch</th>
+              <th style="width:130px;">Team Member</th>
+              <th style="width:125px;">Actor Domain</th>
+              <th style="width:90px;">Scope</th>
+              <th>Technical Deliverables &amp; Responsibilities</th>
+              <th style="width:230px;">Modular Feature Branches (1 PR / UC)</th>
             </tr>
           </thead>
           <tbody>
@@ -368,42 +377,81 @@
               <td>Admissions &amp; Intake</td>
               <td><code>CU19–CU23</code></td>
               <td><code>IAdmissionsService</code>, bed allocation, equipment room scheduling calendar, conflict detection, backlog governance.</td>
-              <td><code>feature/It3-admissions-scheduling</code></td>
+              <td>
+                <div style="display:flex;flex-direction:column;gap:4px;font-size:0.78rem;">
+                  <code>feature/CU19-patient-bed-search</code>
+                  <code>feature/CU20-admission-registration</code>
+                  <code>feature/CU21-room-equipment-scheduling</code>
+                  <code>feature/CU22-CU23-reschedule-cancel</code>
+                </div>
+              </td>
             </tr>
             <tr>
               <td><strong>Ayça Görgülü</strong><br><small style="color:var(--text-muted);">Developer / Tester</small></td>
               <td>Admissions &amp; Billing</td>
               <td><code>CU24–CU26</code></td>
               <td><code>IBillingService</code>, procedure tariff calculation, insurance payment authorization, admission incident logging.</td>
-              <td><code>feature/It3-billing-incidents</code></td>
+              <td>
+                <div style="display:flex;flex-direction:column;gap:4px;font-size:0.78rem;">
+                  <code>feature/CU24-tariff-calculation-invoice</code>
+                  <code>feature/CU25-insurance-authorization</code>
+                  <code>feature/CU26-admission-incident-logging</code>
+                </div>
+              </td>
             </tr>
             <tr>
               <td><strong>Beyza Balota</strong><br><small style="color:var(--text-muted);">Developer / Tester</small></td>
               <td>Patient Portal</td>
               <td><code>CU01–CU05</code></td>
               <td><code>IAppointmentService</code>, patient appointment request, consultation, soft cancellation, report &amp; DICOM viewing.</td>
-              <td><code>feature/It3-patient-portal-core</code></td>
+              <td>
+                <div style="display:flex;flex-direction:column;gap:4px;font-size:0.78rem;">
+                  <code>feature/CU01-CU02-appointment-request-consult</code>
+                  <code>feature/CU03-patient-soft-cancellation</code>
+                  <code>feature/CU04-CU05-patient-reports-dicom</code>
+                </div>
+              </td>
             </tr>
             <tr>
               <td><strong>Berke Pica</strong><br><small style="color:var(--text-muted);">Developer / UI Lead</small></td>
               <td>Patient Portal &amp; UI</td>
               <td><code>CU06–CU09</code></td>
               <td>PDF export pipeline, notification dispatcher engine, clinical episode summary, contact preferences, Client Swing views.</td>
-              <td><code>feature/It3-patient-portal-ui</code></td>
+              <td>
+                <div style="display:flex;flex-direction:column;gap:4px;font-size:0.78rem;">
+                  <code>feature/CU06-pdf-report-export</code>
+                  <code>feature/CU07-notification-dispatcher</code>
+                  <code>feature/CU08-CU09-episodes-contact-prefs</code>
+                  <code>feature/client-swing-patient-portal</code>
+                </div>
+              </td>
             </tr>
             <tr>
               <td><strong>Mina Özdoğan</strong><br><small style="color:var(--text-muted);">Developer / Tester</small></td>
               <td>SysAdmin &amp; Security</td>
               <td><code>CU27–CU29</code></td>
               <td><code>IAdminService</code>, user account lifecycle, RBAC role assignment, password reset, equipment maintenance windows.</td>
-              <td><code>feature/It3-admin-user-management</code></td>
+              <td>
+                <div style="display:flex;flex-direction:column;gap:4px;font-size:0.78rem;">
+                  <code>feature/CU27-user-account-rbac</code>
+                  <code>feature/CU28-credential-reset-session-revoke</code>
+                  <code>feature/CU29-equipment-maintenance-hours</code>
+                </div>
+              </td>
             </tr>
             <tr>
               <td><strong>Felipe Dionisio</strong><br><small style="color:var(--text-muted);">Developer / SQA Lead</small></td>
               <td>SysAdmin &amp; SQA</td>
               <td><code>CU30–CU32</code></td>
               <td>Security audit logging (CU30), external adapter configuration (CU31), operational metrics (CU32), SQA regression gate.</td>
-              <td><code>feature/It3-admin-audit-metrics</code></td>
+              <td>
+                <div style="display:flex;flex-direction:column;gap:4px;font-size:0.78rem;">
+                  <code>feature/CU30-security-audit-trails</code>
+                  <code>feature/CU31-adapter-endpoint-config</code>
+                  <code>feature/CU32-system-metrics-reporting</code>
+                  <code>test/It3-regression-sqa-gate</code>
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
